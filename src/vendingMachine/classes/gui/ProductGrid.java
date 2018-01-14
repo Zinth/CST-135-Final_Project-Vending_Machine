@@ -1,3 +1,12 @@
+/**
+ * @project Final Project - Vending Machine
+ * @about Create and orginize GridPane of products.
+ * @course CST-135
+ * @author Christopher Hyde
+ * @author Robert Wayde
+ * @date 01/13/18
+ */
+
 package vendingMachine.classes.gui;
 
 import javafx.scene.layout.GridPane;
@@ -7,9 +16,17 @@ import java.util.ArrayList;
 
 public class ProductGrid extends GridPane{
 
+    // ArrayList holder
     private ArrayList<Product> productList;
+
+    //number of Vertical Columns in GridPane
     private int columns;
 
+    /**
+     * Main Constructor
+     * @param productList
+     * @param columns
+     */
     public ProductGrid(ArrayList<Product> productList, int columns){
       this.productList = productList;
       this.columns = columns;
@@ -17,6 +34,12 @@ public class ProductGrid extends GridPane{
       //TODO: Add Any universal GridPane Formatting
     }
 
+    /**
+     * get the number of a particular product type and return it.
+     *
+     * @param productType
+     * @return int
+     */
     public int numOfProductType(String productType){
         int drinkCount = 0;
         int chipCount = 0;
@@ -51,17 +74,25 @@ public class ProductGrid extends GridPane{
 
     }
 
+    /**
+     * Sets what to display on product grid
+     * @param productType
+     */
     public void sortProductGrid(String productType) {
+        //Clear all previouse grid nodes.
         this.getChildren().clear();
-        // number
+
+        // counter to keep track of number of products added.
         int counter = 0;
+
+        //counter to keep track of index of the productList
         int productCounter = 0;
-        System.out.println(numOfProductType(productType));
+
         //Loop through the number of product and add a productPane to the grid for it.
         for (int i = 0; i < productList.size(); i++) {
 
             for (int j = 0; j < getColumns(); j++) {
-                //Add products based on productType (default is all products)
+                //if Product is a type add it to the gridPane and increase counter.
                 switch (productType) {
                     case "drink":
                         if (productList.get(productCounter) instanceof Drink) {
@@ -92,9 +123,12 @@ public class ProductGrid extends GridPane{
                         counter++;
                         break;
                 }
+
+                //Increase podunctList index
                 productCounter++;
 
             }
+            //If counter is greater than the number of products on the list break the loop
             if(counter > numOfProductType(productType) || productCounter >= productList.size()){
                 break;
             }
@@ -102,18 +136,26 @@ public class ProductGrid extends GridPane{
         }
     }
 
+    /**
+     * get ArrayList
+     * @return productList
+     */
     public ArrayList<Product> getProductList() {
         return productList;
     }
 
-    public void setProductList(ArrayList<Product> productList) {
-        this.productList = productList;
-    }
-
+    /**
+     * get columns
+     * @return columns
+     */
     public int getColumns() {
         return columns;
     }
 
+    /**
+     * set columns
+     * @param columns
+     */
     public void setColumns(int columns) {
         this.columns = columns;
     }

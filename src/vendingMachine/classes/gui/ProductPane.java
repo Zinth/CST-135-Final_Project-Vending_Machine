@@ -1,3 +1,11 @@
+/**
+ * @project Final Project - Vending Machine
+ * @about Create a custom vbox for holding product information.
+ * @course CST-135
+ * @author Christopher Hyde
+ * @date 01/13/18
+ */
+
 package vendingMachine.classes.gui;
 
 import javafx.event.EventHandler;
@@ -16,7 +24,6 @@ import java.util.ArrayList;
 public class ProductPane extends VBox {
 
     private String labelStyle = "-fx-background-color: black; -fx-text-fill: white; -fx-label-padding: 5; -fx-font: Calibri;";
-    private ArrayList<Product> cartList;
 
     //basic constructor
     public ProductPane(){}
@@ -57,11 +64,7 @@ public class ProductPane extends VBox {
         this.setAlignment(Pos.CENTER);
     }
 
-    public ArrayList<Product> getCartList() {
-        return cartList;
-    }
 
-    public void setCartList(ArrayList<Product> cartList) {
-        this.cartList = cartList;
-    }
+
+
 }

@@ -1,3 +1,13 @@
+/**
+ * @project Final Project - Vending Machine
+ * @course CST-135
+ * @author James Ray
+ * @author Christopher Hyde
+ * @author Jesus Leon
+ * @author Robert Wayde
+ * @teacher Dr. Lively
+ * @date 1/13/28
+ */
 package vendingMachine;
 
 import javafx.application.Application;
@@ -25,6 +35,11 @@ public class Main extends Application{
             + "-fx-border-style: solid;\n";
 
 
+    /**
+     * Overrided start method
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -91,7 +106,10 @@ public class Main extends Application{
     }
 
 
-
+    /**
+     * Main Method
+     * @param args
+     */
     public static void Main(String[] args){
         launch(args);
     }
