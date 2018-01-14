@@ -14,11 +14,13 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import vendingMachine.classes.Cart;
 import vendingMachine.classes.Dispenser;
 import vendingMachine.classes.gui.ProductGrid;
 import vendingMachine.classes.gui.ProductPane;
@@ -28,6 +30,7 @@ public class Main extends Application{
 
     // Dispencer class creation
     private Dispenser dispenser = new Dispenser(20.00, 0);
+    private Cart cart = new Cart();
     private Insets padding = new Insets(5,5,5,5);
     private String borderedItems = "-fx-border-color: blue;\n"
             + "-fx-border-insets: 6;\n"
@@ -56,6 +59,10 @@ public class Main extends Application{
         HBox productSelectionHBox = new HBox();
         productSelectionHBox.setPadding(padding);
 
+        //Create hbox to hold cart update button and total cost label
+        HBox cartHBox = new HBox();
+        cartHBox.setPadding(padding);
+
         // vbox to hold grid
         VBox productVBox = new VBox();
         productVBox.setPadding(padding);
@@ -64,37 +71,54 @@ public class Main extends Application{
         VBox cartVBox = new VBox();
         cartVBox.setPadding(padding);
 
+        //Label for holding the current total price in the cart
+        Label totalPrice = new Label("Total Cost: $" + String.valueOf(cart.getTotalDue()));
+
+
         //Grid pane for the products
-        ProductGrid productGrid = new ProductGrid(dispenser.getProductList(), 4);
+        ProductGrid productGrid = new ProductGrid(dispenser.getProductList(), 3, cart);
+        ProductGrid cartGrid = new ProductGrid(cart.getPurchaseList(),3, cart);
 
         //Button for selecting Drink
-        Button btnDrink = new Button("Drinks");
+        Button btnDrink = new Button("Show Just Drinks");
         btnDrink.setOnAction(event -> {
-         productGrid.sortProductGrid("drink");
+         productGrid.sortProductGrid("drink", cart);
         });
 
         //Button for selecting Chips
-        Button btnChip = new Button("Chips");
+        Button btnChip = new Button("Show Just Chips");
         btnChip.setOnAction(event -> {
-            productGrid.sortProductGrid("chips");
+            productGrid.sortProductGrid("chips", cart);
         });
 
         //Button for selecting Snack
-        Button btnCandy = new Button("Candy");
+        Button btnCandy = new Button("Show Just Candy");
         btnCandy.setOnAction(event -> {
-            productGrid.sortProductGrid("candy");
+            productGrid.sortProductGrid("candy", cart);
         });
-        //Button for selecting Snack
-        Button btnGum = new Button("Gum");
+        //Button for selecting Gum
+        Button btnGum = new Button("Show Just Gum");
         btnGum.setOnAction(event -> {
-            productGrid.sortProductGrid("gum");
+            productGrid.sortProductGrid("gum", cart);
         });
+
+        Button btnCartupdate = new Button("Update Cart");
+        btnCartupdate.setOnAction(event -> {
+            cartGrid.sortProductGrid("default", cart);
+            totalPrice.setText("Total Cost: $" + String.valueOf(cart.getTotalDue()));
+        });
+
+
+
 
         //Add Nodes to panes
         mainPane.setCenter(mainHBox);
         mainHBox.getChildren().addAll(productVBox, cartVBox);
         productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
         productVBox.getChildren().addAll(productSelectionHBox, productGrid);
+        cartHBox.getChildren().addAll(btnCartupdate, totalPrice);
+        cartVBox.getChildren().addAll(cartHBox,cartGrid);
+
 
         //Set Scene
         Scene scene = new Scene(mainPane, 800, 600);

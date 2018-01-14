@@ -9,7 +9,9 @@
 
 package vendingMachine.classes.gui;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import vendingMachine.classes.Cart;
 import vendingMachine.classes.products.*;
 
 import java.util.ArrayList;
@@ -22,14 +24,16 @@ public class ProductGrid extends GridPane{
     //number of Vertical Columns in GridPane
     private int columns;
 
+
     /**
      * Main Constructor
      * @param productList
      * @param columns
      */
-    public ProductGrid(ArrayList<Product> productList, int columns){
+    public ProductGrid(ArrayList<Product> productList, int columns, Cart cart){
       this.productList = productList;
       this.columns = columns;
+      sortProductGrid("chips", cart);
 
       //TODO: Add Any universal GridPane Formatting
     }
@@ -78,7 +82,7 @@ public class ProductGrid extends GridPane{
      * Sets what to display on product grid
      * @param productType
      */
-    public void sortProductGrid(String productType) {
+    public void sortProductGrid(String productType, Cart cart) {
         //Clear all previouse grid nodes.
         this.getChildren().clear();
 
@@ -96,30 +100,30 @@ public class ProductGrid extends GridPane{
                 switch (productType) {
                     case "drink":
                         if (productList.get(productCounter) instanceof Drink) {
-                            this.add(new ProductPane(productList.get(productCounter)), j, i);
+                            this.add(new ProductPane(productList.get(productCounter), cart), j, i);
                             counter++;
                         }
                         break;
                     case "chips":
                         if (productList.get(productCounter) instanceof Chips) {
-                            this.add(new ProductPane(productList.get(productCounter)), j, i);
+                            this.add(new ProductPane(productList.get(productCounter), cart), j, i);
                             counter++;
                         }
                         break;
                     case "candy":
                         if (productList.get(productCounter) instanceof Candy) {
-                            this.add(new ProductPane(productList.get(productCounter)), j, i);
+                            this.add(new ProductPane(productList.get(productCounter), cart), j, i);
                             counter++;
                         }
                         break;
                     case "gum":
                         if (productList.get(productCounter) instanceof Gum) {
-                            this.add(new ProductPane(productList.get(productCounter)), j, i);
+                            this.add(new ProductPane(productList.get(productCounter), cart), j, i);
                             counter++;
                         }
                         break;
                     default:
-                        this.add(new ProductPane(productList.get(productCounter)), j, i);
+                        this.add(new ProductPane(productList.get(productCounter), cart), j, i);
                         counter++;
                         break;
                 }
