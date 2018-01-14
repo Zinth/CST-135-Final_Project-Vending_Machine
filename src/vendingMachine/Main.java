@@ -10,10 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import vendingMachine.classes.Dispenser;
+import vendingMachine.classes.gui.ProductGrid;
 import vendingMachine.classes.gui.ProductPane;
-import vendingMachine.classes.products.Drink;
-import vendingMachine.classes.products.Product;
-import vendingMachine.classes.products.Snack;
+import vendingMachine.classes.products.*;
 
 public class Main extends Application{
 
@@ -51,25 +50,35 @@ public class Main extends Application{
         cartVBox.setPadding(padding);
 
         //Grid pane for the products
-        GridPane productGrid = new GridPane();
-
+        ProductGrid productGrid = new ProductGrid(dispenser.getProductList(), 4);
 
         //Button for selecting Drink
         Button btnDrink = new Button("Drinks");
         btnDrink.setOnAction(event -> {
-           buildProductGrid(productGrid, true);
+         productGrid.sortProductGrid("drink");
+        });
+
+        //Button for selecting Chips
+        Button btnChip = new Button("Chips");
+        btnChip.setOnAction(event -> {
+            productGrid.sortProductGrid("chips");
         });
 
         //Button for selecting Snack
-        Button btnSnack = new Button("Snacks");
-        btnSnack.setOnAction(event -> {
-            buildProductGrid(productGrid, false);
+        Button btnCandy = new Button("Candy");
+        btnCandy.setOnAction(event -> {
+            productGrid.sortProductGrid("candy");
+        });
+        //Button for selecting Snack
+        Button btnGum = new Button("Gum");
+        btnGum.setOnAction(event -> {
+            productGrid.sortProductGrid("gum");
         });
 
         //Add Nodes to panes
         mainPane.setCenter(mainHBox);
         mainHBox.getChildren().addAll(productVBox, cartVBox);
-        productSelectionHBox.getChildren().addAll(btnDrink, btnSnack);
+        productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
         productVBox.getChildren().addAll(productSelectionHBox, productGrid);
 
         //Set Scene
@@ -81,31 +90,6 @@ public class Main extends Application{
         primaryStage.show();
     }
 
-    public void buildProductGrid( GridPane gridPane, boolean isDrink){
-        // Clear gridPane's previous content
-        gridPane.getChildren().clear();
-
-        // counter for indexing products
-        int counter = 0;
-
-        // imbeded for loop for filling gridPane
-        for(int i =0; i < 4; i++){
-            for(int j = 0; j< 6; j++){
-                //See if the product is a Drink or not and populate gridPane accordingly
-                if(isDrink){
-                    if(dispenser.getProductList().get(counter) instanceof Drink) {
-                        gridPane.add(new ProductPane(dispenser.getProductList().get(counter)), j, i);
-                    }
-                }else {
-                    if(dispenser.getProductList().get(counter) instanceof Snack) {
-                        gridPane.add(new ProductPane(dispenser.getProductList().get(counter)), j, i);
-                    }
-                }
-                //Incrament counter
-                counter++;
-            }
-        }
-    }
 
 
     public static void Main(String[] args){
