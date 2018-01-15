@@ -27,6 +27,7 @@ public class Cart {
     }
 
     public double getTotalDue(){
+        totalDue = 0;
         for(int i = 0; i < purchaseList.size(); i++){
             totalDue += purchaseList.get(i).getPrice();
         }

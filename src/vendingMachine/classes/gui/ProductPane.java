@@ -21,12 +21,14 @@ import vendingMachine.classes.Cart;
 import vendingMachine.classes.products.Product;
 
 import java.awt.event.ActionEvent;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
 public class ProductPane extends VBox {
 
     private String labelStyle = "-fx-background-color: black; -fx-text-fill: white; -fx-label-padding: 5; ";
+    private final NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
     //basic constructor
     public ProductPane(){}
@@ -49,14 +51,18 @@ public class ProductPane extends VBox {
             productName.setStyle(labelStyle);
 
             // Label for displaying the price of the product
-            Label productPrice = new Label("$" +String.valueOf(product.getPrice()) + "Stock: " +String.valueOf(product.getQuantity()));
+            Label productPrice = new Label(formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
             productPrice.setWrapText(true);
             productPrice.setStyle(labelStyle);
 
             Button btnBuy = new Button("Purchase");
             btnBuy.setOnAction(event -> {
-                product.setQuantity(product.getQuantity() - 1); // subtract one from
-                cart.addToCart(product);
+                if(product.getQuantity() > 0){
+                    product.setQuantity(product.getQuantity() - 1); // subtract one from
+                    cart.addToCart(product);
+                }else{
+                    System.err.println("Out of product.");
+                }
             });
 
 

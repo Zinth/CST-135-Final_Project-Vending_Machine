@@ -10,21 +10,21 @@
  */
 package vendingMachine;
 
+import java.text.NumberFormat;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import vendingMachine.classes.Cart;
 import vendingMachine.classes.Dispenser;
 import vendingMachine.classes.gui.ProductGrid;
-import vendingMachine.classes.gui.ProductPane;
-import vendingMachine.classes.products.*;
 
 public class Main extends Application{
 
@@ -36,6 +36,7 @@ public class Main extends Application{
             + "-fx-border-insets: 6;\n"
             + "-fx-border-width: 2;\n"
             + "-fx-border-style: solid;\n";
+    private final NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
 
     /**
@@ -72,7 +73,7 @@ public class Main extends Application{
         cartVBox.setPadding(padding);
 
         //Label for holding the current total price in the cart
-        Label totalPrice = new Label("Total Cost: $" + String.valueOf(cart.getTotalDue()));
+        Label totalPrice = new Label("Total Cost: " + formatter.format(cart.getTotalDue()));
 
 
         //Grid pane for the products
@@ -113,7 +114,7 @@ public class Main extends Application{
         Button btnCartupdate = new Button("Update Cart");
         btnCartupdate.setOnAction(event -> {
             cartGrid.sortProductGrid("default", cart);
-            totalPrice.setText("Total Cost: $" + String.valueOf(cart.getTotalDue()));
+            totalPrice.setText("Total Cost: " + formatter.format(cart.getTotalDue()));
         });
 
 
