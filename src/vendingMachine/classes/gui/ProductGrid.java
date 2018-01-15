@@ -97,6 +97,10 @@ public class ProductGrid extends GridPane{
 
             for (int j = 0; j < getColumns(); j++) {
                 //if Product is a type add it to the gridPane and increase counter.
+                if(productCounter >= productList.size()){
+                    System.out.println("hit this");
+                    break;
+                }
                 switch (productType) {
                     case "drink":
                         if (productList.get(productCounter) instanceof Drink) {
@@ -128,7 +132,7 @@ public class ProductGrid extends GridPane{
                         break;
                 }
 
-                //Increase podunctList index
+                //Increase productList index
                 productCounter++;
 
             }
