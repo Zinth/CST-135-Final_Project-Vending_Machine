@@ -4,7 +4,7 @@
  * @author James Ray
  * @author Christopher Hyde
  * @author Jesus Leon
- * @author Robert Wayde
+ * @author Robert Wade
  * @teacher Dr. Lively
  * @date 1/13/28
  */
@@ -79,25 +79,33 @@ public class Main extends Application{
         ProductGrid productGrid = new ProductGrid(dispenser.getProductList(), 3, cart);
         ProductGrid cartGrid = new ProductGrid(cart.getPurchaseList(),3, cart);
 
-        //Button for selecting Drink
-        Button btnDrink = new Button("Show Just Drinks");
+        //Button for selecting Drink with picture
+        Button btnDrink = new Button("Drinks");
+        Image drink = new Image("res/images/drink.jpg");
+        btnDrink.setGraphic(new ImageView(drink));
         btnDrink.setOnAction(event -> {
          productGrid.sortProductGrid("drink", cart);
         });
 
-        //Button for selecting Chips
-        Button btnChip = new Button("Show Just Chips");
+        //Button for selecting Chips with picture
+        Button btnChip = new Button("Chips");
+        Image chip = new Image("res/images/chips.jpg");
+        btnChip.setGraphic(new ImageView(chip));
         btnChip.setOnAction(event -> {
             productGrid.sortProductGrid("chips", cart);
         });
 
-        //Button for selecting Snack
-        Button btnCandy = new Button("Show Just Candy");
+        //Button for selecting Snack with picture
+        Button btnCandy = new Button("Candy");
+        Image candy = new Image("res/images/candy.jpg");
+        btnCandy.setGraphic(new ImageView(candy));
         btnCandy.setOnAction(event -> {
             productGrid.sortProductGrid("candy", cart);
         });
-        //Button for selecting Gum
-        Button btnGum = new Button("Show Just Gum");
+        //Button for selecting Gum with picture
+        Button btnGum = new Button("Gum");
+        Image gum = new Image("res/images/gum.jpg");
+        btnGum.setGraphic(new ImageView(gum));
         btnGum.setOnAction(event -> {
             productGrid.sortProductGrid("gum", cart);
         });
