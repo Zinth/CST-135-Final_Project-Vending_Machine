@@ -200,6 +200,12 @@ abstract public class Product {
      * @return imageName
      */
     public String getImageName() {
+        //If the item is sold out display the sold_out.jpg image.
+        if(getQuantity() <= 0){
+            setQuantity(0);
+            return "sold_out.jpg";
+        }
+
             return imageName;
     }
 
