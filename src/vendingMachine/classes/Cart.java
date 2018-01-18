@@ -9,6 +9,7 @@ public class Cart {
     private ArrayList<Product> purchaseList;
     private int itemCount;
     private double totalDue;
+    private InventoryManagement inventoryManagement = new InventoryManagement();
 
     public Cart(){
         purchaseList = new ArrayList<Product>();
@@ -18,6 +19,7 @@ public class Cart {
 
     public void addToCart(Product product){
         purchaseList.add(product);
+        inventoryManagement.addToCart(product, 1);
         itemCount++;
     }
 

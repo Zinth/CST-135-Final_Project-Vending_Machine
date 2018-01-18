@@ -41,6 +41,11 @@ abstract public class Product {
     private String imageName;
 
     /**
+     * Id of the product
+     */
+    protected int productId;
+
+    /**
      * Create a product with generic information.
      */
     public Product() {
@@ -216,5 +221,21 @@ abstract public class Product {
      */
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+
+    /**
+     * Returns the product id.
+     * @return int
+     */
+    public int getProductId() {
+        return productId;
+    }
+
+    /**
+     * Sets the product id.
+     * @param productId 
+     */
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 }

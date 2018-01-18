@@ -76,7 +76,8 @@ public class InventoryManagement extends Product {
 
             Group root = new Group();
 
-            ImageView cart = new ImageView(new Image("res/images/cart.jpg"));
+            //Cart image is missing
+            ImageView cart = new ImageView(new Image("/res/images/cart.jpg"));
             cart.relocate(15, 250);
             cart.setFitHeight(100);
             cart.setFitWidth(100);
@@ -85,122 +86,122 @@ public class InventoryManagement extends Product {
             ImageView productImage = new ImageView();
 
         switch (product.getProductName()){
-            case "Arrowhead Water": productImage = new ImageView((new Image("res/images/arrowhead_water.jpg")));
+            case "Arrowhead Water": productImage = new ImageView((new Image("/res/images/arrowhead_water.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Big Red Gum": productImage = new ImageView((new Image("res/images/big_red.jpg")));
+            case "Big Red Gum": productImage = new ImageView((new Image("/res/images/big_red.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Coca Cola": productImage = new ImageView((new Image("res/images/coca-cola.jpg")));
+            case "Coca Cola": productImage = new ImageView((new Image("/res/images/coca-cola.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Diet Coca Cola": productImage = new ImageView((new Image("res/images/diet_coca-cola.jpg")));
+            case "Diet Coca Cola": productImage = new ImageView((new Image("/res/images/diet_coca-cola.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Diet Pepsi": productImage = new ImageView((new Image("res/images/diet_pepsi.jpg")));
+            case "Diet Pepsi": productImage = new ImageView((new Image("/res/images/diet_pepsi.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Doritos Cool Ranch": productImage = new ImageView((new Image("res/images/doritos_cool_ranch.jpg")));
+            case "Doritos Cool Ranch": productImage = new ImageView((new Image("/res/images/doritos_cool_ranch.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Doritos Nacho Cheese": productImage = new ImageView((new Image("res/images/doritos_nacho_cheese.jpg")));
+            case "Doritos Nacho Cheese": productImage = new ImageView((new Image("/res/images/doritos_nacho_cheese.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Doublemint Gum": productImage = new ImageView((new Image("res/images/doublemint.jpg")));
+            case "Doublemint Gum": productImage = new ImageView((new Image("/res/images/doublemint.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Fritos Chilli Cheese Chips": productImage = new ImageView((new Image("res/images/fritos_chili_cheese.jpg")));
+            case "Fritos Chilli Cheese Chips": productImage = new ImageView((new Image("/res/images/fritos_chili_cheese.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Fritos Original": productImage = new ImageView((new Image("res/images/fritos_original.jpg")));
+            case "Fritos Original": productImage = new ImageView((new Image("/res/images/fritos_original.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Gatorade Fruit Punch": productImage = new ImageView((new Image("res/images/gatorade_fruit_punch.jpg")));
+            case "Gatorade Fruit Punch": productImage = new ImageView((new Image("/res/images/gatorade_fruit_punch.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Hershy Candy Bar": productImage = new ImageView((new Image("res/images/hershy.jpg")));
+            case "Hershy Candy Bar": productImage = new ImageView((new Image("/res/images/hershy.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Juicy Fruit Gum": productImage = new ImageView((new Image("res/images/juicy_fruit.jpg")));
+            case "Juicy Fruit Gum": productImage = new ImageView((new Image("/res/images/juicy_fruit.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Juicy Fruit Sour Watermelon": productImage = new ImageView((new Image("res/images/juicy_fruit_sour_watermelon.jpg")));
+            case "Juicy Fruit Sour Watermelon": productImage = new ImageView((new Image("/res/images/juicy_fruit_sour_watermelon.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Lay's BBQ Chips": productImage = new ImageView((new Image("res/images/lays_bbq.jpg")));
+            case "Lay's BBQ Chips": productImage = new ImageView((new Image("/res/images/lays_bbq.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Lay's Classic Chips": productImage = new ImageView((new Image("res/images/lays_classic.jpg")));
+            case "Lay's Classic Chips": productImage = new ImageView((new Image("/res/images/lays_classic.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "M & M Candy": productImage = new ImageView((new Image("res/images/m_and_m.jpg")));
+            case "M & M Candy": productImage = new ImageView((new Image("/res/images/m_and_m.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Pepsi": productImage = new ImageView((new Image("res/images/pepsi.jpg")));
+            case "Pepsi": productImage = new ImageView((new Image("/res/images/pepsi.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Resees Candy": productImage = new ImageView((new Image("res/images/resees.jpg")));
+            case "Resees Candy": productImage = new ImageView((new Image("/res/images/resees.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Skittles Candy": productImage = new ImageView((new Image("res/images/skittles.jpg")));
+            case "Skittles Candy": productImage = new ImageView((new Image("/res/images/skittles.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Snickers": productImage = new ImageView((new Image("res/images/snickers.jpg")));
+            case "Snickers": productImage = new ImageView((new Image("/res/images/snickers.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Starburst Candy": productImage = new ImageView((new Image("res/images/starburst.jpg")));
+            case "Starburst Candy": productImage = new ImageView((new Image("/res/images/starburst.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Trident Cinnamon Gum": productImage = new ImageView((new Image("res/images/trident_cinnamon.jpg")));
+            case "Trident Cinnamon Gum": productImage = new ImageView((new Image("/res/images/trident_cinnamon.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
 
-            case "Trident Tropical Twist": productImage = new ImageView((new Image("res/images/trident_tropical_twist.jpg")));
+            case "Trident Tropical Twist": productImage = new ImageView((new Image("/res/images/trident_tropical_twist.jpg")));
                 productImage.setFitHeight(70);
                 productImage.setFitWidth(70);
                 break;
@@ -249,14 +250,14 @@ public class InventoryManagement extends Product {
         //remove item from array
         for (int i = 0; i < cartListItems.size(); i++){
             String[] itemToRemove = cartListItems.get(i).split(" - ");
-
-            if (Integer.parseInt(itemToRemove[1] == productId)){
+            System.out.println(itemToRemove[i]);
+            if (Integer.parseInt(itemToRemove[1]) == productId){
                 cartListItems.remove(i);
 
             }
         }
-        for (int k = 0; k < mainDispenser.getProducts().size(); k++){
-            Product theProduct = mainDispenser.getProducts().get(k);
+        for (int k = 0; k < mainDispenser.getProductList().size(); k++){
+            Product theProduct = mainDispenser.getProductList().get(k);
             
             if (theProduct.getProductId() == productId){
                 theProduct.setQuantity(theProduct.getQuantity() + 1);
