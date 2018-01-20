@@ -61,11 +61,10 @@ public class Chips extends Snack {
      * @param productName
      * @param price
      * @param quantity
-     * @param dispenceLocation
      * @param imageName
      */
-    public Chips(String flavor, double servingSize, boolean baked, boolean glutenFree, double weight, int calories, String productName, double price, int quantity, String dispenceLocation, String imageName) {
-        super(weight, calories, productName, price, quantity, dispenceLocation, imageName);
+    public Chips(String flavor, double servingSize, boolean baked, boolean glutenFree, double weight, int calories, String productName, double price, int quantity, String imageName) {
+        super(weight, calories, productName, price, quantity, imageName);
         this.flavor = flavor;
         this.servingSize = servingSize;
         this.baked = baked;
@@ -78,7 +77,7 @@ public class Chips extends Snack {
      * @param chips
      */
     public Chips(Chips chips) {
-        this(chips.getFlavor(), chips.getServingSize(), chips.isBaked(), chips.isGlutenFree(), chips.getWeight(), chips.getCalories(), chips.getProductName(), chips.getPrice(), chips.getQuantity(), chips.getDispenceLocation(), chips.getImageName());
+        this(chips.getFlavor(), chips.getServingSize(), chips.isBaked(), chips.isGlutenFree(), chips.getWeight(), chips.getCalories(), chips.getProductName(), chips.getPrice(), chips.getQuantity(), chips.getImageName());
     }
 
     /**

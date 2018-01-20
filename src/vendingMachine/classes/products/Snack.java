@@ -43,11 +43,10 @@ abstract public class Snack extends Product implements Comparable<Snack> {
      * @param productName
      * @param price
      * @param quantity
-     * @param dispenceLocation
      * @param imageName
      */
-    public Snack(double weight, int calories, String productName, double price, int quantity, String dispenceLocation, String imageName) {
-        super(productName, price, quantity, dispenceLocation, imageName);
+    public Snack(double weight, int calories, String productName, double price, int quantity, String imageName) {
+        super(productName, price, quantity, imageName);
         this.weight = weight;
         this.calories = calories;
     }
@@ -58,7 +57,7 @@ abstract public class Snack extends Product implements Comparable<Snack> {
      * @param snack
      */
     public Snack(Snack snack) {
-        this(snack.getWeight(), snack.getCalories(), snack.getProductName(), snack.getPrice(), snack.getQuantity(), snack.getDispenceLocation(), snack.getImageName());
+        this(snack.getWeight(), snack.getCalories(), snack.getProductName(), snack.getPrice(), snack.getQuantity(), snack.getImageName());
     }
 
     /**

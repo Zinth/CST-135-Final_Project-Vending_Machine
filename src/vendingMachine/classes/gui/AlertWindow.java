@@ -53,7 +53,6 @@ public class AlertWindow extends Application {
         Scene scene = new Scene(pane, 300, 300);
         alertStage.setScene(scene);
         alertStage.setAlwaysOnTop(true); // Keeps alert window on top
-        alertStage.showAndWait(); // Makes sure you can only click in the alert window
     }
 
     /**

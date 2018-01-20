@@ -4,25 +4,27 @@
  * @course CST-135
  * @author Christopher Hyde
  * @author Robert Wayde
- * @date 01/13/18
+ * @date 01/19/18
+ *
+ * @about class that displays productPanes on a grid based on Product type.
  */
 
-package vendingMachine.classes.gui;
+package vendingMachine.classes.gui.grids;
 
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import vendingMachine.classes.Cart;
+import vendingMachine.classes.gui.panes.InventoryPane;
 import vendingMachine.classes.products.*;
 
 import java.util.ArrayList;
 
-public class ProductGrid extends GridPane{
-
+public class InventoryGrid extends GridPane {
     // ArrayList holder
     private ArrayList<Product> productList;
 
     //number of Vertical Columns in GridPane
     private int columns;
+    private double x, y;
+    private CartGrid cartGrid;
 
 
     /**
@@ -30,12 +32,16 @@ public class ProductGrid extends GridPane{
      * @param productList
      * @param columns
      */
-    public ProductGrid(ArrayList<Product> productList, int columns, Cart cart){
-      this.productList = productList;
-      this.columns = columns;
-      sortProductGrid("chips", cart);
+    public InventoryGrid(ArrayList<Product> productList, int columns, CartGrid cartGrid, double x, double y){
+        this.productList = productList;
+        this.x = x;
+        this.y = y;
+        this.cartGrid = cartGrid;
+        this.columns = columns;
+        sortProductGrid("chips");
 
-      //TODO: Add Any universal GridPane Formatting
+
+        //TODO: Add Any universal GridPane Formatting
     }
 
     /**
@@ -82,7 +88,7 @@ public class ProductGrid extends GridPane{
      * Sets what to display on product grid
      * @param productType
      */
-    public void sortProductGrid(String productType, Cart cart) {
+    public void sortProductGrid(String productType) {
         //Clear all previouse grid nodes.
         this.getChildren().clear();
 
@@ -93,7 +99,7 @@ public class ProductGrid extends GridPane{
         int productCounter = 0;
 
         //Loop through the number of product and add a productPane to the grid for it.
-        for (int i = 0; i < productList.size(); i++) {
+        for (int index = 0; index < productList.size(); index++) {
 
             for (int j = 0; j < getColumns(); j++) {
                 //if Product is a type add it to the gridPane and increase counter.
@@ -101,34 +107,31 @@ public class ProductGrid extends GridPane{
                     break;
                 }
                 switch (productType) {
-                    case "drink":
-                        if (productList.get(productCounter) instanceof Drink) {
-                            this.add(new ProductPane(productList.get(productCounter), cart), j, i);
-                            counter++;
-                        }
-                        break;
                     case "chips":
                         if (productList.get(productCounter) instanceof Chips) {
-                            this.add(new ProductPane(productList.get(productCounter), cart), j, i);
+                            this.add(new InventoryPane(productList.get(productCounter), cartGrid, x, y), j, index);
                             counter++;
                         }
                         break;
                     case "candy":
                         if (productList.get(productCounter) instanceof Candy) {
-                            this.add(new ProductPane(productList.get(productCounter), cart), j, i);
+                            this.add(new InventoryPane(productList.get(productCounter), cartGrid, x, y), j, index);
                             counter++;
                         }
                         break;
                     case "gum":
                         if (productList.get(productCounter) instanceof Gum) {
-                            this.add(new ProductPane(productList.get(productCounter), cart), j, i);
+                            this.add(new InventoryPane(productList.get(productCounter), cartGrid, x, y), j, index);
                             counter++;
                         }
                         break;
-                    default:
-                        this.add(new ProductPane(productList.get(productCounter), cart), j, i);
-                        counter++;
+                    case "drink":
+                        if (productList.get(productCounter) instanceof Drink) {
+                            this.add(new InventoryPane(productList.get(productCounter), cartGrid, x, y), j, index);
+                            counter++;
+                        }
                         break;
+
                 }
 
                 //Increase productList index
@@ -143,27 +146,7 @@ public class ProductGrid extends GridPane{
         }
     }
 
-    /**
-     * get ArrayList
-     * @return productList
-     */
-    public ArrayList<Product> getProductList() {
-        return productList;
-    }
-
-    /**
-     * get columns
-     * @return columns
-     */
     public int getColumns() {
         return columns;
-    }
-
-    /**
-     * set columns
-     * @param columns
-     */
-    public void setColumns(int columns) {
-        this.columns = columns;
     }
 }
