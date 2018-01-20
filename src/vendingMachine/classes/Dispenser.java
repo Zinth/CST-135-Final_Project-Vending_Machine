@@ -99,12 +99,12 @@ public class Dispenser {
         productList.add(new Chips("Nacho Cheese", 1, true, false, 1, 120, "Dorito", 0.99, 10, "doritosCoolRanch.jpg"));
 
         //Candy
-        productList.add(new Candy(1, "Mix Fruit", false, false, 2.17, 251, "Skittkes", 1.00, 20, "skittles.jpg" ));
-        productList.add(new Candy(1, "Peanutbutter & Chocolate", false, false, 1.53, 176, "Resees's", 1.25, 20, "resees.jpg" ));
-        productList.add(new Candy(1, "Mix Fruit", false, false, 2.07, 160, "Starburst", 1.00, 20, "starburst.jpg" ));
-        productList.add(new Candy(1, "Milk Chocolate", false, false, 1.69, 230, "M&M's", 1.00, 20, "m&m.jpg" ));
-        productList.add(new Candy(1, "Milk Chocolate", false, false, 1.55, 214, "Hershey Bar", 1.25, 20, "hershy.jpg" ));
-        productList.add(new Candy(1, "Chocolate", false, false, 2.00, 266, "Snickers", 1.00, 20, "snickers.jpg" ));
+        productList.add(new Candy(1, "Mix Fruit", false, false, 2.17, 251, "Skittkes", 1.00, 20, "skittlesCandy.jpg" ));
+        productList.add(new Candy(1, "Peanutbutter & Chocolate", false, false, 1.53, 176, "Resees's", 1.25, 20, "reseesCandy.jpg" ));
+        productList.add(new Candy(1, "Mix Fruit", false, false, 2.07, 160, "Starburst", 1.00, 20, "starburstCandy.jpg" ));
+        productList.add(new Candy(1, "Milk Chocolate", false, false, 1.69, 230, "M&M's", 1.00, 20, "mmCandy.jpg" ));
+        productList.add(new Candy(1, "Milk Chocolate", false, false, 1.55, 214, "Hershey Bar", 1.25, 20, "hershyCandy.jpg" ));
+        productList.add(new Candy(1, "Chocolate", false, false, 2.00, 266, "Snickers", 1.00, 20, "snickersCandy.jpg" ));
 
         //Gum
         productList.add(new Gum("Tropical Twist", 8, 1, true, 21.2, 1, "Tridant", 0.50, 10, "tridentTropicalTwist.jpg"));
@@ -112,15 +112,15 @@ public class Dispenser {
         productList.add(new Gum("Original", 8, 1, true, 21.6, 1, "Juicy Fruit", 0.75, 10, "juicyFruit.jpg"));
         productList.add(new Gum("Sour Watermelon", 8, 1, true, 21.6, 1, "Juicy Fruit", 0.75, 10, "juicyFruitSourWatermelon.jpg"));
         productList.add(new Gum("Cinnamon", 5, 1, false, 13.5, 10, "Big Red", 0.35, 10, "bigRed.jpg"));
-        productList.add(new Gum("Doublemint", 5, 1, false, 13.3, 10, "Wrigley's", 0.35, 10, "doublmint.jpg"));
+        productList.add(new Gum("Doublemint", 5, 1, false, 13.3, 10, "Wrigley's", 0.35, 10, "doublemint.jpg"));
 
         //Drinks
-        productList.add(new Drink(16, "Soft Drink", 187, false, 1, "Coca-Cola", 1.25, 10, "coke.jpg"));
-        productList.add(new Drink(16, "Soft Drink", 0, true, 1, "Diet Coca-Cola", 1.25, 10, "dietCoke.jpg"));
-        productList.add(new Drink(16, "Soft Drink", 200, false, 1, "Pepsi", 1.25, 10, "pepsi.jpg"));
-        productList.add(new Drink(16, "Soft Drink", 0, true, 1, "Diet Pepsi", 1.25, 10, "dietPepsi.jpg"));
-        productList.add(new Drink(16, "Water", 0, true, 0, "Arrowhead Drinking Water", 1.00, 10, "arrowheadWater.jpg"));
-        productList.add(new Drink(16, "Sports Drink", 80, false, 0, "Gatorade Fruit Punch", 1.00, 10, "gatoradeFruitPunch.jpg"));
+        productList.add(new Drink(16, "Soft Drink", 187, false, 1, "Coca-Cola", 1.25, 10, "cokeDrink.jpg"));
+        productList.add(new Drink(16, "Soft Drink", 0, true, 1, "Diet Coca-Cola", 1.25, 10, "dietCokeDrink.jpg"));
+        productList.add(new Drink(16, "Soft Drink", 200, false, 1, "Pepsi", 1.25, 10, "pepsiDrink.jpg"));
+        productList.add(new Drink(16, "Soft Drink", 0, true, 1, "Diet Pepsi", 1.25, 10, "dietPepsiDrink.jpg"));
+        productList.add(new Drink(16, "Water", 0, true, 0, "Arrowhead Drinking Water", 1.00, 10, "arrowheadWaterDrink.jpg"));
+        productList.add(new Drink(16, "Sports Drink", 80, false, 0, "Gatorade Fruit Punch", 1.00, 10, "gatoradeFruitPunchDrink.jpg"));
     }
 
     /**

@@ -20,17 +20,20 @@ import vendingMachine.classes.products.Product;
 
 public class ManagerPane extends ProductPane {
 
+    private InventoryManagement iManager;
+
     public ManagerPane(Product product, InventoryManagement iManager){
         super(product);
+        this.iManager = iManager;
 
         Button btnIncrease = new Button("+");
         btnIncrease.setOnAction(event -> {
-            iManager.increaseQuantity(product);
+            this.iManager.increaseQuantity(product);
         });
 
         Button btnDecrease = new Button("-");
         btnDecrease.setOnAction(event -> {
-            iManager.decreaseQuantity(product);
+            this.iManager.decreaseQuantity(product);
         });
 
         HBox btnHBox = new HBox();

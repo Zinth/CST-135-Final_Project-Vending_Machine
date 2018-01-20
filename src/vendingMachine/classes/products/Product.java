@@ -179,6 +179,9 @@ abstract public class Product {
      * @return imageName
      */
     public String getImageName() {
+        if(getQuantity() <= 0){
+            return "soldOut.jpg";
+        }
         return imageName;
     }
 

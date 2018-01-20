@@ -1,3 +1,14 @@
+/**
+ * @project Final Project - Vending Machine
+ * @about Create and orginize GridPane of products.
+ * @course CST-135
+ * @author Christopher Hyde
+ * @author Robert Wayde
+ * @date 01/19/18
+ *
+ * @about class that displays productPanes on a grid based on Product type.
+ */
+
 package vendingMachine.classes.gui.grids;
 
 import javafx.scene.layout.GridPane;
@@ -98,12 +109,6 @@ public class InventoryGrid extends GridPane {
                     break;
                 }
                 switch (productType) {
-                    case "drink":
-                        if (productList.get(productCounter) instanceof Drink) {
-                            this.add(new InventoryPane(productList.get(index), cart, x , y), j, index);
-                            counter++;
-                        }
-                        break;
                     case "chips":
                         if (productList.get(productCounter) instanceof Chips) {
                             this.add(new InventoryPane(productList.get(productCounter), cart, x , y), j, index);
@@ -122,10 +127,13 @@ public class InventoryGrid extends GridPane {
                             counter++;
                         }
                         break;
-                    default:
-                        this.add(new InventoryPane(productList.get(productCounter), cart, x , y), j, index);
-                        counter++;
+                    case "drink":
+                        if (productList.get(productCounter) instanceof Drink) {
+                            this.add(new InventoryPane(productList.get(productCounter), cart, x , y), j, index);
+                            counter++;
+                        }
                         break;
+
                 }
 
                 //Increase productList index

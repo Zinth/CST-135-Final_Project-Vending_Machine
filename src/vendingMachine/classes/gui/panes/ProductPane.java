@@ -36,23 +36,18 @@ public class ProductPane extends VBox {
 
             // Create an ImageView of the product image
             productImage = new ImageView(new Image("res/images/" + product.getImageName()));
-            productImage.setFitWidth(100);
-            productImage.setFitHeight(100);
+            productImage.setFitWidth(75);
+            productImage.setFitHeight(75);
 
-
-            // Label for displaying the name of the product
-            Label productName = new Label(product.getProductName());
-            productName.setWrapText(true);
-            productName.setStyle(labelStyle);
 
             // Label for displaying the price of the product
-            Label productPrice = new Label(formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
-            productPrice.setWrapText(true);
-            productPrice.setStyle(labelStyle);
+            Label productInfo = new Label(product.getProductName() + ":\n" + formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
+            productInfo.setWrapText(true);
+            productInfo.setStyle(labelStyle);
 
 
             //Add nodes to productPane
-            this.getChildren().addAll(productImage, productName, productPrice);
+            this.getChildren().addAll(productImage, productInfo);
 
             //TODO: Fromat StackPane to look good.
 
@@ -64,7 +59,7 @@ public class ProductPane extends VBox {
      * @return
      */
     public double getPositoinX(){
-        return this.getPositoinX();
+        return productImage.getX();
     }
 
     /**
@@ -72,7 +67,7 @@ public class ProductPane extends VBox {
      * @return
      */
     public double getPositionY(){
-        return this.getPositionY();
+        return productImage.getY();
     }
 
     /**

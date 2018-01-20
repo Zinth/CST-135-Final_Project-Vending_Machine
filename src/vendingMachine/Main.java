@@ -24,8 +24,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import vendingMachine.classes.Cart;
 import vendingMachine.classes.InventoryManagement;
-import vendingMachine.classes.gui.ProductGrid;
 import vendingMachine.classes.gui.grids.InventoryGrid;
+import vendingMachine.classes.gui.grids.ManagerGrid;
 
 public class Main extends Application{
 
@@ -33,6 +33,7 @@ public class Main extends Application{
     private InventoryManagement iManager = new InventoryManagement();
     private Cart cart = new Cart(iManager);
     private Insets padding = new Insets(5,5,5,5);
+    private boolean managerMode = false;
     private String borderedItems = "-fx-border-color: blue;\n"
             + "-fx-border-insets: 6;\n"
             + "-fx-border-width: 2;\n"
@@ -81,40 +82,55 @@ public class Main extends Application{
 
 
         //Grid for InventoryPane's
-        InventoryGrid productGrid = new InventoryGrid(iManager.getProductList(), 6, cart, imageBasket.getX(), imageBasket.getY());
+        InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 6, cart, 510, 0);
+        ManagerGrid managerGrid = new ManagerGrid(iManager, 6);
 
 
         //Button for selecting Drink with picture
         Button btnDrink = new Button("Drinks", new ImageView(new Image("res/images/drink.jpg")));
         btnDrink.setOnAction(event -> {
-         productGrid.sortProductGrid("drink");
+         inventoryGrid.sortProductGrid("drink");
         });
 
         //Button for selecting Chips with picture
         Button btnChip = new Button("Chips", new ImageView(new Image("res/images/chips.jpg")));
         btnChip.setOnAction(event -> {
-            productGrid.sortProductGrid("chips");
+            inventoryGrid.sortProductGrid("chips");
         });
 
         //Button for selecting Snack with picture
         Button btnCandy = new Button("Candy", new ImageView(new Image("res/images/candy.jpg")));
         btnCandy.setOnAction(event -> {
-            productGrid.sortProductGrid("candy");
+            inventoryGrid.sortProductGrid("candy");
         });
         //Button for selecting Gum with picture
         Button btnGum = new Button("Gum", new ImageView(new Image("res/images/gum.jpg")));
         btnGum.setOnAction(event -> {
-            productGrid.sortProductGrid("gum");
+            inventoryGrid.sortProductGrid("gum");
         });
 
-
+        //Button to display Manager Grid
+        Button btnManager = new Button("Manager Logon");
+        btnManager.setOnAction(event -> {
+            if(!managerMode){
+                btnManager.setText("Manager Logoff");
+                productVBox.getChildren().clear();
+                productVBox.getChildren().addAll(btnManager, managerGrid);
+                managerMode = true;
+            }else{
+                btnManager.setText("Manager Logon");
+                productVBox.getChildren().clear();
+                productVBox.getChildren().addAll(btnManager, productSelectionHBox, inventoryGrid, imageBasket);
+                managerMode = false;
+            }
+        });
 
 
         //Add Nodes to panes
         mainPane.setCenter(mainHBox);
         mainHBox.getChildren().addAll(productVBox, cartVBox);
         productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
-        productVBox.getChildren().addAll(productSelectionHBox, productGrid, imageBasket);
+        productVBox.getChildren().addAll(btnManager, productSelectionHBox, inventoryGrid, imageBasket);
         cartHBox.getChildren().addAll();
         cartVBox.getChildren().addAll();
 
