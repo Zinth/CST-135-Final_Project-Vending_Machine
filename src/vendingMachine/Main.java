@@ -6,7 +6,9 @@
  * @author Jesus Leon
  * @author Robert Wade
  * @teacher Dr. Lively
- * @date 1/13/28
+ * @date 1/20/28
+ *
+ * @about the main class.
  */
 package vendingMachine;
 
@@ -16,16 +18,19 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import vendingMachine.classes.Cart;
 import vendingMachine.classes.InventoryManagement;
+
+import vendingMachine.classes.gui.CustomButtons;
+import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.gui.grids.InventoryGrid;
 import vendingMachine.classes.gui.grids.ManagerGrid;
+
 
 public class Main extends Application{
 
@@ -38,8 +43,7 @@ public class Main extends Application{
             + "-fx-border-insets: 6;\n"
             + "-fx-border-width: 2;\n"
             + "-fx-border-style: solid;\n";
-    private final NumberFormat formatter = NumberFormat.getCurrencyInstance();
-
+    private final NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
 
     /**
      * Overrided start method
@@ -52,7 +56,7 @@ public class Main extends Application{
         //Create and Fromat the mainPane
         BorderPane mainPane = new BorderPane();
         mainPane.setPadding(padding);
-        mainPane.setPrefSize(300,300);
+        mainPane.setPrefSize(1020,800);
 
         //Create pane that will hold all center content
         HBox mainHBox = new HBox();
@@ -66,73 +70,81 @@ public class Main extends Application{
         HBox cartHBox = new HBox();
         cartHBox.setPadding(padding);
 
+        // vbox to hold Inventory Grid and Selection Buttons
+        VBox inventoryVBox = new VBox();
+        inventoryVBox.setPadding(padding);
+        inventoryVBox.setAlignment(Pos.CENTER);
+        inventoryVBox.setMaxWidth(510);
+        inventoryVBox.setMinWidth(510);
+
         // vbox to hold grid
-        VBox productVBox = new VBox();
-        productVBox.setPadding(padding);
-        productVBox.setAlignment(Pos.CENTER);
+        VBox managerVBox = new VBox();
+        managerVBox.setPadding(padding);
+        managerVBox.setAlignment(Pos.CENTER);
 
         //vbox to hold cart grid , total price cost, and confirmation button
         VBox cartVBox = new VBox();
+        cartVBox.setAlignment(Pos.CENTER);
         cartVBox.setPadding(padding);
+        cartVBox.setMaxWidth(510);
+        cartVBox.setMinWidth(510);
 
-        ImageView imageBasket = new ImageView(new Image("res/images/basket.jpg"));
-        imageBasket.setFitHeight(100);
-        imageBasket.setFitWidth(100);
+        HBox bottomHBox = new HBox();
+        bottomHBox.setAlignment(Pos.CENTER);
 
-
+        //Text Labels
+        Text inventoryLabel = new Text("Vending Machine");
+        Text cartLabel = new Text("Cart");
+        Text costLabel = new Text("Total:" + FORMATTER.format(cart.getTotalCost()));
 
         //Grid for InventoryPane's
-        InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 6, cart, 510, 0);
+        CartGrid cartGrid = new CartGrid(cart, 6);
+        InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 6, cartGrid, 410, 0);
         ManagerGrid managerGrid = new ManagerGrid(iManager, 6);
 
 
+
         //Button for selecting Drink with picture
-        Button btnDrink = new Button("Drinks", new ImageView(new Image("res/images/drink.jpg")));
+        Button btnDrink = new CustomButtons("res/images/drink.jpg", "Drinks");
         btnDrink.setOnAction(event -> {
          inventoryGrid.sortProductGrid("drink");
         });
 
         //Button for selecting Chips with picture
-        Button btnChip = new Button("Chips", new ImageView(new Image("res/images/chips.jpg")));
+        Button btnChip = new CustomButtons("res/images/chips.jpg", "Chips");
         btnChip.setOnAction(event -> {
             inventoryGrid.sortProductGrid("chips");
         });
 
         //Button for selecting Snack with picture
-        Button btnCandy = new Button("Candy", new ImageView(new Image("res/images/candy.jpg")));
+        Button btnCandy = new CustomButtons("res/images/candy.jpg", "Candy");
         btnCandy.setOnAction(event -> {
             inventoryGrid.sortProductGrid("candy");
         });
+
         //Button for selecting Gum with picture
-        Button btnGum = new Button("Gum", new ImageView(new Image("res/images/gum.jpg")));
+        Button btnGum = new CustomButtons("res/images/gum.jpg", "Gums");
         btnGum.setOnAction(event -> {
             inventoryGrid.sortProductGrid("gum");
         });
 
         //Button to display Manager Grid
-        Button btnManager = new Button("Manager Logon");
-        btnManager.setOnAction(event -> {
-            if(!managerMode){
-                btnManager.setText("Manager Logoff");
-                productVBox.getChildren().clear();
-                productVBox.getChildren().addAll(btnManager, managerGrid);
-                managerMode = true;
-            }else{
-                btnManager.setText("Manager Logon");
-                productVBox.getChildren().clear();
-                productVBox.getChildren().addAll(btnManager, productSelectionHBox, inventoryGrid, imageBasket);
-                managerMode = false;
-            }
-        });
+        Button btnManager = new CustomButtons("res/images/manager.jpg", "Manager Mode");
 
 
         //Add Nodes to panes
-        mainPane.setCenter(mainHBox);
-        mainHBox.getChildren().addAll(productVBox, cartVBox);
+        mainHBox.getChildren().addAll(inventoryVBox,  cartVBox);
         productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
-        productVBox.getChildren().addAll(btnManager, productSelectionHBox, inventoryGrid, imageBasket);
+        inventoryVBox.getChildren().addAll(inventoryLabel, productSelectionHBox, inventoryGrid);
+        managerVBox.getChildren().addAll(managerGrid);
         cartHBox.getChildren().addAll();
-        cartVBox.getChildren().addAll();
+        cartVBox.getChildren().addAll(cartLabel, cartGrid, costLabel);
+        bottomHBox.getChildren().add(btnManager);
+
+        //Set default UI Group for mainPane
+        mainPane.setCenter(mainHBox);
+        mainPane.setBottom(bottomHBox);
+
 
 
         //Set Scene
@@ -141,6 +153,7 @@ public class Main extends Application{
         //Set primaryStage
         primaryStage.setTitle("Vending Machine");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

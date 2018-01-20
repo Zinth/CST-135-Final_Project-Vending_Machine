@@ -38,6 +38,7 @@ public class AnimationPane extends Pane{
         //Create the path using a drawn Line
         Line path = new Line(startX, startY, endX, endY);
 
+
         //Add children to the Pane
         this.getChildren().addAll(imageView);
 

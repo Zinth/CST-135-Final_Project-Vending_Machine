@@ -12,6 +12,7 @@
 
 package vendingMachine.classes;
 
+import javafx.beans.property.DoubleProperty;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.products.Product;
 
@@ -28,6 +29,7 @@ public class Cart {
     public Cart(InventoryManagement iManager){
         this.iManager = iManager;
     }
+
 
     /**
      * Reduce the product quantity in cart or remove it
@@ -97,5 +99,9 @@ public class Cart {
 
         //return totalCost
         return totalCost;
+    }
+
+    public ArrayList<Product> getCartList() {
+        return cartList;
     }
 }

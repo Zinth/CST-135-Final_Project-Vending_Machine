@@ -21,7 +21,7 @@ import java.text.NumberFormat;
 
 public class ProductPane extends VBox {
 
-    private String labelStyle = "-fx-background-color: black; -fx-text-fill: white; -fx-label-padding: 5; ";
+    private String labelStyle = "-fx-background-color: cyan; -fx-text-fill: black; -fx-label-padding: 5; ";
     private final NumberFormat formatter = NumberFormat.getCurrencyInstance();
     private ImageView productImage;
 
@@ -40,6 +40,7 @@ public class ProductPane extends VBox {
             productImage.setFitHeight(75);
 
 
+
             // Label for displaying the price of the product
             Label productInfo = new Label(product.getProductName() + ":\n" + formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
             productInfo.setWrapText(true);
@@ -50,6 +51,7 @@ public class ProductPane extends VBox {
             this.getChildren().addAll(productImage, productInfo);
 
             //TODO: Fromat StackPane to look good.
+        this.setStyle("-fx-background-color: cyan");
 
         this.setAlignment(Pos.CENTER);
     }
@@ -58,8 +60,8 @@ public class ProductPane extends VBox {
      * get the X position of the Pane
      * @return
      */
-    public double getPositoinX(){
-        return productImage.getX();
+    public double getPositionX(){
+        return this.getLayoutX();
     }
 
     /**
@@ -67,14 +69,14 @@ public class ProductPane extends VBox {
      * @return
      */
     public double getPositionY(){
-        return productImage.getY();
+        return this.getLayoutY();
     }
 
     /**
      * get the ImageView
      * @return
      */
-    public ImageView getProductImage() {
-        return productImage;
+    public Image getImage() {
+        return productImage.getImage();
     }
 }

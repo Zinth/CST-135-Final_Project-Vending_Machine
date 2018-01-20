@@ -12,9 +12,7 @@
 package vendingMachine.classes.gui.grids;
 
 import javafx.scene.layout.GridPane;
-import vendingMachine.classes.Cart;
 import vendingMachine.classes.gui.panes.InventoryPane;
-import vendingMachine.classes.gui.panes.ProductPane;
 import vendingMachine.classes.products.*;
 
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ public class InventoryGrid extends GridPane {
     //number of Vertical Columns in GridPane
     private int columns;
     private double x, y;
-    private Cart cart;
+    private CartGrid cartGrid;
 
 
     /**
@@ -34,11 +32,11 @@ public class InventoryGrid extends GridPane {
      * @param productList
      * @param columns
      */
-    public InventoryGrid(ArrayList<Product> productList, int columns, Cart cart, double x, double y){
+    public InventoryGrid(ArrayList<Product> productList, int columns, CartGrid cartGrid, double x, double y){
         this.productList = productList;
         this.x = x;
         this.y = y;
-        this.cart = cart;
+        this.cartGrid = cartGrid;
         this.columns = columns;
         sortProductGrid("chips");
 
@@ -111,25 +109,25 @@ public class InventoryGrid extends GridPane {
                 switch (productType) {
                     case "chips":
                         if (productList.get(productCounter) instanceof Chips) {
-                            this.add(new InventoryPane(productList.get(productCounter), cart, x , y), j, index);
+                            this.add(new InventoryPane(productList.get(productCounter), cartGrid, x, y), j, index);
                             counter++;
                         }
                         break;
                     case "candy":
                         if (productList.get(productCounter) instanceof Candy) {
-                            this.add(new InventoryPane(productList.get(productCounter), cart, x , y), j, index);
+                            this.add(new InventoryPane(productList.get(productCounter), cartGrid, x, y), j, index);
                             counter++;
                         }
                         break;
                     case "gum":
                         if (productList.get(productCounter) instanceof Gum) {
-                            this.add(new InventoryPane(productList.get(productCounter), cart, x , y), j, index);
+                            this.add(new InventoryPane(productList.get(productCounter), cartGrid, x, y), j, index);
                             counter++;
                         }
                         break;
                     case "drink":
                         if (productList.get(productCounter) instanceof Drink) {
-                            this.add(new InventoryPane(productList.get(productCounter), cart, x , y), j, index);
+                            this.add(new InventoryPane(productList.get(productCounter), cartGrid, x, y), j, index);
                             counter++;
                         }
                         break;
