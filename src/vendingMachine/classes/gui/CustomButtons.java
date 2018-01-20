@@ -24,8 +24,8 @@ public class CustomButtons extends Button {
 
         //Image that will be displayed on the button
         ImageView imageView = new ImageView(new Image(imagePath));
-        imageView.setFitWidth(100);
-        imageView.setFitHeight(100);
+        imageView.setFitWidth(75);
+        imageView.setFitHeight(75);
 
         //set graphic ImageView of button
         this.setGraphic(imageView);

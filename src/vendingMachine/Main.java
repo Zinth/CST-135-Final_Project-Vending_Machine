@@ -16,6 +16,7 @@ import java.text.NumberFormat;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -44,6 +45,17 @@ public class Main extends Application{
             + "-fx-border-width: 2;\n"
             + "-fx-border-style: solid;\n";
     private final NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
+    private BorderPane root;
+    private Group customerUI = new Group();
+    private Group managerUI= new Group();
+
+    /**
+     * Main Method
+     * @param args
+     */
+    public static void Main(String[] args){
+        launch(args);
+    }
 
     /**
      * Overrided start method
@@ -53,102 +65,51 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        //Create and Fromat the mainPane
-        BorderPane mainPane = new BorderPane();
-        mainPane.setPadding(padding);
-        mainPane.setPrefSize(1020,800);
+        //Create the root pane and format it.
+        root = new BorderPane();
+        root.setPadding(padding);
+        root.setPrefSize(1020,800);
 
-        //Create pane that will hold all center content
-        HBox mainHBox = new HBox();
-        mainHBox.setPadding(padding);
-
-        //Create hbox to hold product selection buttons
-        HBox productSelectionHBox = new HBox();
-        productSelectionHBox.setPadding(padding);
-
-        //Create hbox to hold cart update button and total cost label
-        HBox cartHBox = new HBox();
-        cartHBox.setPadding(padding);
-
-        // vbox to hold Inventory Grid and Selection Buttons
-        VBox inventoryVBox = new VBox();
-        inventoryVBox.setPadding(padding);
-        inventoryVBox.setAlignment(Pos.CENTER);
-        inventoryVBox.setMaxWidth(510);
-        inventoryVBox.setMinWidth(510);
-
-        // vbox to hold grid
+        //Create the Manager VBox to hold the managerGrid
         VBox managerVBox = new VBox();
         managerVBox.setPadding(padding);
         managerVBox.setAlignment(Pos.CENTER);
 
-        //vbox to hold cart grid , total price cost, and confirmation button
-        VBox cartVBox = new VBox();
-        cartVBox.setAlignment(Pos.CENTER);
-        cartVBox.setPadding(padding);
-        cartVBox.setMaxWidth(510);
-        cartVBox.setMinWidth(510);
-
+        //Create the bottomHBox to hold the manager Button
         HBox bottomHBox = new HBox();
         bottomHBox.setAlignment(Pos.CENTER);
 
-        //Text Labels
-        Text inventoryLabel = new Text("Vending Machine");
-        Text cartLabel = new Text("Cart");
-        Text costLabel = new Text("Total:" + FORMATTER.format(cart.getTotalCost()));
-
-        //Grid for InventoryPane's
-        CartGrid cartGrid = new CartGrid(cart, 6);
-        InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 6, cartGrid, 410, 0);
+        //Create the managerGrid that will display all products for sale
         ManagerGrid managerGrid = new ManagerGrid(iManager, 6);
-
-
-
-        //Button for selecting Drink with picture
-        Button btnDrink = new CustomButtons("res/images/drink.jpg", "Drinks");
-        btnDrink.setOnAction(event -> {
-         inventoryGrid.sortProductGrid("drink");
-        });
-
-        //Button for selecting Chips with picture
-        Button btnChip = new CustomButtons("res/images/chips.jpg", "Chips");
-        btnChip.setOnAction(event -> {
-            inventoryGrid.sortProductGrid("chips");
-        });
-
-        //Button for selecting Snack with picture
-        Button btnCandy = new CustomButtons("res/images/candy.jpg", "Candy");
-        btnCandy.setOnAction(event -> {
-            inventoryGrid.sortProductGrid("candy");
-        });
-
-        //Button for selecting Gum with picture
-        Button btnGum = new CustomButtons("res/images/gum.jpg", "Gums");
-        btnGum.setOnAction(event -> {
-            inventoryGrid.sortProductGrid("gum");
-        });
 
         //Button to display Manager Grid
         Button btnManager = new CustomButtons("res/images/manager.jpg", "Manager Mode");
+        //btnManager action event for changing if manager grid is displayed or not
+        btnManager.setOnAction(event -> {
+            if(managerMode){
+                root.setCenter(customerUI);
+                managerMode = false;
+            }else{
+                // Else have scene contain managerVBox
+                root.setCenter(managerUI);
+                managerMode = true;
+            }
+        });
+
+        customerUI.getChildren().addAll(createCustomerUI());
+        managerUI.getChildren().addAll(managerVBox);
 
 
         //Add Nodes to panes
-        mainHBox.getChildren().addAll(inventoryVBox,  cartVBox);
-        productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
-        inventoryVBox.getChildren().addAll(inventoryLabel, productSelectionHBox, inventoryGrid);
-        managerVBox.getChildren().addAll(managerGrid);
-        cartHBox.getChildren().addAll();
-        cartVBox.getChildren().addAll(cartLabel, cartGrid, costLabel);
+        managerVBox.getChildren().addAll(managerGrid, btnManager);
         bottomHBox.getChildren().add(btnManager);
 
-        //Set default UI Group for mainPane
-        mainPane.setCenter(mainHBox);
-        mainPane.setBottom(bottomHBox);
+        //Set default UI Group for root Pane
+        root.setCenter(customerUI);
+        root.setBottom(bottomHBox);
 
-
-
-        //Set Scene
-        Scene scene = new Scene(mainPane, 1020, 800);
+        //Set up default Scene
+        Scene scene = new Scene(root, 1020, 800);
 
         //Set primaryStage
         primaryStage.setTitle("Vending Machine");
@@ -157,12 +118,84 @@ public class Main extends Application{
         primaryStage.show();
     }
 
-
     /**
-     * Main Method
-     * @param args
+     * Method to create the customerHBox
+     * @return customerHBox
      */
-    public static void Main(String[] args){
-        launch(args);
+    public HBox createCustomerUI(){
+        // --- Create and Formate Panes ---
+        //Create pane that will hold all center content
+        HBox customerHBox = new HBox();
+        customerHBox.setPadding(padding);
+
+        //Create hbox to hold product selection buttons
+        HBox productSelectionHBox = new HBox();
+        productSelectionHBox.setPadding(padding);
+
+        // vbox to hold Inventory Grid and Selection Buttons
+        VBox inventoryVBox = new VBox();
+        inventoryVBox.setPadding(padding);
+        inventoryVBox.setAlignment(Pos.CENTER);
+        inventoryVBox.setMaxWidth(510);
+        inventoryVBox.setMinWidth(510);
+
+        //vbox to hold cart grid , total price cost, and confirmation button
+        VBox cartVBox = new VBox();
+        cartVBox.setAlignment(Pos.CENTER);
+        cartVBox.setPadding(padding);
+        cartVBox.setMaxWidth(510);
+        cartVBox.setMinWidth(510);
+
+        // --- Create Labels ---
+        //Text Labels
+        Text inventoryLabel = new Text("Vending Machine");
+        Text cartLabel = new Text("Cart");
+        Text costLabel = new Text("Total:" + FORMATTER.format(cart.getTotalCost()));
+
+        // --- Create Grids ---
+        CartGrid cartGrid = new CartGrid(cart, 6);
+        InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 6, cartGrid, 410, 0);
+
+        // --- Selection Buttons ---
+        //Button for selecting Drink with picture
+        Button btnDrink = new CustomButtons("res/images/drink.jpg", "Drinks");
+        btnDrink.setOnAction(event -> {
+            //Sort the inventory grid to show only drinks
+            inventoryGrid.sortProductGrid("drink");
+        });
+
+        //Button for selecting Chips with picture
+        Button btnChip = new CustomButtons("res/images/chips.jpg", "Chips");
+        btnChip.setOnAction(event -> {
+            //Sort the inventory grid to show only chips
+            inventoryGrid.sortProductGrid("chips");
+        });
+
+        //Button for selecting Snack with picture
+        Button btnCandy = new CustomButtons("res/images/candy.jpg", "Candy");
+        btnCandy.setOnAction(event -> {
+            //Sort the inventory grid to show only candy
+            inventoryGrid.sortProductGrid("candy");
+        });
+
+        //Button for selecting Gum with picture
+        Button btnGum = new CustomButtons("res/images/gum.jpg", "Gums");
+        btnGum.setOnAction(event -> {
+            //Sort the inventory grid to show only gum
+            inventoryGrid.sortProductGrid("gum");
+        });
+
+        // --- Fill Panes ---
+        //Add Nodes to panes
+        customerHBox.getChildren().addAll(inventoryVBox, cartVBox);
+        productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
+        inventoryVBox.getChildren().addAll(inventoryLabel, productSelectionHBox, inventoryGrid);
+        cartVBox.getChildren().addAll(cartLabel, cartGrid, costLabel);
+
+        // Return customerHBox Node
+        return customerHBox;
     }
+
+
+
 }
