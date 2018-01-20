@@ -1,13 +1,4 @@
-/**
- * @project Final Project - Vending Machine
- * @about Create and orginize GridPane of products.
- * @course CST-135
- * @author Christopher Hyde
- * @author Robert Wayde
- * @date 01/13/18
- */
-
-package vendingMachine.classes.gui;
+package vendingMachine.classes.gui.grids;
 
 import javafx.scene.layout.GridPane;
 import vendingMachine.classes.Cart;
@@ -17,14 +8,14 @@ import vendingMachine.classes.products.*;
 
 import java.util.ArrayList;
 
-public class ProductGrid extends GridPane{
-
+public class InventoryGrid extends GridPane {
     // ArrayList holder
     private ArrayList<Product> productList;
 
     //number of Vertical Columns in GridPane
     private int columns;
     private double x, y;
+    private Cart cart;
 
 
     /**
@@ -32,12 +23,13 @@ public class ProductGrid extends GridPane{
      * @param productList
      * @param columns
      */
-    public ProductGrid(ArrayList<Product> productList, int columns, Cart cart, double x, double y){
+    public InventoryGrid(ArrayList<Product> productList, int columns, Cart cart, double x, double y){
+        this.productList = productList;
         this.x = x;
         this.y = y;
-        this.productList = productList;
+        this.cart = cart;
         this.columns = columns;
-        sortProductGrid("chips", cart);
+        sortProductGrid("chips");
 
 
         //TODO: Add Any universal GridPane Formatting
@@ -87,7 +79,7 @@ public class ProductGrid extends GridPane{
      * Sets what to display on product grid
      * @param productType
      */
-    public void sortProductGrid(String productType, Cart cart) {
+    public void sortProductGrid(String productType) {
         //Clear all previouse grid nodes.
         this.getChildren().clear();
 
@@ -148,27 +140,7 @@ public class ProductGrid extends GridPane{
         }
     }
 
-    /**
-     * get ArrayList
-     * @return productList
-     */
-    public ArrayList<Product> getProductList() {
-        return productList;
-    }
-
-    /**
-     * get columns
-     * @return columns
-     */
     public int getColumns() {
         return columns;
-    }
-
-    /**
-     * set columns
-     * @param columns
-     */
-    public void setColumns(int columns) {
-        this.columns = columns;
     }
 }

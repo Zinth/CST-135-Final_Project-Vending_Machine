@@ -61,11 +61,10 @@ public class Gum extends Snack {
      * @param productName
      * @param price
      * @param quantity
-     * @param dispenceLocation
      * @param imageName
      */
-    public Gum(String flavor, int pieces, double servingSize, boolean sugarFree, double weight, int calories, String productName, double price, int quantity, String dispenceLocation, String imageName) {
-        super(weight, calories, productName, price, quantity, dispenceLocation, imageName);
+    public Gum(String flavor, int pieces, double servingSize, boolean sugarFree, double weight, int calories, String productName, double price, int quantity, String imageName) {
+        super(weight, calories, productName, price, quantity,  imageName);
         this.flavor = flavor;
         this.pieces = pieces;
         this.servingSize = servingSize;

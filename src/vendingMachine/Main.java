@@ -13,9 +13,9 @@ package vendingMachine;
 import java.text.NumberFormat;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -23,14 +23,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import vendingMachine.classes.Cart;
-import vendingMachine.classes.Dispenser;
+import vendingMachine.classes.InventoryManagement;
 import vendingMachine.classes.gui.ProductGrid;
+import vendingMachine.classes.gui.grids.InventoryGrid;
 
 public class Main extends Application{
 
     // Dispencer class creation
-    private Dispenser dispenser = new Dispenser(20.00, 0);
-    private Cart cart = new Cart();
+    private InventoryManagement iManager = new InventoryManagement();
+    private Cart cart = new Cart(iManager);
     private Insets padding = new Insets(5,5,5,5);
     private String borderedItems = "-fx-border-color: blue;\n"
             + "-fx-border-insets: 6;\n"
@@ -67,54 +68,43 @@ public class Main extends Application{
         // vbox to hold grid
         VBox productVBox = new VBox();
         productVBox.setPadding(padding);
+        productVBox.setAlignment(Pos.CENTER);
 
         //vbox to hold cart grid , total price cost, and confirmation button
         VBox cartVBox = new VBox();
         cartVBox.setPadding(padding);
 
-        //Label for holding the current total price in the cart
-        Label totalPrice = new Label("Total Cost: " + formatter.format(cart.getTotalDue()));
+        ImageView imageBasket = new ImageView(new Image("res/images/basket.jpg"));
+        imageBasket.setFitHeight(100);
+        imageBasket.setFitWidth(100);
 
 
-        //Grid pane for the products
-        ProductGrid productGrid = new ProductGrid(dispenser.getProductList(), 3, cart);
-        ProductGrid cartGrid = new ProductGrid(cart.getPurchaseList(),3, cart);
+
+        //Grid for InventoryPane's
+        InventoryGrid productGrid = new InventoryGrid(iManager.getProductList(), 6, cart, imageBasket.getX(), imageBasket.getY());
+
 
         //Button for selecting Drink with picture
-        Button btnDrink = new Button("Drinks");
-        Image drink = new Image("res/images/drink.jpg");
-        btnDrink.setGraphic(new ImageView(drink));
+        Button btnDrink = new Button("Drinks", new ImageView(new Image("res/images/drink.jpg")));
         btnDrink.setOnAction(event -> {
-         productGrid.sortProductGrid("drink", cart);
+         productGrid.sortProductGrid("drink");
         });
 
         //Button for selecting Chips with picture
-        Button btnChip = new Button("Chips");
-        Image chip = new Image("res/images/chips.jpg");
-        btnChip.setGraphic(new ImageView(chip));
+        Button btnChip = new Button("Chips", new ImageView(new Image("res/images/chips.jpg")));
         btnChip.setOnAction(event -> {
-            productGrid.sortProductGrid("chips", cart);
+            productGrid.sortProductGrid("chips");
         });
 
         //Button for selecting Snack with picture
-        Button btnCandy = new Button("Candy");
-        Image candy = new Image("res/images/candy.jpg");
-        btnCandy.setGraphic(new ImageView(candy));
+        Button btnCandy = new Button("Candy", new ImageView(new Image("res/images/candy.jpg")));
         btnCandy.setOnAction(event -> {
-            productGrid.sortProductGrid("candy", cart);
+            productGrid.sortProductGrid("candy");
         });
         //Button for selecting Gum with picture
-        Button btnGum = new Button("Gum");
-        Image gum = new Image("res/images/gum.jpg");
-        btnGum.setGraphic(new ImageView(gum));
+        Button btnGum = new Button("Gum", new ImageView(new Image("res/images/gum.jpg")));
         btnGum.setOnAction(event -> {
-            productGrid.sortProductGrid("gum", cart);
-        });
-
-        Button btnCartupdate = new Button("Update Cart");
-        btnCartupdate.setOnAction(event -> {
-            cartGrid.sortProductGrid("default", cart);
-            totalPrice.setText("Total Cost: " + formatter.format(cart.getTotalDue()));
+            productGrid.sortProductGrid("gum");
         });
 
 
@@ -124,13 +114,13 @@ public class Main extends Application{
         mainPane.setCenter(mainHBox);
         mainHBox.getChildren().addAll(productVBox, cartVBox);
         productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
-        productVBox.getChildren().addAll(productSelectionHBox, productGrid);
-        cartHBox.getChildren().addAll(btnCartupdate, totalPrice);
-        cartVBox.getChildren().addAll(cartHBox,cartGrid);
+        productVBox.getChildren().addAll(productSelectionHBox, productGrid, imageBasket);
+        cartHBox.getChildren().addAll();
+        cartVBox.getChildren().addAll();
 
 
         //Set Scene
-        Scene scene = new Scene(mainPane, 800, 600);
+        Scene scene = new Scene(mainPane, 1020, 800);
 
         //Set primaryStage
         primaryStage.setTitle("Vending Machine");

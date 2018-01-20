@@ -57,11 +57,10 @@ public class Candy extends Snack {
      * @param productName
      * @param price
      * @param quantity
-     * @param dispenceLocation
      * @param imageName
      */
-    public Candy(double servingSize, String flavor, boolean sugarFree, boolean glutenFree, double weight, int calories, String productName, double price, int quantity, String dispenceLocation, String imageName) {
-        super(weight, calories, productName, price, quantity, dispenceLocation, imageName);
+    public Candy(double servingSize, String flavor, boolean sugarFree, boolean glutenFree, double weight, int calories, String productName, double price, int quantity, String imageName) {
+        super(weight, calories, productName, price, quantity, imageName);
         this.servingSize = servingSize;
         this.flavor = flavor;
         this.sugarFree = sugarFree;
@@ -74,7 +73,7 @@ public class Candy extends Snack {
      * @param candy
      */
     public Candy(Candy candy) {
-        this(candy.getServingSize(), candy.getFlavor(), candy.isSugarFree(), candy.isGlutenFree(), candy.getWeight(), candy.getCalories(), candy.getProductName(), candy.getPrice(), candy.getQuantity(), candy.getDispenceLocation(), candy.getImageName());
+        this(candy.getServingSize(), candy.getFlavor(), candy.isSugarFree(), candy.isGlutenFree(), candy.getWeight(), candy.getCalories(), candy.getProductName(), candy.getPrice(), candy.getQuantity(), candy.getImageName());
     }
 
     /**

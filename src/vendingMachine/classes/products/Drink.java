@@ -64,11 +64,10 @@ public class Drink extends Product implements Comparable<Drink> {
      * @param productName
      * @param price
      * @param quantity
-     * @param dispenceLocation
      * @param imageName
      */
-    public Drink(double ounces, String type, int calories, boolean sugarFree, int caffeine, String productName, double price, int quantity, String dispenceLocation, String imageName) {
-        super(productName, price, quantity, dispenceLocation, imageName);
+    public Drink(double ounces, String type, int calories, boolean sugarFree, int caffeine, String productName, double price, int quantity, String imageName) {
+        super(productName, price, quantity, imageName);
         this.ounces = ounces;
         this.type = type;
         this.calories = calories;
@@ -82,7 +81,7 @@ public class Drink extends Product implements Comparable<Drink> {
      * @param drink
      */
     public Drink(Drink drink) {
-        this(drink.getOunces(), drink.getType(), drink.getCalories(), drink.isSugarFree(), drink.getCaffeine(), drink.getProductName(), drink.getPrice(), drink.getQuantity(), drink.getDispenceLocation(), drink.getImageName());
+        this(drink.getOunces(), drink.getType(), drink.getCalories(), drink.isSugarFree(), drink.getCaffeine(), drink.getProductName(), drink.getPrice(), drink.getQuantity(), drink.getImageName());
     }
 
     /**

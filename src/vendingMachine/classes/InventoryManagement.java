@@ -6,6 +6,8 @@
  * @author Robert Wade
  * @teacher Dr. Lively
  * @date 01/16/18
+ *
+ * @about This class manages the inventory of the Dispenser and is infact and extention of the Dispenser Class
  */
 
 package vendingMachine.classes;
@@ -29,275 +31,34 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import vendingMachine.classes.products.Product;
 
-public class InventoryManagement extends Product {
+public class InventoryManagement extends Dispenser {
 
-    protected ObservableList<String> cartObservableList;
-    protected ArrayList<String> cartListItems = new ArrayList<String>();
-    private void sendAlert(AlertType error, String item_unavailable, String item_unavailable1, String errorMessage) {
-    }
-
-    InventoryManagement(){
-
+    public InventoryManagement(){
+        super(20, 0);
     }
 
     /**
-     * sellItem
-     *
-     * Reduce items based on what has been sold.
-     *
-     * @param product
-     * @param qty
+     * Increace Product Quantity by one
      */
-    public boolean addToCart(Product product, int qty){
-        String errorMessage = "";
-
-        //First check to make sure the items are available.
-        if (product.getQuantity() <= 0){
-            if (product.getQuantity() == 0)
-                errorMessage = "Sorry, " + product.getProductName()+ "available. Please select a different item.";
-            else
-                errorMessage = "Sorry, only " + product.getQuantity() + "left of " + product.getProductName() + ". Please select a differnt item.";
-
-            sendAlert(AlertType.ERROR, "Item Unavailable", "Item Unavailable", errorMessage);
-
-            return false;
-        }else{
-            product.setQuantity(product.getQuantity() - qty);
-
-           //Add items to the cart
-            cartListItems.add(product.getProductName() + " - $" + product.getPrice());
-            updateCartObservableList();
-
-            //This step will create the animation for items dropping into the cart.
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Add to cart");
-            stage.setResizable(false);
-
-            Group root = new Group();
-
-            //Cart image is missing
-            ImageView cart = new ImageView(new Image("/res/images/cart.jpg"));
-            cart.relocate(15, 250);
-            cart.setFitHeight(100);
-            cart.setFitWidth(100);
-
-            //Import the images for the items.
-            ImageView productImage = new ImageView();
-
-        switch (product.getProductName()){
-            case "Arrowhead Water": productImage = new ImageView((new Image("/res/images/arrowhead_water.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Big Red Gum": productImage = new ImageView((new Image("/res/images/big_red.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Coca Cola": productImage = new ImageView((new Image("/res/images/coca-cola.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Diet Coca Cola": productImage = new ImageView((new Image("/res/images/diet_coca-cola.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Diet Pepsi": productImage = new ImageView((new Image("/res/images/diet_pepsi.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Doritos Cool Ranch": productImage = new ImageView((new Image("/res/images/doritos_cool_ranch.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Doritos Nacho Cheese": productImage = new ImageView((new Image("/res/images/doritos_nacho_cheese.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Doublemint Gum": productImage = new ImageView((new Image("/res/images/doublemint.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Fritos Chilli Cheese Chips": productImage = new ImageView((new Image("/res/images/fritos_chili_cheese.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Fritos Original": productImage = new ImageView((new Image("/res/images/fritos_original.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Gatorade Fruit Punch": productImage = new ImageView((new Image("/res/images/gatorade_fruit_punch.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Hershy Candy Bar": productImage = new ImageView((new Image("/res/images/hershy.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Juicy Fruit Gum": productImage = new ImageView((new Image("/res/images/juicy_fruit.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Juicy Fruit Sour Watermelon": productImage = new ImageView((new Image("/res/images/juicy_fruit_sour_watermelon.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Lay's BBQ Chips": productImage = new ImageView((new Image("/res/images/lays_bbq.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Lay's Classic Chips": productImage = new ImageView((new Image("/res/images/lays_classic.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "M & M Candy": productImage = new ImageView((new Image("/res/images/m_and_m.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Pepsi": productImage = new ImageView((new Image("/res/images/pepsi.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Resees Candy": productImage = new ImageView((new Image("/res/images/resees.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Skittles Candy": productImage = new ImageView((new Image("/res/images/skittles.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Snickers": productImage = new ImageView((new Image("/res/images/snickers.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Starburst Candy": productImage = new ImageView((new Image("/res/images/starburst.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Trident Cinnamon Gum": productImage = new ImageView((new Image("/res/images/trident_cinnamon.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-
-            case "Trident Tropical Twist": productImage = new ImageView((new Image("/res/images/trident_tropical_twist.jpg")));
-                productImage.setFitHeight(70);
-                productImage.setFitWidth(70);
-                break;
-        }
-
-        productImage.relocate(0,0);
-            root.getChildren().addAll(productImage, cart);
-
-            //Build animation path.
-            Path path = new Path();
-            path.getElements().addAll(new MoveTo(50,50), new VLineTo(300));
-            path.setFill(null);
-            path.setStroke(Color.TRANSPARENT);
-            path.setStrokeWidth(2);
-            root.getChildren().add(path);
-
-            Scene scene = new Scene(root, 100, 300);
-            stage.setScene(scene);
-            stage.show();
-
-            PathTransition pt = new PathTransition(Duration.millis(1000), path, productImage);
-        pt.play();
-            pt.setAutoReverse(false);
-            pt.play();
-
-            return true;
-
-        }
-    }
-
-
-
-    /**
-     *
-     * removing items from cart
-     *
-     * @param mainDispenser
-     * @param productId
-     * @param itemInList
-     *
-     */
-    public void removeFromCart(Dispenser mainDispenser, int productId, int itemInList){
-
-        cartObservableList.remove(itemInList);
-
-        //remove item from array
-        for (int i = 0; i < cartListItems.size(); i++){
-            String[] itemToRemove = cartListItems.get(i).split(" - ");
-            System.out.println(itemToRemove[i]);
-            if (Integer.parseInt(itemToRemove[1]) == productId){
-                cartListItems.remove(i);
-
-            }
-        }
-        for (int k = 0; k < mainDispenser.getProductList().size(); k++){
-            Product theProduct = mainDispenser.getProductList().get(k);
-            
-            if (theProduct.getProductId() == productId){
-                theProduct.setQuantity(theProduct.getQuantity() + 1);
-                
+    public void increaseQuantity(Product product){
+        for (int index = 0; index < getProductList().size(); index++){
+            if(getProductList().get(index) == product){
+                getProductList().get(index).increaseQuantity();
             }
         }
     }
+
     /**
-     * getCartTotal
-     * 
-     * @return
+     * Decrease Product Quantity by one
      */
-    public double getCartTotal(){
-        double tempTotal = 0.00;
-        
-        for (int j = 0; j < cartListItems.size(); j++){
-            String[] itemToRemove = cartListItems.get(j).split(" - ");
-            
-            tempTotal += Float.parseFloat(itemToRemove[2].replace("$", ""));
-                        
+    public void decreaseQuantity(Product product){
+        for (int index = 0; index < getProductList().size(); index++){
+            if(getProductList().get(index) == product){
+                getProductList().get(index).decreaseQuantity();
+            }
         }
-        
-        return Math.round(tempTotal * 100D) / 100D;
     }
-    /**
-     * updateCartObservableList()
-     * 
-     */
-    private void updateCartObservableList(){
-        String[] tempListItems = new String[cartListItems.size()];
-        
-        for (int i = 0; i < cartListItems.size(); i++){
-            tempListItems[i] = cartListItems.get(i);
-        }
-        
-        cartObservableList = FXCollections.observableArrayList(tempListItems);
-    }
-    
-    public ObservableList<String>getCartObservableList(){
-        return cartObservableList;
-    }
+
+
 
 }

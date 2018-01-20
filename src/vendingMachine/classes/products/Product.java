@@ -31,11 +31,6 @@ abstract public class Product {
     private int quantity;
 
     /**
-     * Location of the product.
-     */
-    private String dispenceLocation;
-
-    /**
      * Image icon file name of product
      */
     private String imageName;
@@ -55,7 +50,6 @@ abstract public class Product {
         price = Double.parseDouble(dec.format(randomPrice));
         int randomQuantity = ThreadLocalRandom.current().nextInt(1, 11);
         quantity = randomQuantity;
-        dispenceLocation = "A1";
         imageName = "sold_out";
     }
 
@@ -65,14 +59,12 @@ abstract public class Product {
      * @param productName
      * @param price
      * @param quantity
-     * @param dispenceLocation
      * @param imageName
      */
-    public Product(String productName, double price, int quantity, String dispenceLocation, String imageName) {
+    public Product(String productName, double price, int quantity, String imageName) {
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
-        this.dispenceLocation = dispenceLocation;
         this.imageName = imageName;
     }
 
@@ -82,7 +74,7 @@ abstract public class Product {
      * @param product
      */
     public Product(Product product) {
-        this(product.getProductName(), product.getPrice(), product.getQuantity(), product.getDispenceLocation(), product.getImageName());
+        this(product.getProductName(), product.getPrice(), product.getQuantity(), product.getImageName());
     }
 
     /**
@@ -92,7 +84,7 @@ abstract public class Product {
      */
     @Override
     public String toString() {
-        return "Product{" + "productName=" + productName + ", price=" + price + ", quantity=" + quantity + ", dispenceLocation=" + dispenceLocation + '}';
+        return "Product{" + "productName=" + productName + ", price=" + price + ", quantity=" + quantity + ", dispenceLocation=" + '}';
     }
 
     /**
@@ -182,36 +174,12 @@ abstract public class Product {
     }
 
     /**
-     * gets the location of the item.
-     *
-     * @return
-     */
-    public String getDispenceLocation() {
-        return dispenceLocation;
-    }
-
-    /**
-     * sets the location of the item
-     *
-     * @param dispenceLocation
-     */
-    public void setDispenceLocation(String dispenceLocation) {
-        this.dispenceLocation = dispenceLocation;
-    }
-
-    /**
      * Returns the name of the image to be displayed.
      *
      * @return imageName
      */
     public String getImageName() {
-        //If the item is sold out display the sold_out.jpg image.
-        if(getQuantity() <= 0){
-            setQuantity(0);
-            return "sold_out.jpg";
-        }
-
-            return imageName;
+        return imageName;
     }
 
     /**

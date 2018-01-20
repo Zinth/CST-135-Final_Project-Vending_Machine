@@ -6,29 +6,24 @@
  * @date 01/13/18
  */
 
-package vendingMachine.classes.gui;
+package vendingMachine.classes.gui.panes;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.AccessibleAction;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import vendingMachine.classes.Cart;
+import vendingMachine.classes.gui.AnimationPane;
 import vendingMachine.classes.products.Product;
-
-import java.awt.event.ActionEvent;
 import java.text.NumberFormat;
-import java.util.ArrayList;
+
 
 
 public class ProductPane extends VBox {
 
     private String labelStyle = "-fx-background-color: black; -fx-text-fill: white; -fx-label-padding: 5; ";
     private final NumberFormat formatter = NumberFormat.getCurrencyInstance();
+    private ImageView productImage;
 
     //basic constructor
     public ProductPane(){}
@@ -37,10 +32,10 @@ public class ProductPane extends VBox {
      * Contructor to create a array list of Stack panes holding product information.
     * @param product
      */
-    public ProductPane(Product product, Cart cart) {
+    public ProductPane(Product product) {
 
             // Create an ImageView of the product image
-            ImageView productImage = new ImageView(new Image("res/images/" + product.getImageName()));
+            productImage = new ImageView(new Image("res/images/" + product.getImageName()));
             productImage.setFitWidth(100);
             productImage.setFitHeight(100);
 
@@ -55,27 +50,36 @@ public class ProductPane extends VBox {
             productPrice.setWrapText(true);
             productPrice.setStyle(labelStyle);
 
-            Button btnBuy = new Button("Purchase");
-            btnBuy.setOnAction(event -> {
-                if(product.getQuantity() > 0){
-                    product.setQuantity(product.getQuantity() - 1); // subtract one from
-                    cart.addToCart(product);
-                }else{
-                    System.err.println("Out of product.");
-                }
-            });
-
-
 
             //Add nodes to productPane
-            this.getChildren().addAll(productImage, productName, productPrice, btnBuy);
+            this.getChildren().addAll(productImage, productName, productPrice);
 
             //TODO: Fromat StackPane to look good.
 
         this.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * get the X position of the Pane
+     * @return
+     */
+    public double getPositoinX(){
+        return this.getPositoinX();
+    }
 
+    /**
+     * get the Y position of the Pane
+     * @return
+     */
+    public double getPositionY(){
+        return this.getPositionY();
+    }
 
-
+    /**
+     * get the ImageView
+     * @return
+     */
+    public ImageView getProductImage() {
+        return productImage;
+    }
 }

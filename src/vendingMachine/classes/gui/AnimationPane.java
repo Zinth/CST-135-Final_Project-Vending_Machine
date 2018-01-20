@@ -29,14 +29,11 @@ public class AnimationPane extends Pane{
      * @param startY
      * @param endX
      * @param endY
-     * @param image
      */
-    public AnimationPane(double startX, double startY, double endX, double endY, Image image){
+    public AnimationPane(double startX, double startY, double endX, double endY, ImageView imageView){
         this.transSpeed = 4000;
         this.fadeSpeed = 300;
 
-        //Create the ImageView that will move along the path
-        ImageView imageView = new ImageView(image);
 
         //Create the path using a drawn Line
         Line path = new Line(startX, startY, endX, endY);
