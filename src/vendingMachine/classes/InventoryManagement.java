@@ -12,23 +12,6 @@
 
 package vendingMachine.classes;
 
-import java.util.ArrayList;
-import javafx.animation.PathTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.VLineTo;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import vendingMachine.classes.products.Product;
 
 public class InventoryManagement extends Dispenser {
@@ -59,6 +42,11 @@ public class InventoryManagement extends Dispenser {
         }
     }
 
+    public void resetProducts() {
+        for (int index = 0; index < getProductList().size(); index++){
+                getProductList().get(index).setQuantity(defaultQuantity);
+        }
+    }
 
 
 }

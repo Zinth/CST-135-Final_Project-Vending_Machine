@@ -84,6 +84,11 @@ public class Main extends Application{
         ManagerGrid managerGrid = new ManagerGrid(iManager, 8);
 
         // --- Create Buttons ---
+        Button resetButton = new CustomButtons("res/images/refresh.png", "Reset Items");
+        resetButton.setOnAction(e -> {
+            iManager.resetProducts();
+            managerGrid.fillGrid();
+        });
         //Button to display Manager Grid
         Button btnManager = new CustomButtons("res/images/manager.png", "Manager Mode");
         //btnManager action event for changing if manager grid is displayed or not
@@ -91,13 +96,15 @@ public class Main extends Application{
             if(managerMode){
                 root.setCenter(customerUI);
                 managerMode = false;
+                bottomHBox.getChildren().remove(resetButton);
             }else{
                 // Else have scene contain managerVBox
                 root.setCenter(managerUI);
                 managerMode = true;
+                bottomHBox.getChildren().add(resetButton);
             }
+            managerGrid.fillGrid();
         });
-
         // --- Nodes to Groups ---
         //Add the createCustomerUI to customerUI group
         customerUI.getChildren().addAll(createCustomerUI());
@@ -108,7 +115,7 @@ public class Main extends Application{
         //Add managerGrid to managerVBox
         managerVBox.getChildren().addAll(managerGrid);
         //Add btnManager to bottomHBox
-        bottomHBox.getChildren().add(btnManager);
+        bottomHBox.getChildren().addAll(btnManager);
         //Set default UI Group for root Pane
         root.setCenter(customerUI);
         //Add the bottomHBox to the bottom of root.

@@ -37,6 +37,8 @@ public class Dispenser {
      * Number of sales made
      */
     private int totalSales;
+    
+    protected final int defaultQuantity = 10;
 
     /**
      * Create a Dispenser with generic information.
@@ -91,28 +93,28 @@ public class Dispenser {
         // Varaity of products that will be placed in the productList ArrayList<Product>
 
         //Chips
-        productList.add(new Chips("Barbecue", 1, false, false, 1, 139, "Lays", 0.99, 10, "laysBbq.png"));
-        productList.add(new Chips("Classic", 1, false, false, 1, 152, "Lays", 0.99, 10, "laysClassic.png"));
-        productList.add(new Chips("Original", 1, true, false, 1, 160, "Fritos", 0.99, 10, "fritosOriginal.png"));
-        productList.add(new Chips("Chili Cheese", 1, true, false, 1, 160, "Fritos Chili Cheese", 0.99, 10, "fritosChiliCheese.png"));
-        productList.add(new Chips("Cool Ranch", 1, true, false, 1, 180, "Dorito", 0.99, 10, "doritosNachoCheese.png"));
-        productList.add(new Chips("Nacho Cheese", 1, true, false, 1, 120, "Dorito", 0.99, 10, "doritosCoolRanch.png"));
+        productList.add(new Chips("Barbecue", 1, false, false, 1, 139, "Lays", 0.99, defaultQuantity, "laysBbq.png"));
+        productList.add(new Chips("Classic", 1, false, false, 1, 152, "Lays", 0.99, defaultQuantity, "laysClassic.png"));
+        productList.add(new Chips("Original", 1, true, false, 1, 160, "Fritos", 0.99, defaultQuantity, "fritosOriginal.png"));
+        productList.add(new Chips("Chili Cheese", 1, true, false, 1, 160, "Fritos Chili Cheese", 0.99, defaultQuantity, "fritosChiliCheese.png"));
+        productList.add(new Chips("Cool Ranch", 1, true, false, 1, 180, "Dorito", 0.99, defaultQuantity, "doritosNachoCheese.png"));
+        productList.add(new Chips("Nacho Cheese", 1, true, false, 1, 120, "Dorito", 0.99, defaultQuantity, "doritosCoolRanch.png"));
 
         //Candy
-        productList.add(new Candy(1, "Mix Fruit", false, false, 2.17, 251, "Skittkes", 1.00, 20, "skittlesCandy.png" ));
-        productList.add(new Candy(1, "Peanutbutter & Chocolate", false, false, 1.53, 176, "Resees's", 1.25, 20, "reseesCandy.png" ));
-        productList.add(new Candy(1, "Mix Fruit", false, false, 2.07, 160, "Starburst", 1.00, 20, "starburstCandy.png" ));
-        productList.add(new Candy(1, "Milk Chocolate", false, false, 1.69, 230, "M&M's", 1.00, 20, "mmCandy.png" ));
-        productList.add(new Candy(1, "Milk Chocolate", false, false, 1.55, 214, "Hershey Bar", 1.25, 20, "hershyCandy.png" ));
-        productList.add(new Candy(1, "Chocolate", false, false, 2.00, 266, "Snickers", 1.00, 20, "snickersCandy.png" ));
+        productList.add(new Candy(1, "Mix Fruit", false, false, 2.17, 251, "Skittkes", 1.00, defaultQuantity, "skittlesCandy.png" ));
+        productList.add(new Candy(1, "Peanutbutter & Chocolate", false, false, 1.53, 176, "Resees's", 1.25, defaultQuantity, "reseesCandy.png" ));
+        productList.add(new Candy(1, "Mix Fruit", false, false, 2.07, 160, "Starburst", 1.00, defaultQuantity, "starburstCandy.png" ));
+        productList.add(new Candy(1, "Milk Chocolate", false, false, 1.69, 230, "M&M's", 1.00, defaultQuantity, "mmCandy.png" ));
+        productList.add(new Candy(1, "Milk Chocolate", false, false, 1.55, 214, "Hershey Bar", 1.25, defaultQuantity, "hershyCandy.png" ));
+        productList.add(new Candy(1, "Chocolate", false, false, 2.00, 266, "Snickers", 1.00, defaultQuantity, "snickersCandy.png" ));
 
         //Gum
-        productList.add(new Gum("Tropical Twist", 8, 1, true, 21.2, 1, "Tridant", 0.50, 10, "tridentTropicalTwist.png"));
-        productList.add(new Gum("Cinnamon", 8, 1, true, 21.2, 1, "Tridant", 0.50, 10, "tridentCinnamon.png"));
-        productList.add(new Gum("Original", 8, 1, true, 21.6, 1, "Juicy Fruit", 0.75, 10, "juicyFruit.png"));
-        productList.add(new Gum("Sour Watermelon", 8, 1, true, 21.6, 1, "Juicy Fruit", 0.75, 10, "juicyFruitSourWatermelon.png"));
-        productList.add(new Gum("Cinnamon", 5, 1, false, 13.5, 10, "Big Red", 0.35, 10, "bigRed.png"));
-        productList.add(new Gum("Doublemint", 5, 1, false, 13.3, 10, "Wrigley's", 0.35, 10, "doublemint.png"));
+        productList.add(new Gum("Tropical Twist", 8, 1, true, 21.2, 1, "Tridant", 0.50, defaultQuantity, "tridentTropicalTwist.png"));
+        productList.add(new Gum("Cinnamon", 8, 1, true, 21.2, 1, "Tridant", 0.50, defaultQuantity, "tridentCinnamon.png"));
+        productList.add(new Gum("Original", 8, 1, true, 21.6, 1, "Juicy Fruit", 0.75, defaultQuantity, "juicyFruit.png"));
+        productList.add(new Gum("Sour Watermelon", 8, 1, true, 21.6, 1, "Juicy Fruit", 0.75, defaultQuantity, "juicyFruitSourWatermelon.png"));
+        productList.add(new Gum("Cinnamon", 5, 1, false, 13.5, 10, "Big Red", 0.35, defaultQuantity, "bigRed.png"));
+        productList.add(new Gum("Doublemint", 5, 1, false, 13.3, 10, "Wrigley's", 0.35, defaultQuantity, "doublemint.png"));
 
         //Drinks
         productList.add(new Drink(16, "Soft Drink", 187, false, 1, "Coca-Cola", 1.25, 10, "cokeDrink.png"));
