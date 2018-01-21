@@ -31,6 +31,7 @@ public class ManagerGrid extends GridPane{
      * @param columns
      */
     public ManagerGrid(InventoryManagement iManager, int columns){
+        this.iManager = iManager;
         this.productList = iManager.getProductList();
         this.columns = columns;
 
@@ -44,11 +45,11 @@ public class ManagerGrid extends GridPane{
         int productCounter = 0;
         for(int i = 0; i < productList.size(); i++){
             for(int j = 0; j < getColumns(); j++){
-                add(new ManagerPane(productList.get(productCounter), iManager), j, i);
+                if(productCounter >= productList.size()){
+                    break;
+                }
+                add(new ManagerPane(productList.get(productCounter), iManager, this), j, i);
                 productCounter++;
-            }
-            if(productCounter >= productList.size()){
-                break;
             }
         }
     }

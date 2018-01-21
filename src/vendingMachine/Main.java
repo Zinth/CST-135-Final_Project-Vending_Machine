@@ -81,7 +81,7 @@ public class Main extends Application{
 
         // --- Create Grids ---
         //Create the managerGrid that will display all products for sale
-        ManagerGrid managerGrid = new ManagerGrid(iManager, 6);
+        ManagerGrid managerGrid = new ManagerGrid(iManager, 8);
 
         // --- Create Buttons ---
         //Button to display Manager Grid
