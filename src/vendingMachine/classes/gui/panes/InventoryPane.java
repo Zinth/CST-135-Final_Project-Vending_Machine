@@ -34,6 +34,8 @@ public class InventoryPane extends ProductPane {
             cartGrid.getCart().addToCart(product);
             //refresh cartGrid
             cartGrid.fillGrid();
+            
+            this.updateLabel(product);
             //Create animationPane
 //            AnimationPane animation = new AnimationPane(0, 0, x,y, animateImage );
             //Run Animation

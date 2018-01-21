@@ -15,8 +15,8 @@ package vendingMachine.classes;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.products.Product;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Cart {
 
@@ -79,8 +79,10 @@ public class Cart {
         double totalCost = 0;
 
         //Loop through each product and add the products price times quantity to toal cost.
-        for (int index = 0 ; index < cartList.size(); index++){
-//            totalCost += cartList.get(index).getPrice() * cartList.get(index).getQuantity();
+        for (Map.Entry<Product, Integer> entry : cartList.entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            totalCost += product.getPrice()*quantity;
         }
 
         //return totalCost

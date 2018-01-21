@@ -10,6 +10,7 @@
  */
 package vendingMachine.classes.gui.grids;
 
+import java.text.NumberFormat;
 import javafx.scene.layout.GridPane;
 import vendingMachine.classes.Cart;
 import vendingMachine.classes.gui.panes.CartPane;
@@ -17,23 +18,26 @@ import vendingMachine.classes.products.Product;
 
 import java.util.HashMap;
 import java.util.Map;
+import javafx.scene.text.Text;
 
 public class CartGrid extends GridPane {
 
     private HashMap<Product, Integer> cartList;
     private Cart cart;
     private int columns;
+    private Text costLabel;
 
+    private final NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
     /**
      * constructor to create the initial cartGrid
      *
      * @param cart
      * @param columns
      */
-    public CartGrid(Cart cart, int columns) {
+    public CartGrid(Cart cart, int columns, Text costLabel) {
         this.cart = cart;
         this.cartList = cart.getCartList();
-
+        this.costLabel = costLabel;
         this.columns = columns;
 
         //FillCartList
@@ -63,6 +67,7 @@ public class CartGrid extends GridPane {
                 col = 0;
             }
         }
+        costLabel.setText("Total:" + FORMATTER.format(cart.getTotalCost()));
     }
 
     public int getColumns() {

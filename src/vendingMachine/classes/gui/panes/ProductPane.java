@@ -24,6 +24,7 @@ public class ProductPane extends VBox {
     private String labelStyle = "-fx-background-color: cyan; -fx-text-fill: black; -fx-label-padding: 5; ";
     private final NumberFormat formatter = NumberFormat.getCurrencyInstance();
     private ImageView productImage;
+    private Label productInfo;
 
     //basic constructor
     public ProductPane(){}
@@ -42,7 +43,7 @@ public class ProductPane extends VBox {
 
 
             // Label for displaying the price of the product
-            Label productInfo = new Label(product.getProductName() + ":\n" + formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
+            productInfo = new Label(product.getProductName() + ":\n" + formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
             productInfo.setWrapText(true);
             productInfo.setStyle(labelStyle);
 
@@ -54,6 +55,10 @@ public class ProductPane extends VBox {
         this.setStyle("-fx-background-color: cyan; -fx-border-color: black");
 
         this.setAlignment(Pos.CENTER);
+    }
+    
+    protected void updateLabel(Product product){
+        productInfo.setText(product.getProductName() + ":\n" + formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
     }
 
     /**

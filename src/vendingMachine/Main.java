@@ -48,6 +48,7 @@ public class Main extends Application{
     private BorderPane root;
     private Group customerUI = new Group();
     private Group managerUI= new Group();
+    private CartGrid cartGrid;
 
     /**
      * Main Method
@@ -88,6 +89,7 @@ public class Main extends Application{
         resetButton.setOnAction(e -> {
             iManager.resetProducts();
             managerGrid.fillGrid();
+            cartGrid.fillGrid();
         });
         //Button to display Manager Grid
         Button btnManager = new CustomButtons("res/images/manager.png", "Manager Mode");
@@ -167,7 +169,7 @@ public class Main extends Application{
         Text costLabel = new Text("Total:" + FORMATTER.format(cart.getTotalCost()));
 
         // --- Create Grids ---
-        CartGrid cartGrid = new CartGrid(cart, 3);
+        cartGrid = new CartGrid(cart, 3, costLabel);
         InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 3, cartGrid, 410, 0);
 
         // --- Selection Buttons ---
