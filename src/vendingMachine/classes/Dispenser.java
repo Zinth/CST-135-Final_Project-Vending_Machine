@@ -94,7 +94,7 @@ public class Dispenser {
         productList.add(new Chips("Barbecue", 1, false, false, 1, 139, "Lays", 0.99, 10, "laysBbq.png"));
         productList.add(new Chips("Classic", 1, false, false, 1, 152, "Lays", 0.99, 10, "laysClassic.png"));
         productList.add(new Chips("Original", 1, true, false, 1, 160, "Fritos", 0.99, 10, "fritosOriginal.png"));
-        productList.add(new Chips("Chili Cheese", 1, true, false, 1, 160, "Fritos", 0.99, 10, "fritosChiliCheese.png"));
+        productList.add(new Chips("Chili Cheese", 1, true, false, 1, 160, "Fritos Chili Cheese", 0.99, 10, "fritosChiliCheese.png"));
         productList.add(new Chips("Cool Ranch", 1, true, false, 1, 180, "Dorito", 0.99, 10, "doritosNachoCheese.png"));
         productList.add(new Chips("Nacho Cheese", 1, true, false, 1, 120, "Dorito", 0.99, 10, "doritosCoolRanch.png"));
 
