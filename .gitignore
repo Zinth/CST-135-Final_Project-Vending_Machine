@@ -14,5 +14,5 @@ nbproject/
 *.xml
 /build/
 /dist/
-/src/out/
+src/out/
 *.iml
