@@ -37,20 +37,18 @@ public class Cart {
      * @param product
      */
     public void removeFromCart(Product product){
-        //Loop through all product in the cart
-        for(int index = 0; index < cartList.size(); index++){
             //check if item does exist in the cart
             if(cartList.containsKey(product)){
                 int prevQuantity = cartList.get(product);
-                cartList.replace(product, prevQuantity--);
+                int newQuantity = prevQuantity-1;
+                cartList.replace(product, newQuantity);
                 iManager.increaseQuantity(product);
-                if(prevQuantity == 0){
+                if(newQuantity == 0){
                     cartList.remove(product);
                 }
             }else{
                 alert.showAlert("Error C02: Product is not longer in the cart");
             }
-        }
     }
 
     /**
@@ -66,7 +64,8 @@ public class Cart {
             iManager.decreaseQuantity(product);
         }else{
             int prevQuantity = cartList.get(product);
-            cartList.replace(product, prevQuantity++);
+            int newQuantity = prevQuantity+1;
+            cartList.replace(product, newQuantity);
             iManager.decreaseQuantity(product);
         }
     }

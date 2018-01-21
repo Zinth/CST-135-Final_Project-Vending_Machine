@@ -35,9 +35,9 @@ public class InventoryPane extends ProductPane {
             //refresh cartGrid
             cartGrid.fillGrid();
             //Create animationPane
-            AnimationPane animation = new AnimationPane(0, 0, x,y, animateImage );
+//            AnimationPane animation = new AnimationPane(0, 0, x,y, animateImage );
             //Run Animation
-            this.getChildren().add(animation);
+//            this.getChildren().add(animation);
 
         });
         btnAdd.setStyle("-fx-background-color: \n" +
