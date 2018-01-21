@@ -11,8 +11,11 @@
  */
 package vendingMachine.classes.gui.panes;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import vendingMachine.classes.gui.AnimationPane;
 import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.products.Product;
 
@@ -28,17 +31,15 @@ public class InventoryPane extends ProductPane {
 
         btnAdd.setOnAction(event -> {
             //Add item to cart
-            System.out.println(cartGrid);
-            System.out.println(product);
             cartGrid.getCart().addToCart(product);
             //refresh cartGrid
             cartGrid.fillGrid();
             
             this.updateLabel(product);
             //Create animationPane
-//            AnimationPane animation = new AnimationPane(0, 0, x,y, animateImage );
+            AnimationPane animation = new AnimationPane(0, 0, x,y, animateImage );
             //Run Animation
-//            this.getChildren().add(animation);
+            this.getChildren().add(animation);
 
         });
         btnAdd.setStyle("-fx-background-color: \n" +
