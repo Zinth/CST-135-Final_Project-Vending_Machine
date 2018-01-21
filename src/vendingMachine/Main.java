@@ -49,6 +49,7 @@ public class Main extends Application{
     private Group customerUI = new Group();
     private Group managerUI= new Group();
     private CartGrid cartGrid;
+    private InventoryGrid inventoryGrid;
 
     /**
      * Main Method
@@ -82,7 +83,7 @@ public class Main extends Application{
 
         // --- Create Grids ---
         //Create the managerGrid that will display all products for sale
-        ManagerGrid managerGrid = new ManagerGrid(iManager, 8);
+        ManagerGrid managerGrid = new ManagerGrid(iManager, 8, inventoryGrid, cartGrid);
 
         // --- Create Buttons ---
         Button resetButton = new CustomButtons("res/images/refresh.png", "Reset Items");
@@ -90,6 +91,7 @@ public class Main extends Application{
             iManager.resetProducts();
             managerGrid.fillGrid();
             cartGrid.fillGrid();
+            inventoryGrid.sortProductGrid("chips");
         });
         //Button to display Manager Grid
         Button btnManager = new CustomButtons("res/images/manager.png", "Manager Mode");
@@ -170,7 +172,8 @@ public class Main extends Application{
 
         // --- Create Grids ---
         cartGrid = new CartGrid(cart, 3, costLabel);
-        InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 3, cartGrid, 410, 0);
+        inventoryGrid = new InventoryGrid(iManager.getProductList(), 3, cartGrid, 410, 0);
+        cartGrid.setInventoryGrid(inventoryGrid);
 
         // --- Selection Buttons ---
         //Button for selecting Drink with picture

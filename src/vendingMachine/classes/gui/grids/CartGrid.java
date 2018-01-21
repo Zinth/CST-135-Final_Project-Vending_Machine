@@ -26,6 +26,7 @@ public class CartGrid extends GridPane {
     private Cart cart;
     private int columns;
     private Text costLabel;
+    private InventoryGrid inventoryGrid;
 
     private final NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
     /**
@@ -33,17 +34,22 @@ public class CartGrid extends GridPane {
      *
      * @param cart
      * @param columns
+     * @param costLabel
      */
     public CartGrid(Cart cart, int columns, Text costLabel) {
         this.cart = cart;
         this.cartList = cart.getCartList();
         this.costLabel = costLabel;
         this.columns = columns;
+    }
 
+    public void setInventoryGrid(InventoryGrid inventoryGrid) {
+        this.inventoryGrid = inventoryGrid;
         //FillCartList
         fillGrid();
     }
 
+    
     /**
      * Fill that cart grid with product from the cartList
      */
@@ -60,7 +66,7 @@ public class CartGrid extends GridPane {
         for (Map.Entry<Product, Integer> entry : cartList.entrySet()) {
             Product key = entry.getKey();
             Integer value = entry.getValue();
-            add(new CartPane(key, this, value), col, row);
+            add(new CartPane(key, this, value, inventoryGrid), col, row);
             col++;
             if(col >= getColumns()){
                 row++;

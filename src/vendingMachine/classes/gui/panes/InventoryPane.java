@@ -12,10 +12,7 @@
 package vendingMachine.classes.gui.panes;
 
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import vendingMachine.classes.Cart;
-import vendingMachine.classes.gui.AnimationPane;
 import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.products.Product;
 
@@ -31,6 +28,8 @@ public class InventoryPane extends ProductPane {
 
         btnAdd.setOnAction(event -> {
             //Add item to cart
+            System.out.println(cartGrid);
+            System.out.println(product);
             cartGrid.getCart().addToCart(product);
             //refresh cartGrid
             cartGrid.fillGrid();

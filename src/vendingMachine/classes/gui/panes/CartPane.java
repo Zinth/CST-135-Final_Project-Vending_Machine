@@ -14,10 +14,11 @@ package vendingMachine.classes.gui.panes;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import vendingMachine.classes.gui.grids.CartGrid;
+import vendingMachine.classes.gui.grids.InventoryGrid;
 import vendingMachine.classes.products.Product;
 
 public class CartPane extends ProductPane {
-    public CartPane(Product product, CartGrid cartGrid, Integer quantity){
+    public CartPane(Product product, CartGrid cartGrid, Integer quantity, InventoryGrid inventoryGrid){
         super(product);
 
         Label quantityLabel;
@@ -29,6 +30,8 @@ public class CartPane extends ProductPane {
             //Add quantity back to product in inventory
             //Refresh cartGrid
             cartGrid.fillGrid();
+            this.updateLabel(product);
+            inventoryGrid.sortProductGrid(product.getClass().getSimpleName().toLowerCase());
         });
         this.getChildren().add(quantityLabel);
         this.getChildren().add(btnRemove);

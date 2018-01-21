@@ -16,6 +16,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import vendingMachine.classes.InventoryManagement;
+import vendingMachine.classes.gui.grids.CartGrid;
+import vendingMachine.classes.gui.grids.InventoryGrid;
 import vendingMachine.classes.gui.grids.ManagerGrid;
 import vendingMachine.classes.products.Product;
 
@@ -23,7 +25,7 @@ public class ManagerPane extends ProductPane {
 
     private InventoryManagement iManager;
 
-    public ManagerPane(Product product, InventoryManagement iManager, ManagerGrid managerGrid){
+    public ManagerPane(Product product, InventoryManagement iManager, ManagerGrid managerGrid, InventoryGrid inventoryGrid, CartGrid cartGrid){
         super(product);
         this.iManager = iManager;
 
@@ -31,12 +33,18 @@ public class ManagerPane extends ProductPane {
         btnIncrease.setOnAction(event -> {
             this.iManager.increaseQuantity(product);
             managerGrid.fillGrid();
+            this.updateLabel(product);
+            cartGrid.fillGrid();
+            inventoryGrid.sortProductGrid(product.getClass().getSimpleName().toLowerCase());
         });
 
         Button btnDecrease = new Button("-");
         btnDecrease.setOnAction(event -> {
             this.iManager.decreaseQuantity(product);
             managerGrid.fillGrid();
+            this.updateLabel(product);
+            cartGrid.fillGrid();
+            inventoryGrid.sortProductGrid(product.getClass().getSimpleName().toLowerCase());
         });
 
         HBox btnHBox = new HBox();

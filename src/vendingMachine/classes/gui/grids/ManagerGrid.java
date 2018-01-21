@@ -12,7 +12,6 @@
 package vendingMachine.classes.gui.grids;
 
 import javafx.scene.layout.GridPane;
-import vendingMachine.classes.Cart;
 import vendingMachine.classes.InventoryManagement;
 import vendingMachine.classes.gui.panes.ManagerPane;
 import vendingMachine.classes.products.Product;
@@ -24,16 +23,22 @@ public class ManagerGrid extends GridPane{
     private ArrayList<Product> productList;
     private InventoryManagement iManager;
     private int columns;
+    private InventoryGrid inventoryGrid;
+    private CartGrid cartGrid;
 
     /**
      * Constructor
      * @param iManager
      * @param columns
+     * @param inventoryGrid
+     * @param cartGrid 
      */
-    public ManagerGrid(InventoryManagement iManager, int columns){
+    public ManagerGrid(InventoryManagement iManager, int columns, InventoryGrid inventoryGrid, CartGrid cartGrid){
         this.iManager = iManager;
         this.productList = iManager.getProductList();
         this.columns = columns;
+        this.inventoryGrid = inventoryGrid;
+        this.cartGrid = cartGrid;
 
         fillGrid();
     }
@@ -48,7 +53,7 @@ public class ManagerGrid extends GridPane{
                 if(productCounter >= productList.size()){
                     break;
                 }
-                add(new ManagerPane(productList.get(productCounter), iManager, this), j, i);
+                add(new ManagerPane(productList.get(productCounter), iManager, this, inventoryGrid, cartGrid), j, i);
                 productCounter++;
             }
         }
