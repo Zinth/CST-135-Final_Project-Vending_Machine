@@ -52,13 +52,13 @@ public class CartGrid extends GridPane{
         //Loop through each product in cart list
         for(int i = 0; i < cartList.size(); i++){
             for(int j = 0; j < getColumns(); j++){
+                //Don't go over bounds of cartList.size()
+                if(productCounter + 1 > cartList.size()){
+                    break;
+                }
                 //add that product to the cartGrid
                 add(new CartPane(cartList.get(productCounter), this), j, i);
                 productCounter++;
-            }
-            //Don't go over bounds of cartList.size()
-            if(productCounter + 1 >= cartList.size()){
-                break;
             }
         }
     }
