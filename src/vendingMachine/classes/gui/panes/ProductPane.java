@@ -23,7 +23,7 @@ public class ProductPane extends VBox {
 
     private String labelStyle = "-fx-background-color: cyan; -fx-text-fill: black; -fx-label-padding: 5; ";
     private final NumberFormat formatter = NumberFormat.getCurrencyInstance();
-    private ImageView productImage;
+    protected ImageView productImage;
     private Label productInfo;
 
     //basic constructor

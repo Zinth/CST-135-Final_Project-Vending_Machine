@@ -179,10 +179,6 @@ abstract public class Product {
      * @return imageName
      */
     public String getImageName() {
-        if(getQuantity() <= 0){
-            setQuantity(0);
-            return "soldOut.png";
-        }
         return imageName;
     }
 

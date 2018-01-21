@@ -81,6 +81,7 @@ public class Main extends Application{
         HBox bottomHBox = new HBox();
         bottomHBox.setAlignment(Pos.CENTER);
 
+        HBox customerHbox = createCustomerUI();
         // --- Create Grids ---
         //Create the managerGrid that will display all products for sale
         ManagerGrid managerGrid = new ManagerGrid(iManager, 8, inventoryGrid, cartGrid);
@@ -111,7 +112,7 @@ public class Main extends Application{
         });
         // --- Nodes to Groups ---
         //Add the createCustomerUI to customerUI group
-        customerUI.getChildren().addAll(createCustomerUI());
+        customerUI.getChildren().addAll(customerHbox);
         //Add managerVBox to managerUI group
         managerUI.getChildren().addAll(managerVBox);
 

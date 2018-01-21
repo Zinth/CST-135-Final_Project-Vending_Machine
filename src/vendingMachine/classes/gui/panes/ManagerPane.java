@@ -40,11 +40,13 @@ public class ManagerPane extends ProductPane {
 
         Button btnDecrease = new Button("-");
         btnDecrease.setOnAction(event -> {
-            this.iManager.decreaseQuantity(product);
-            managerGrid.fillGrid();
-            this.updateLabel(product);
-            cartGrid.fillGrid();
-            inventoryGrid.sortProductGrid(product.getClass().getSimpleName().toLowerCase());
+            if(product.getQuantity() > 0){
+                this.iManager.decreaseQuantity(product);
+                managerGrid.fillGrid();
+                this.updateLabel(product);
+                cartGrid.fillGrid();
+                inventoryGrid.sortProductGrid(product.getClass().getSimpleName().toLowerCase());
+            }
         });
 
         HBox btnHBox = new HBox();
