@@ -13,3 +13,6 @@ nbproject/
 *.mf
 *.xml
 /build/
+/dist/
+/src/out/
+*.iml
