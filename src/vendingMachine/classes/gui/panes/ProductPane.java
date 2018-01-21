@@ -36,8 +36,8 @@ public class ProductPane extends VBox {
 
             // Create an ImageView of the product image
             productImage = new ImageView(new Image("res/images/" + product.getImageName()));
-            productImage.setFitWidth(75);
-            productImage.setFitHeight(75);
+            productImage.setFitWidth(100);
+            productImage.setFitHeight(100);
 
 
 
@@ -51,7 +51,7 @@ public class ProductPane extends VBox {
             this.getChildren().addAll(productImage, productInfo);
 
             //TODO: Fromat StackPane to look good.
-        this.setStyle("-fx-background-color: cyan");
+        this.setStyle("-fx-background-color: cyan; -fx-border-color: black");
 
         this.setAlignment(Pos.CENTER);
     }

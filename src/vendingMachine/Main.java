@@ -64,7 +64,7 @@ public class Main extends Application{
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        //-- Create Panes --
         //Create the root pane and format it.
         root = new BorderPane();
         root.setPadding(padding);
@@ -79,11 +79,13 @@ public class Main extends Application{
         HBox bottomHBox = new HBox();
         bottomHBox.setAlignment(Pos.CENTER);
 
+        // --- Create Grids ---
         //Create the managerGrid that will display all products for sale
         ManagerGrid managerGrid = new ManagerGrid(iManager, 6);
 
+        // --- Create Buttons ---
         //Button to display Manager Grid
-        Button btnManager = new CustomButtons("res/images/manager.jpg", "Manager Mode");
+        Button btnManager = new CustomButtons("res/images/manager.png", "Manager Mode");
         //btnManager action event for changing if manager grid is displayed or not
         btnManager.setOnAction(event -> {
             if(managerMode){
@@ -96,25 +98,30 @@ public class Main extends Application{
             }
         });
 
+        // --- Nodes to Groups ---
+        //Add the createCustomerUI to customerUI group
         customerUI.getChildren().addAll(createCustomerUI());
+        //Add managerVBox to managerUI group
         managerUI.getChildren().addAll(managerVBox);
 
-
-        //Add Nodes to panes
-        managerVBox.getChildren().addAll(managerGrid, btnManager);
+        // --- Add Nodes to Panes ---
+        //Add managerGrid to managerVBox
+        managerVBox.getChildren().addAll(managerGrid);
+        //Add btnManager to bottomHBox
         bottomHBox.getChildren().add(btnManager);
-
         //Set default UI Group for root Pane
         root.setCenter(customerUI);
+        //Add the bottomHBox to the bottom of root.
         root.setBottom(bottomHBox);
 
+        // --- Standard JavaFX ---
         //Set up default Scene
         Scene scene = new Scene(root, 1020, 800);
 
         //Set primaryStage
         primaryStage.setTitle("Vending Machine");
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(false); // Prevent user resizing
         primaryStage.show();
     }
 
@@ -153,33 +160,33 @@ public class Main extends Application{
         Text costLabel = new Text("Total:" + FORMATTER.format(cart.getTotalCost()));
 
         // --- Create Grids ---
-        CartGrid cartGrid = new CartGrid(cart, 6);
-        InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 6, cartGrid, 410, 0);
+        CartGrid cartGrid = new CartGrid(cart, 3);
+        InventoryGrid inventoryGrid = new InventoryGrid(iManager.getProductList(), 3, cartGrid, 410, 0);
 
         // --- Selection Buttons ---
         //Button for selecting Drink with picture
-        Button btnDrink = new CustomButtons("res/images/drink.jpg", "Drinks");
+        Button btnDrink = new CustomButtons("res/images/drinks.png", "Drinks");
         btnDrink.setOnAction(event -> {
             //Sort the inventory grid to show only drinks
             inventoryGrid.sortProductGrid("drink");
         });
 
         //Button for selecting Chips with picture
-        Button btnChip = new CustomButtons("res/images/chips.jpg", "Chips");
+        Button btnChip = new CustomButtons("res/images/chips.png", "Chips");
         btnChip.setOnAction(event -> {
             //Sort the inventory grid to show only chips
             inventoryGrid.sortProductGrid("chips");
         });
 
         //Button for selecting Snack with picture
-        Button btnCandy = new CustomButtons("res/images/candy.jpg", "Candy");
+        Button btnCandy = new CustomButtons("res/images/candy.png", "Candy");
         btnCandy.setOnAction(event -> {
             //Sort the inventory grid to show only candy
             inventoryGrid.sortProductGrid("candy");
         });
 
         //Button for selecting Gum with picture
-        Button btnGum = new CustomButtons("res/images/gum.jpg", "Gums");
+        Button btnGum = new CustomButtons("res/images/gum.png", "Gums");
         btnGum.setOnAction(event -> {
             //Sort the inventory grid to show only gum
             inventoryGrid.sortProductGrid("gum");
@@ -187,7 +194,7 @@ public class Main extends Application{
 
         // --- Fill Panes ---
         //Add Nodes to panes
-        customerHBox.getChildren().addAll(inventoryVBox, cartVBox);
+        customerHBox.getChildren().addAll( inventoryVBox,  cartVBox);
         productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
         inventoryVBox.getChildren().addAll(inventoryLabel, productSelectionHBox, inventoryGrid);
         cartVBox.getChildren().addAll(cartLabel, cartGrid, costLabel);

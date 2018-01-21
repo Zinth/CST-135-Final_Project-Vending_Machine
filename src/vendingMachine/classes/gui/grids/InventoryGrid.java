@@ -11,6 +11,7 @@
 
 package vendingMachine.classes.gui.grids;
 
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import vendingMachine.classes.gui.panes.InventoryPane;
 import vendingMachine.classes.products.*;
@@ -42,6 +43,10 @@ public class InventoryGrid extends GridPane {
 
 
         //TODO: Add Any universal GridPane Formatting
+
+        this.setHgap(10);
+        this.setVgap(10);
+        this.setStyle("-fx-background-color: cyan; -fx-border-color: black");
     }
 
     /**
