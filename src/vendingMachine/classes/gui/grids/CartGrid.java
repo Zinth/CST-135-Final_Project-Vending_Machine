@@ -8,7 +8,6 @@
  *
  * @about Class displays all products in the cartList.
  */
-
 package vendingMachine.classes.gui.grids;
 
 import javafx.scene.layout.GridPane;
@@ -16,20 +15,22 @@ import vendingMachine.classes.Cart;
 import vendingMachine.classes.gui.panes.CartPane;
 import vendingMachine.classes.products.Product;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class CartGrid extends GridPane{
+public class CartGrid extends GridPane {
 
-    private ArrayList<Product> cartList;
+    private HashMap<Product, Integer> cartList;
     private Cart cart;
     private int columns;
 
     /**
      * constructor to create the initial cartGrid
+     *
      * @param cart
      * @param columns
      */
-    public CartGrid(Cart cart, int columns){
+    public CartGrid(Cart cart, int columns) {
         this.cart = cart;
         this.cartList = cart.getCartList();
 
@@ -42,7 +43,7 @@ public class CartGrid extends GridPane{
     /**
      * Fill that cart grid with product from the cartList
      */
-    public void fillGrid(){
+    public void fillGrid() {
         //Clear all nodes from the grid before filling it again
         this.getChildren().clear();
 
@@ -50,19 +51,19 @@ public class CartGrid extends GridPane{
         int productCounter = 0;
 
         //Loop through each product in cart list
-        for(int i = 0; i < cartList.size(); i++){
-            for(int j = 0; j < getColumns(); j++){
-                //Don't go over bounds of cartList.size()
-                if(productCounter + 1 > cartList.size()){
-                    break;
-                }
-                //add that product to the cartGrid
-                add(new CartPane(cartList.get(productCounter), this), j, i);
-                productCounter++;
+        int row = 0;
+        int col = 0;
+        for (Map.Entry<Product, Integer> entry : cartList.entrySet()) {
+            Product key = entry.getKey();
+            Integer value = entry.getValue();
+            add(new CartPane(key, this, value), col, row);
+            col++;
+            if(col >= getColumns()){
+                row++;
+                col = 0;
             }
         }
     }
-
 
     public int getColumns() {
         return columns;

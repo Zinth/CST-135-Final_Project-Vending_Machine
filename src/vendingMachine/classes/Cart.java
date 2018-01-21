@@ -12,22 +12,23 @@
 
 package vendingMachine.classes;
 
-import javafx.beans.property.DoubleProperty;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.products.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cart {
 
     // AlertWindow class for poping up error messages
     private AlertWindow alert = new AlertWindow();
-
-    private ArrayList<Product> cartList = new ArrayList<Product>();
+    private final HashMap<Product, Integer> cartList;
     private InventoryManagement iManager;
 
     public Cart(InventoryManagement iManager){
+        this.cartList = new HashMap<>();
         this.iManager = iManager;
+        
     }
 
 
@@ -39,20 +40,14 @@ public class Cart {
         //Loop through all product in the cart
         for(int index = 0; index < cartList.size(); index++){
             //check if item does exist in the cart
-            if(cartList.get(index) == product){
-                //If soDecrease the quantity of the Product in Cart
-                cartList.get(index).decreaseQuantity();
-
-                //Increase quantity of product in Productlist
+            if(cartList.containsKey(product)){
+                int prevQuantity = cartList.get(product);
+                cartList.replace(product, prevQuantity--);
                 iManager.increaseQuantity(product);
-
-                //Check to see if the quantity of the product fall to or below 0
-                if(cartList.get(index).getQuantity() <= 0 ){
-                    //If so remove product from cartList
-                    cartList.remove(index);
+                if(prevQuantity == 0){
+                    cartList.remove(product);
                 }
             }else{
-                //else alert customer that no product in cart.
                 alert.showAlert("Error C02: Product is not longer in the cart");
             }
         }
@@ -64,23 +59,15 @@ public class Cart {
      */
     public void addToCart(Product product){
         //Check if cartlist does not contain product
-        if(!cartList.contains(product)){
-            // set the Quantity of this product to 1.
-            product.setQuantity(1);
+        if(!cartList.containsKey(product)){
             // add product
-            cartList.add(product);
+            cartList.put(product, 1);
             //Remove inventory from productList
             iManager.decreaseQuantity(product);
         }else{
-            //loop through all the products in the cartList to find the product.
-            for(int index = 0; index < cartList.size(); index++){
-                if(cartList.get(index) == product) {
-                    //increase the products quantity
-                    cartList.get(index).increaseQuantity();
-                    //Remove inventory from productList
-                    iManager.decreaseQuantity(product);
-                }
-            }
+            int prevQuantity = cartList.get(product);
+            cartList.replace(product, prevQuantity++);
+            iManager.decreaseQuantity(product);
         }
     }
 
@@ -94,14 +81,14 @@ public class Cart {
 
         //Loop through each product and add the products price times quantity to toal cost.
         for (int index = 0 ; index < cartList.size(); index++){
-            totalCost += cartList.get(index).getPrice() * cartList.get(index).getQuantity();
+//            totalCost += cartList.get(index).getPrice() * cartList.get(index).getQuantity();
         }
 
         //return totalCost
         return totalCost;
     }
 
-    public ArrayList<Product> getCartList() {
+    public HashMap<Product, Integer> getCartList() {
         return cartList;
     }
 }
