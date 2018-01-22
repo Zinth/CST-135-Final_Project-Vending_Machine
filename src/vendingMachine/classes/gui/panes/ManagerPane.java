@@ -15,37 +15,25 @@ package vendingMachine.classes.gui.panes;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import vendingMachine.classes.InventoryManagement;
-import vendingMachine.classes.gui.grids.CartGrid;
-import vendingMachine.classes.gui.grids.InventoryGrid;
-import vendingMachine.classes.gui.grids.ManagerGrid;
+import vendingMachine.classes.ServiceManager;
 import vendingMachine.classes.products.Product;
 
 public class ManagerPane extends ProductPane {
 
-    private InventoryManagement iManager;
-
-    public ManagerPane(Product product, InventoryManagement iManager, ManagerGrid managerGrid, InventoryGrid inventoryGrid, CartGrid cartGrid){
-        super(product);
-        this.iManager = iManager;
+    public ManagerPane(ServiceManager serviceManager, Product product){
+        super(serviceManager, product);
 
         Button btnIncrease = new Button("+");
         btnIncrease.setOnAction(event -> {
-            this.iManager.increaseQuantity(product);
-            managerGrid.fillGrid();
-            this.updateLabel(product);
-            cartGrid.fillGrid();
-            inventoryGrid.sortProductGrid(product.getClass().getSimpleName().toLowerCase());
+            serviceManager.getIManager().increaseQuantity(product);
+            serviceManager.UpdateGui();
         });
 
         Button btnDecrease = new Button("-");
         btnDecrease.setOnAction(event -> {
             if(product.getQuantity() > 0){
-                this.iManager.decreaseQuantity(product);
-                managerGrid.fillGrid();
-                this.updateLabel(product);
-                cartGrid.fillGrid();
-                inventoryGrid.sortProductGrid(product.getClass().getSimpleName().toLowerCase());
+                serviceManager.getIManager().decreaseQuantity(product);
+                serviceManager.UpdateGui();
             }
         });
 

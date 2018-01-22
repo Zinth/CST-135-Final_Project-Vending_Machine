@@ -61,8 +61,7 @@ public class AnimationPane extends Pane {
         // Play fadeTrans on pathTrans finished
         pathTrans.setOnFinished(event -> fadeTrans.play());
         fadeTrans.setOnFinished(event -> {
-            ((InventoryPane) this.getParent()).getChildren().remove(this);
-            imageView.setOpacity(1.0);
+            ((InventoryPane) this.getParent()).finishAnimation();
         });
         
     }

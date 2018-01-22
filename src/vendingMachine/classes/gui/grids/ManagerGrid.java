@@ -12,48 +12,37 @@
 package vendingMachine.classes.gui.grids;
 
 import javafx.scene.layout.GridPane;
-import vendingMachine.classes.InventoryManagement;
 import vendingMachine.classes.gui.panes.ManagerPane;
-import vendingMachine.classes.products.Product;
+import vendingMachine.classes.ServiceManager;
+import vendingMachine.interfaces.UpdatableGUINode;
 
-import java.util.ArrayList;
+public class ManagerGrid extends GridPane implements UpdatableGUINode{
 
-public class ManagerGrid extends GridPane{
-
-    private ArrayList<Product> productList;
-    private InventoryManagement iManager;
-    private int columns;
-    private InventoryGrid inventoryGrid;
-    private CartGrid cartGrid;
+    private final ServiceManager serviceManager;
+    private final int columns;
 
     /**
      * Constructor
-     * @param iManager
-     * @param columns
-     * @param inventoryGrid
-     * @param cartGrid 
+     * @param serviceManager
+     * @param columns 
      */
-    public ManagerGrid(InventoryManagement iManager, int columns, InventoryGrid inventoryGrid, CartGrid cartGrid){
-        this.iManager = iManager;
-        this.productList = iManager.getProductList();
+    public ManagerGrid(ServiceManager serviceManager, int columns) {
+        this.serviceManager = serviceManager;
         this.columns = columns;
-        this.inventoryGrid = inventoryGrid;
-        this.cartGrid = cartGrid;
-
-        fillGrid();
     }
 
     /**
      * Method for filling the grid.
      */
-    public void fillGrid(){
+    @Override
+    public void updateNode(){
         int productCounter = 0;
-        for(int i = 0; i < productList.size(); i++){
+        for(int i = 0; i < serviceManager.getIManager().getProducts().size(); i++){
             for(int j = 0; j < getColumns(); j++){
-                if(productCounter >= productList.size()){
+                if(productCounter >= serviceManager.getIManager().getProducts().size()){
                     break;
                 }
-                add(new ManagerPane(productList.get(productCounter), iManager, this, inventoryGrid, cartGrid), j, i);
+                add(new ManagerPane(serviceManager, serviceManager.getIManager().getProducts().get(productCounter)), j, i);
                 productCounter++;
             }
         }

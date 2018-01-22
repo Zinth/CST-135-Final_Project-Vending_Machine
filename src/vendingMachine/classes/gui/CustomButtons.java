@@ -10,11 +10,8 @@
 
 package vendingMachine.classes.gui;
 
-import javafx.geometry.NodeOrientation;
-import javafx.geometry.VerticalDirection;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

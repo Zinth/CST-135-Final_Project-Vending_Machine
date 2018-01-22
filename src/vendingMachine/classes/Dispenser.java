@@ -18,9 +18,6 @@ import vendingMachine.classes.products.Product;
 
 import java.util.ArrayList;
 
-/**
- * @author Christopher Hyde
- */
 public class Dispenser {
 
     /**
@@ -44,13 +41,14 @@ public class Dispenser {
      * Create a Dispenser with generic information.
      */
     public Dispenser() {
-        this.productList = new ArrayList<Product>();
         this.balance = 20.00;
         this.totalSales = 0;
     }
 
     /**
      * Create Dispenser with specific info and Generated productList
+     * @param balance
+     * @param totalSales 
      */
     public Dispenser(double balance, int totalSales) {
         productListFiller(); // Fill the productList with products
@@ -79,8 +77,8 @@ public class Dispenser {
         String inventory = "";
 
         // Create a single string containing every product in the Dispenser
-        for (int i = 0; i < getProductList().size(); i++) {
-            inventory += i + ": " + getProductList().get(i) + "\n\n";
+        for (int i = 0; i < getProducts().size(); i++) {
+            inventory += i + ": " + getProducts().get(i) + "\n\n";
         }
 
         return inventory;
@@ -89,7 +87,7 @@ public class Dispenser {
     /**
      * Fill the productList with products
      */
-    public void productListFiller() {
+    public final void productListFiller() {
         // Varaity of products that will be placed in the productList ArrayList<Product>
 
         //Chips
@@ -132,8 +130,8 @@ public class Dispenser {
      * @param product
      */
     public void changeProduct(int index, Product product) {
-        getProductList().remove(index); //remove the product currently in that index.
-        getProductList().add(index, product); // Add the new product to that index.
+        getProducts().remove(index); //remove the product currently in that index.
+        getProducts().add(index, product); // Add the new product to that index.
     }
 
     /**
@@ -141,7 +139,7 @@ public class Dispenser {
      *
      * @return productList
      */
-    public ArrayList<Product> getProductList() {
+    public ArrayList<Product> getProducts() {
         return productList;
     }
 

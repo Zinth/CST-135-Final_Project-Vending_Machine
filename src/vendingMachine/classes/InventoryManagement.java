@@ -22,29 +22,31 @@ public class InventoryManagement extends Dispenser {
 
     /**
      * Increace Product Quantity by one
+     * @param product 
      */
     public void increaseQuantity(Product product){
-        for (int index = 0; index < getProductList().size(); index++){
-            if(getProductList().get(index) == product){
-                getProductList().get(index).increaseQuantity();
+        for (int index = 0; index < getProducts().size(); index++){
+            if(getProducts().get(index) == product){
+                getProducts().get(index).increaseQuantity();
             }
         }
     }
 
     /**
      * Decrease Product Quantity by one
+     * @param product 
      */
     public void decreaseQuantity(Product product){
-        for (int index = 0; index < getProductList().size(); index++){
-            if(getProductList().get(index) == product){
-                getProductList().get(index).decreaseQuantity();
+        for (int index = 0; index < getProducts().size(); index++){
+            if(getProducts().get(index) == product){
+                getProducts().get(index).decreaseQuantity();
             }
         }
     }
 
     public void resetProducts() {
-        for (int index = 0; index < getProductList().size(); index++){
-                getProductList().get(index).setQuantity(defaultQuantity);
+        for (int index = 0; index < getProducts().size(); index++){
+                getProducts().get(index).setQuantity(defaultQuantity);
         }
     }
 

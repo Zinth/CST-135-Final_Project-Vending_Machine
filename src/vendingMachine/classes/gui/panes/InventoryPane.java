@@ -11,43 +11,43 @@
  */
 package vendingMachine.classes.gui.panes;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import vendingMachine.classes.ServiceManager;
 import vendingMachine.classes.gui.AnimationPane;
-import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.products.Product;
 
 public class InventoryPane extends ProductPane {
 
-    public InventoryPane(Product product, CartGrid cartGrid, double x, double y) {
-        super(product);
+    private double X = 410;
+    private double Y = 0;
+    private ImageView animateImage;
+    private AnimationPane animation;
 
-        if(product.getQuantity() <= 0){
+    public InventoryPane(ServiceManager serviceManager, Product product) {
+        super(serviceManager, product);
+
+        if (product.getQuantity() <= 0) {
             productImage.setImage(new Image("res/images/soldOut.png"));
         }
         Button btnAdd = new Button("Add");
         //Get this products image as a seperate image view for animation
-        ImageView animateImage = new ImageView(getImage());
+        animateImage = new ImageView(getImage());
         animateImage.setFitWidth(75);
         animateImage.setFitHeight(75);
 
         btnAdd.setOnAction(event -> {
             if (product.getQuantity() > 0) {
                 //Add item to cart
-                cartGrid.getCart().addToCart(product);
-                //refresh cartGrid
-                cartGrid.fillGrid();
-
-                this.updateLabel(product);
+                serviceManager.getCart().addToCart(product);
+                serviceManager.getIManager().decreaseQuantity(product);
                 //Create animationPane
-                AnimationPane animation = new AnimationPane(50, 0, x, y, animateImage);
+                animation = new AnimationPane(50, 0, X, Y, animateImage);
                 //Run Animation
                 this.toFront();
                 this.getChildren().add(animation);
-                if(product.getQuantity() == 0){
+                if (product.getQuantity() == 0) {
                     productImage.setImage(new Image("res/images/soldOut.png"));
                 }
             }
@@ -74,5 +74,11 @@ public class InventoryPane extends ProductPane {
         });
 
         this.getChildren().add(btnAdd);
+    }
+
+    public void finishAnimation() {
+        this.getChildren().remove(animation);
+        animateImage.setOpacity(1.0);
+        serviceManager.UpdateGui();
     }
 }
