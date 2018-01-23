@@ -23,12 +23,9 @@ public class Cart {
     // AlertWindow class for poping up error messages
     private AlertWindow alert = new AlertWindow();
     private final HashMap<Product, Integer> cartList;
-    private InventoryManagement iManager;
 
-    public Cart(InventoryManagement iManager){
+    public Cart(){
         this.cartList = new HashMap<>();
-        this.iManager = iManager;
-        
     }
 
 
@@ -42,7 +39,6 @@ public class Cart {
                 int prevQuantity = cartList.get(product);
                 int newQuantity = prevQuantity-1;
                 cartList.replace(product, newQuantity);
-                iManager.increaseQuantity(product);
                 if(newQuantity == 0){
                     cartList.remove(product);
                 }
@@ -60,13 +56,10 @@ public class Cart {
         if(!cartList.containsKey(product)){
             // add product
             cartList.put(product, 1);
-            //Remove inventory from productList
-            iManager.decreaseQuantity(product);
         }else{
             int prevQuantity = cartList.get(product);
             int newQuantity = prevQuantity+1;
             cartList.replace(product, newQuantity);
-            iManager.decreaseQuantity(product);
         }
     }
 
@@ -84,7 +77,6 @@ public class Cart {
             Integer quantity = entry.getValue();
             totalCost += product.getPrice()*quantity;
         }
-
         //return totalCost
         return totalCost;
     }

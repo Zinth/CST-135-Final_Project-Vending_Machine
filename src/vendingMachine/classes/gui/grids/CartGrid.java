@@ -10,77 +10,55 @@
  */
 package vendingMachine.classes.gui.grids;
 
-import java.text.NumberFormat;
 import javafx.scene.layout.GridPane;
-import vendingMachine.classes.Cart;
 import vendingMachine.classes.gui.panes.CartPane;
 import vendingMachine.classes.products.Product;
 
-import java.util.HashMap;
 import java.util.Map;
-import javafx.scene.text.Text;
+import vendingMachine.classes.ServiceManager;
+import vendingMachine.interfaces.UpdatableGUINode;
 
-public class CartGrid extends GridPane {
+public final class CartGrid extends GridPane implements UpdatableGUINode{
 
-    private HashMap<Product, Integer> cartList;
-    private Cart cart;
-    private int columns;
-    private Text costLabel;
-    private InventoryGrid inventoryGrid;
+    private final ServiceManager serviceManager;
+    private final int columns;
 
-    private final NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
     /**
      * constructor to create the initial cartGrid
-     *
-     * @param cart
-     * @param columns
-     * @param costLabel
+     * @param serviceManager
+     * @param columns 
      */
-    public CartGrid(Cart cart, int columns, Text costLabel) {
-        this.cart = cart;
-        this.cartList = cart.getCartList();
-        this.costLabel = costLabel;
+    public CartGrid(ServiceManager serviceManager, int columns) {
+        this.serviceManager = serviceManager;
         this.columns = columns;
+        updateNode();
     }
-
-    public void setInventoryGrid(InventoryGrid inventoryGrid) {
-        this.inventoryGrid = inventoryGrid;
-        //FillCartList
-        fillGrid();
-    }
-
     
     /**
      * Fill that cart grid with product from the cartList
      */
-    public void fillGrid() {
+    @Override
+    public void updateNode() {
         //Clear all nodes from the grid before filling it again
         this.getChildren().clear();
-
-        //productCounter for keeping track of cartList index
-        int productCounter = 0;
 
         //Loop through each product in cart list
         int row = 0;
         int col = 0;
-        for (Map.Entry<Product, Integer> entry : cartList.entrySet()) {
-            Product key = entry.getKey();
-            Integer value = entry.getValue();
-            add(new CartPane(key, this, value, inventoryGrid), col, row);
+        for (Map.Entry<Product, Integer> entry : serviceManager.getCart().getCartList().entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            add(new CartPane(serviceManager, product, quantity), col, row);
             col++;
             if(col >= getColumns()){
                 row++;
                 col = 0;
             }
         }
-        costLabel.setText("Total:" + FORMATTER.format(cart.getTotalCost()));
+        
     }
 
     public int getColumns() {
         return columns;
-    }
-
-    public Cart getCart() {
-        return cart;
     }
 }

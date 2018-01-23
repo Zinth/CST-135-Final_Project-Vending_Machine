@@ -13,28 +13,28 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import vendingMachine.classes.gui.AnimationPane;
 import vendingMachine.classes.products.Product;
-import java.text.NumberFormat;
+import vendingMachine.classes.ServiceManager;
 
 
 
 public class ProductPane extends VBox {
 
     private String labelStyle = "-fx-background-color: cyan; -fx-text-fill: black; -fx-label-padding: 5; ";
-    private final NumberFormat formatter = NumberFormat.getCurrencyInstance();
     protected ImageView productImage;
     private Label productInfo;
+    protected ServiceManager serviceManager;
 
     //basic constructor
     public ProductPane(){}
 
     /**
      * Contructor to create a array list of Stack panes holding product information.
-    * @param product
+     * @param serviceManager
+     * @param product
      */
-    public ProductPane(Product product) {
-
+    public ProductPane(ServiceManager serviceManager, Product product) {
+        this.serviceManager = serviceManager;
             // Create an ImageView of the product image
             productImage = new ImageView(new Image("res/images/" + product.getImageName()));
             productImage.setFitWidth(100);
@@ -43,7 +43,7 @@ public class ProductPane extends VBox {
 
 
             // Label for displaying the price of the product
-            productInfo = new Label(product.getProductName() + ":\n" + formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
+            productInfo = new Label(product.getProductName() + ":\n" + serviceManager.formatPrice(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
             productInfo.setWrapText(true);
             productInfo.setStyle(labelStyle);
 
@@ -55,10 +55,6 @@ public class ProductPane extends VBox {
         this.setStyle("-fx-background-color: cyan; -fx-border-color: black");
 
         this.setAlignment(Pos.CENTER);
-    }
-    
-    protected void updateLabel(Product product){
-        productInfo.setText(product.getProductName() + ":\n" + formatter.format(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
     }
 
     /**

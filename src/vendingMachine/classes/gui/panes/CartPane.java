@@ -13,25 +13,22 @@ package vendingMachine.classes.gui.panes;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import vendingMachine.classes.gui.grids.CartGrid;
-import vendingMachine.classes.gui.grids.InventoryGrid;
+import vendingMachine.classes.ServiceManager;
 import vendingMachine.classes.products.Product;
 
 public class CartPane extends ProductPane {
-    public CartPane(Product product, CartGrid cartGrid, Integer quantity, InventoryGrid inventoryGrid){
-        super(product);
+    public CartPane(ServiceManager serviceManager, Product product, Integer quantity){
+        super(serviceManager, product);
 
         Label quantityLabel;
         quantityLabel = new Label("Quantity: "+quantity.toString());
         Button btnRemove = new Button("Remove from Cart");
         btnRemove.setOnAction(event -> {
             //Remove quantity or product from the cart
-            cartGrid.getCart().removeFromCart(product);
-            //Add quantity back to product in inventory
-            //Refresh cartGrid
-            cartGrid.fillGrid();
-            this.updateLabel(product);
-            inventoryGrid.sortProductGrid(product.getClass().getSimpleName().toLowerCase());
+            serviceManager.getCart().removeFromCart(product);
+            serviceManager.getIManager().increaseQuantity(product);
+            //Refresh Grids
+            serviceManager.UpdateGui();
         });
         this.getChildren().add(quantityLabel);
         this.getChildren().add(btnRemove);
