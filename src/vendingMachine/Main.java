@@ -42,12 +42,12 @@ public class Main extends Application {
      *
      * @param args
      */
-    public static void Main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
     }
 
     /**
-     * Overrided start method
+     * Overriden start method
      *
      * @param primaryStage
      * @throws Exception
