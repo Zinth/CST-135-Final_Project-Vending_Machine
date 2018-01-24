@@ -11,6 +11,8 @@
  */
 package vendingMachine.classes.gui;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import vendingMachine.classes.ServiceManager;
 import vendingMachine.interfaces.UpdatableGUINode;
@@ -27,6 +29,9 @@ public class TotalPrice extends Text implements UpdatableGUINode{
         this.serviceManager = serviceManager;
         double cost = serviceManager.getCart().getTotalCost();
         setText("Total: "+serviceManager.formatPrice(cost));
+        
+        //Format Total Price
+        this.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
     }
     /**
      * Instructs the service manager on how to update this node.
