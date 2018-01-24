@@ -32,8 +32,8 @@ public final class ServiceManager {
 
     public ServiceManager() {
         totalPrice = new TotalPrice(this);
-        cartGrid = new CartGrid(this, 3);
-        inventoryGrid = new InventoryGrid(this, 3);
+        cartGrid = new CartGrid(this, 6);
+        inventoryGrid = new InventoryGrid(this, 6);
         managerGrid = new ManagerGrid(this, 8);
         updatableGuiNodes.add(totalPrice);
         updatableGuiNodes.add(cartGrid);

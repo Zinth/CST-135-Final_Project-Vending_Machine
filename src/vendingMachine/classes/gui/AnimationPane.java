@@ -46,7 +46,7 @@ public class AnimationPane extends Pane {
         pathTrans.setDuration(Duration.millis(transSpeed)); // Set how long the animation lasts
         pathTrans.setPath(path); // Set the path to transition along
         pathTrans.setNode(imageView); // Set the node to transition
-        pathTrans.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT); // Set the Orentation of the node
+        pathTrans.setOrientation(PathTransition.OrientationType.NONE); // Set the Orentation of the node
         pathTrans.setCycleCount(1); // Set how many Cycles it takes.
         pathTrans.setAutoReverse(false); // Set if autoreverse is on
         pathTrans.play(); // Play pathTransition

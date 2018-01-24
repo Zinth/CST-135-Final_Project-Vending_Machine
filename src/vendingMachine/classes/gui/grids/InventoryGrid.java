@@ -41,7 +41,7 @@ public final class InventoryGrid extends GridPane implements UpdatableGUINode{
 
         this.setHgap(10);
         this.setVgap(10);
-        this.setStyle("-fx-background-color: cyan; -fx-border-color: black");
+        this.setStyle("-fx-border-color: 54428E; -fx-border-width: 5px;");
     }
 
     /**

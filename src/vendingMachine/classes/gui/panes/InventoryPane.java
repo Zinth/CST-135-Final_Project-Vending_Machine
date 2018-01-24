@@ -20,8 +20,8 @@ import vendingMachine.classes.products.Product;
 
 public class InventoryPane extends ProductPane {
 
-    private double X = 410;
-    private double Y = 0;
+    private double X = 50;
+    private double Y = 300;
     private ImageView animateImage;
     private AnimationPane animation;
 
@@ -31,13 +31,13 @@ public class InventoryPane extends ProductPane {
         if (product.getQuantity() <= 0) {
             productImage.setImage(new Image("res/images/soldOut.png"));
         }
-        Button btnAdd = new Button("Add");
+
         //Get this products image as a seperate image view for animation
         animateImage = new ImageView(getImage());
         animateImage.setFitWidth(75);
         animateImage.setFitHeight(75);
 
-        btnAdd.setOnAction(event -> {
+        this.setOnMouseClicked(event -> {
             if (product.getQuantity() > 0) {
                 //Add item to cart
                 serviceManager.getCart().addToCart(product);
@@ -52,28 +52,28 @@ public class InventoryPane extends ProductPane {
                 }
             }
         });
-        btnAdd.setStyle("-fx-background-color: \n"
-                + "        linear-gradient(#ffd65b, #e68400),\n"
-                + "        linear-gradient(#ffef84, #f2ba44),\n"
-                + "        linear-gradient(#ffea6a, #efaa22),\n"
-                + "        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),\n"
-                + "        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0))");
+        this.setStyle("-fx-background-color: \n" +
+"        #090a0c,\n" +
+"        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n" +
+"        linear-gradient(#20262b, #191d22),\n" +
+"        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));");
 
-        btnAdd.setOnMouseEntered(event -> {
-            btnAdd.setStyle("-fx-background-color:\n"
-                    + "        linear-gradient(#f0ff35, #a9ff00),\n"
-                    + "        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);");
+        this.setOnMouseEntered(event -> {
+            this.setStyle("-fx-background-color: \n" +
+"        #000000,\n" +
+"        linear-gradient(#7ebcea, #2f4b8f),\n" +
+"        linear-gradient(#426ab7, #263e75),\n" +
+"        linear-gradient(#395cab, #223768);");
         });
-        btnAdd.setOnMouseExited(event -> {
-            btnAdd.setStyle("-fx-background-color: \n"
-                    + "        linear-gradient(#ffd65b, #e68400),\n"
-                    + "        linear-gradient(#ffef84, #f2ba44),\n"
-                    + "        linear-gradient(#ffea6a, #efaa22),\n"
-                    + "        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),\n"
-                    + "        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
+        this.setOnMouseExited(event -> {
+            this.setStyle("-fx-background-color: \n" +
+"        #090a0c,\n" +
+"        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n" +
+"        linear-gradient(#20262b, #191d22),\n" +
+"        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));");
         });
 
-        this.getChildren().add(btnAdd);
+       
     }
 
     public void finishAnimation() {

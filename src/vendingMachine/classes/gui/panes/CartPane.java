@@ -22,8 +22,7 @@ public class CartPane extends ProductPane {
 
         Label quantityLabel;
         quantityLabel = new Label("Quantity: "+quantity.toString());
-        Button btnRemove = new Button("Remove from Cart");
-        btnRemove.setOnAction(event -> {
+        this.setOnMouseClicked(event -> {
             //Remove quantity or product from the cart
             serviceManager.getCart().removeFromCart(product);
             serviceManager.getIManager().increaseQuantity(product);
@@ -31,28 +30,27 @@ public class CartPane extends ProductPane {
             serviceManager.UpdateGui();
         });
         this.getChildren().add(quantityLabel);
-        this.getChildren().add(btnRemove);
+        this.getChildren().remove(stockLabel);
 
-        //Button Styling
-        btnRemove.setStyle("-fx-background-color: \n" +
-                "        linear-gradient(#ffd65b, #e68400),\n" +
-                "        linear-gradient(#ffef84, #f2ba44),\n" +
-                "        linear-gradient(#ffea6a, #efaa22),\n" +
-                "        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),\n" +
-                "        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0))");
+        this.setStyle("-fx-background-color: \n" +
+"        #090a0c,\n" +
+"        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n" +
+"        linear-gradient(#20262b, #191d22),\n" +
+"        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));");
 
-        btnRemove.setOnMouseEntered(event -> {
-            btnRemove.setStyle("-fx-background-color:\n" +
-                    "        linear-gradient(#f0ff35, #a9ff00),\n" +
-                    "        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);");
+        this.setOnMouseEntered(event -> {
+            this.setStyle("-fx-background-color: \n" +
+"        #000000,\n" +
+"        linear-gradient(#7ebcea, #2f4b8f),\n" +
+"        linear-gradient(#426ab7, #263e75),\n" +
+"        linear-gradient(#395cab, #223768);");
         });
-        btnRemove.setOnMouseExited(event -> {
-            btnRemove.setStyle("-fx-background-color: \n" +
-                    "        linear-gradient(#ffd65b, #e68400),\n" +
-                    "        linear-gradient(#ffef84, #f2ba44),\n" +
-                    "        linear-gradient(#ffea6a, #efaa22),\n" +
-                    "        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),\n" +
-                    "        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
+        this.setOnMouseExited(event -> {
+            this.setStyle("-fx-background-color: \n" +
+"        #090a0c,\n" +
+"        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n" +
+"        linear-gradient(#20262b, #191d22),\n" +
+"        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));");
         });
     }
 }

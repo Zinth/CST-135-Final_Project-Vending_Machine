@@ -13,6 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import vendingMachine.classes.products.Product;
 import vendingMachine.classes.ServiceManager;
 
@@ -20,40 +23,45 @@ import vendingMachine.classes.ServiceManager;
 
 public class ProductPane extends VBox {
 
-    private String labelStyle = "-fx-background-color: cyan; -fx-text-fill: black; -fx-label-padding: 5; ";
+    protected String labelStyle = "-fx-text-fill: white; -fx-label-padding: 5; ";
     protected ImageView productImage;
     private Label productInfo;
+    protected Label stockLabel;
     protected ServiceManager serviceManager;
 
     //basic constructor
     public ProductPane(){}
 
     /**
-     * Contructor to create a array list of Stack panes holding product information.
+     * Constructor to create a array list of Stack panes holding product information.
      * @param serviceManager
      * @param product
      */
     public ProductPane(ServiceManager serviceManager, Product product) {
         this.serviceManager = serviceManager;
-            // Create an ImageView of the product image
-            productImage = new ImageView(new Image("res/images/" + product.getImageName()));
-            productImage.setFitWidth(100);
-            productImage.setFitHeight(100);
+        // Create an ImageView of the product image
+        productImage = new ImageView(new Image("res/images/" + product.getImageName()));
+        productImage.setFitWidth(150);
+        productImage.setFitHeight(150);
 
+        //Label for displaying the current Stock
+        stockLabel = new Label("Stock: " + String.valueOf(product.getQuantity()));
+        stockLabel.setStyle(labelStyle);
+        stockLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
 
+        // Label for displaying the price of the product
+        productInfo = new Label(product.getProductName() + "\n" + serviceManager.formatPrice(product.getPrice()));
+        productInfo.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
+        productInfo.setWrapText(true);
+        productInfo.setStyle(labelStyle);
+        productInfo.setTextAlignment(TextAlignment.CENTER);
 
-            // Label for displaying the price of the product
-            productInfo = new Label(product.getProductName() + ":\n" + serviceManager.formatPrice(product.getPrice()) + "\nStock: " +String.valueOf(product.getQuantity()));
-            productInfo.setWrapText(true);
-            productInfo.setStyle(labelStyle);
+        // Add nodes to productPane
+        this.getChildren().addAll(productInfo, productImage, stockLabel);
 
-
-            //Add nodes to productPane
-            this.getChildren().addAll(productImage, productInfo);
-
-            //TODO: Fromat StackPane to look good.
-        this.setStyle("-fx-background-color: cyan; -fx-border-color: black");
-
+        //TODO: Fromat StackPane to look good.
+            
+        this.setStyle("-fx-background-color: #afe3c0");
         this.setAlignment(Pos.CENTER);
     }
 

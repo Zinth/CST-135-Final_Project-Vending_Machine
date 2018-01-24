@@ -22,6 +22,7 @@ public final class CartGrid extends GridPane implements UpdatableGUINode{
 
     private final ServiceManager serviceManager;
     private final int columns;
+    
 
     /**
      * constructor to create the initial cartGrid
@@ -32,6 +33,9 @@ public final class CartGrid extends GridPane implements UpdatableGUINode{
         this.serviceManager = serviceManager;
         this.columns = columns;
         updateNode();
+        
+        this.setHgap(10);
+        this.setVgap(10);
     }
     
     /**

@@ -21,6 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import vendingMachine.classes.ServiceManager;
@@ -36,6 +38,11 @@ public class Main extends Application {
     private final Group CUSTOMER_UI_GROUP = new Group();
     private final Group MANAGER_UI_GROUP = new Group();
     private ServiceManager serviceManager;
+   
+    public final String PANE_STYLE = "-fx-background-color: #7D869C;"
+            + "-fx-border-width: 5px;"
+            + "-fx-border-color: #54428E;";
+
 
     /**
      * Main Method
@@ -62,6 +69,9 @@ public class Main extends Application {
         root = new BorderPane();
         root.setPadding(PADDING);
         root.setPrefSize(1020, 800);
+        root.setStyle("-fx-background-color: #A2ABAB;"
+                + "-fx-border-width: 5px;"
+                + "-fx-border-color: gray");
 
         //Create the Manager VBox to hold the managerGrid
         VBox managerVBox = new VBox();
@@ -72,7 +82,7 @@ public class Main extends Application {
         HBox bottomHBox = new HBox();
         bottomHBox.setAlignment(Pos.CENTER);
 
-        HBox customerHbox = createCustomerUI();
+        VBox customerVBox = createCustomerUI();
         
         // --- Create Buttons ---
         Button resetButton = new CustomButtons("res/images/refresh.png", "Reset Items");
@@ -99,7 +109,7 @@ public class Main extends Application {
         });
         // --- Nodes to Groups ---
         //Add the createCustomerUI to customerUI group
-        CUSTOMER_UI_GROUP.getChildren().addAll(customerHbox);
+        CUSTOMER_UI_GROUP.getChildren().addAll(customerVBox);
         //Add managerVBox to managerUI group
         MANAGER_UI_GROUP.getChildren().addAll(managerVBox);
 
@@ -110,6 +120,7 @@ public class Main extends Application {
         bottomHBox.getChildren().addAll(btnManager);
         //Set default UI Group for root Pane
         root.setCenter(CUSTOMER_UI_GROUP);
+        root.setAlignment(CUSTOMER_UI_GROUP, Pos.TOP_CENTER);
         //Add the bottomHBox to the bottom of root.
         root.setBottom(bottomHBox);
 
@@ -129,34 +140,39 @@ public class Main extends Application {
      *
      * @return customerHBox
      */
-    public HBox createCustomerUI() {
+    public VBox createCustomerUI() {
         // --- Create and Formate Panes ---
         //Create pane that will hold all center content
-        HBox customerHBox = new HBox();
-        customerHBox.setPadding(PADDING);
+        VBox customerVBox = new VBox();
+        customerVBox.setPadding(PADDING);
+        customerVBox.setAlignment(Pos.TOP_CENTER);
+        customerVBox.setMinSize(0, 0);
+        customerVBox.setMaxSize(root.getMaxHeight(), root.getMaxWidth());
+        
 
         //Create hbox to hold product selection buttons
         HBox productSelectionHBox = new HBox();
         productSelectionHBox.setPadding(PADDING);
+        productSelectionHBox.setAlignment(Pos.CENTER);
 
         // vbox to hold Inventory Grid and Selection Buttons
         VBox inventoryVBox = new VBox();
         inventoryVBox.setPadding(PADDING);
         inventoryVBox.setAlignment(Pos.CENTER);
-        inventoryVBox.setMaxWidth(510);
-        inventoryVBox.setMinWidth(510);
-
+        inventoryVBox.setStyle(PANE_STYLE);
+        
         //vbox to hold cart grid , total price cost, and confirmation button
         VBox cartVBox = new VBox();
         cartVBox.setAlignment(Pos.CENTER);
         cartVBox.setPadding(PADDING);
-        cartVBox.setMaxWidth(510);
-        cartVBox.setMinWidth(510);
+        cartVBox.setStyle(PANE_STYLE);
 
         // --- Create Labels ---
         //Text Labels
         Text inventoryLabel = new Text("Vending Machine");
+        inventoryLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
         Text cartLabel = new Text("Cart");
+        cartLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
 
         // --- Selection Buttons ---
         //Button for selecting Drink with picture
@@ -186,16 +202,21 @@ public class Main extends Application {
             //Sort the inventory grid to show only gum
             serviceManager.getInventoryGrid().setProductType("gum");
         });
+        
+        
 
         // --- Fill Panes ---
         //Add Nodes to panes
-        customerHBox.getChildren().addAll(inventoryVBox, cartVBox);
+        customerVBox.getChildren().addAll(inventoryVBox, cartVBox);
         productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
-        inventoryVBox.getChildren().addAll(inventoryLabel, productSelectionHBox, serviceManager.getInventoryGrid());
+        inventoryVBox.getChildren().addAll(inventoryLabel, serviceManager.getInventoryGrid());
         cartVBox.getChildren().addAll(cartLabel, serviceManager.getCartGrid(), serviceManager.getTotalPrice());
 
+
+        
+        root.setTop(productSelectionHBox);
         // Return customerHBox Node
-        return customerHBox;
+        return customerVBox;
     }
 
 }
