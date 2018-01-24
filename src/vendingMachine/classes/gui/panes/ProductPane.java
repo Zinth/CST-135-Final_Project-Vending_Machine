@@ -23,7 +23,18 @@ import vendingMachine.classes.ServiceManager;
 
 public class ProductPane extends VBox {
 
-    protected String labelStyle = "-fx-text-fill: white; -fx-label-padding: 5; ";
+    protected final String LABEL_STYLE = "-fx-text-fill: white; -fx-label-padding: 5; ";
+    protected final String BTN_NORMAL = "-fx-background-color: \n"
+            + "#090a0c,\n"
+            + "linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n"
+            + "linear-gradient(#20262b, #191d22),\n"
+            + "radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));";
+    protected final String BTN_HOVER = "-fx-background-color: \n"
+            + "#000000,\n"
+            + "linear-gradient(#7ebcea, #2f4b8f),\n"
+            + "linear-gradient(#426ab7, #263e75),\n"
+            + "linear-gradient(#395cab, #223768);";
+    
     protected ImageView productImage;
     private Label productInfo;
     protected Label stockLabel;
@@ -41,27 +52,26 @@ public class ProductPane extends VBox {
         this.serviceManager = serviceManager;
         // Create an ImageView of the product image
         productImage = new ImageView(new Image("res/images/" + product.getImageName()));
-        productImage.setFitWidth(150);
-        productImage.setFitHeight(150);
+        productImage.setFitWidth(100);
+        productImage.setFitHeight(100);
 
         //Label for displaying the current Stock
         stockLabel = new Label("Stock: " + String.valueOf(product.getQuantity()));
-        stockLabel.setStyle(labelStyle);
+        stockLabel.setStyle(LABEL_STYLE);
         stockLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
 
         // Label for displaying the price of the product
         productInfo = new Label(product.getProductName() + "\n" + serviceManager.formatPrice(product.getPrice()));
         productInfo.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
         productInfo.setWrapText(true);
-        productInfo.setStyle(labelStyle);
+        productInfo.setStyle(LABEL_STYLE);
         productInfo.setTextAlignment(TextAlignment.CENTER);
 
         // Add nodes to productPane
         this.getChildren().addAll(productInfo, productImage, stockLabel);
 
         //TODO: Fromat StackPane to look good.
-            
-        this.setStyle("-fx-background-color: #afe3c0");
+        this.setStyle("-fx-background-color: #7D869C; -fx-border-width: 3px; -fx-border-color: #54428E");
         this.setAlignment(Pos.CENTER);
     }
 

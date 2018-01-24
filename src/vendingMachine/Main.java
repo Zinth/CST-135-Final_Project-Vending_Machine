@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -79,10 +80,16 @@ public class Main extends Application {
         managerVBox.setAlignment(Pos.CENTER);
 
         //Create the bottomHBox to hold the manager Button
-        HBox bottomHBox = new HBox();
-        bottomHBox.setAlignment(Pos.CENTER);
+        VBox rightVBox = new VBox();
+        rightVBox.setAlignment(Pos.CENTER);
 
+        //Create the Customer VBox
         VBox customerVBox = createCustomerUI();
+        
+        //Create manager ScrollPane
+        ScrollPane managerScroll = new ScrollPane();
+        managerScroll.setMaxHeight(650);
+        managerScroll.setStyle(PANE_STYLE);
         
         // --- Create Buttons ---
         Button resetButton = new CustomButtons("res/images/refresh.png", "Reset Items");
@@ -97,13 +104,13 @@ public class Main extends Application {
             if (managerMode) {
                 root.setCenter(CUSTOMER_UI_GROUP);
                 managerMode = false;
-                bottomHBox.getChildren().remove(resetButton);
+                rightVBox.getChildren().remove(resetButton);
                 serviceManager.UpdateGui();
             } else {
                 // Else have scene contain managerVBox
                 root.setCenter(MANAGER_UI_GROUP);
                 managerMode = true;
-                bottomHBox.getChildren().add(resetButton);
+                rightVBox.getChildren().add(resetButton);
                 serviceManager.UpdateGui();
             }
         });
@@ -111,18 +118,19 @@ public class Main extends Application {
         //Add the createCustomerUI to customerUI group
         CUSTOMER_UI_GROUP.getChildren().addAll(customerVBox);
         //Add managerVBox to managerUI group
-        MANAGER_UI_GROUP.getChildren().addAll(managerVBox);
+        MANAGER_UI_GROUP.getChildren().addAll(managerScroll);
 
         // --- Add Nodes to Panes ---
         //Add managerGrid to managerVBox
         managerVBox.getChildren().addAll(serviceManager.getManagerGrid());
+        managerScroll.setContent(managerVBox);
         //Add btnManager to bottomHBox
-        bottomHBox.getChildren().addAll(btnManager);
+        rightVBox.getChildren().addAll(btnManager);
         //Set default UI Group for root Pane
         root.setCenter(CUSTOMER_UI_GROUP);
         root.setAlignment(CUSTOMER_UI_GROUP, Pos.TOP_CENTER);
         //Add the bottomHBox to the bottom of root.
-        root.setBottom(bottomHBox);
+        root.setRight(rightVBox);
 
         // --- Standard JavaFX ---
         //Set up default Scene
@@ -212,8 +220,6 @@ public class Main extends Application {
         inventoryVBox.getChildren().addAll(inventoryLabel, serviceManager.getInventoryGrid());
         cartVBox.getChildren().addAll(cartLabel, serviceManager.getCartGrid(), serviceManager.getTotalPrice());
 
-
-        
         root.setTop(productSelectionHBox);
         // Return customerHBox Node
         return customerVBox;
