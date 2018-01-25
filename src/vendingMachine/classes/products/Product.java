@@ -220,4 +220,33 @@ abstract public class Product {
     public void setProductId(int productId) {
         this.productId = productId;
     }
+    
+    public int compareName(Product prod) {
+        if (this.getProductName().charAt(0) > prod.getProductName().charAt(0)) {
+            return 1;
+        } else if (this.getProductName().charAt(0) == prod.getProductName().charAt(0) ) {
+            if (this.getProductName().charAt(1) > prod.getProductName().charAt(1)) {
+                return 1;
+            } else if (this.getProductName().charAt(1) == prod.getProductName().charAt(1) ) {
+                if (this.getProductName().charAt(2) > prod.getProductName().charAt(2)) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+
+    public int compareQuantity(Product product) {
+        if (this.getQuantity() > product.getQuantity()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
