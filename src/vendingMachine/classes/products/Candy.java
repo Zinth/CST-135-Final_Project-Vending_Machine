@@ -10,6 +10,7 @@
  */
 package vendingMachine.classes.products;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Candy extends Snack {
@@ -85,6 +86,23 @@ public class Candy extends Snack {
     public String toString() {
         return super.toString() + "\nCandy{" + "servingSize=" + servingSize + ", flavor=" + flavor + ", sugarFree=" + sugarFree + ", glutenFree=" + glutenFree + '}';
     }
+
+    @Override
+    public ArrayList<String> toArrayList() {
+        ArrayList<String> parentProperties = super.toArrayList();
+        ArrayList<String> properties = new ArrayList<>();
+        parentProperties.add(0, getClass().getSimpleName());
+        properties.add(String.valueOf(servingSize));
+        properties.add(flavor);
+        properties.add(String.valueOf(sugarFree));
+        properties.add(String.valueOf(glutenFree));
+        properties.add(String.valueOf(getWeight()));
+        properties.add(String.valueOf(getCalories()));
+        parentProperties.addAll(properties);
+        return parentProperties;
+    }
+    
+    
 
     /**
      * Gets the flavor of the candy

@@ -18,30 +18,43 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CsvUtil {
-    private String path;
     private File file;
     private Writer fileWriter;
+    private final static char QUOTES = '"';
+    private final static char FIELD_SEPORATOR = ',';
 
-    public CsvUtil(String path) throws IOException {
-        this.path = path;
-        file = new File(path);
-        fileWriter = new FileWriter(file);
+    public CsvUtil(String path) {
+        try {
+            file = new File(path);
+            fileWriter = new FileWriter(file);
+        } catch (IOException ex) {
+            Logger.getLogger(CsvUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     public void writeLine(List<String> values){
         try {
             StringBuilder sb = new StringBuilder();
+            boolean first = true;
             for (String value : values) {
-                sb.append('"').append(value).append('"').append(',');
+                if(!first){
+                    sb.append(FIELD_SEPORATOR);
+                }
+                sb.append(QUOTES).append(value).append(QUOTES);
+                first = false;
             }
             sb.append("\n");
             fileWriter.append(sb.toString());
+            fileWriter.flush();
         } catch (IOException ex) {
             Logger.getLogger(CsvUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,6 +65,28 @@ public class CsvUtil {
         }
     }
     
+    public void finalizeWrite(){
+        try {
+            fileWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(CsvUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Read a csv into a hash map.
+     * Usage: 
+     *    Iterator it = csvUtil.readCSV().entrySet().iterator();
+     *        while (it.hasNext()) {
+     *            Map.Entry pair = (Map.Entry)it.next();
+     *            System.out.println(pair.getKey()); // Line Number
+     *            for(String value : Arrays.asList((String[]) pair.getValue())){
+     *                System.out.println(value); //each item in the field
+     *            }
+     *            it.remove(); // avoids a ConcurrentModificationException
+     *   } 
+     * @return 
+     */
     public HashMap<Integer, String[]> readCSV(){
         BufferedReader br = null;
         String line;

@@ -28,7 +28,7 @@ public final class ServiceManager {
     private final InventoryGrid inventoryGrid;
     private final ManagerGrid managerGrid;
     private final ArrayList<UpdatableGUINode> updatableGuiNodes = new ArrayList<>();
-    private final NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
+    private final static NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
     private final TotalPrice totalPrice;
     private final Restock restock;
     private final VendingMachineManager vmManager;
@@ -45,44 +45,81 @@ public final class ServiceManager {
         updatableGuiNodes.add(cartGrid);
         updatableGuiNodes.add(inventoryGrid);
         updatableGuiNodes.add(managerGrid);
+        restock.createAllPOs();
     }
 
+    /**
+     * @return InventoryManagement
+     */
     public InventoryManagement getIManager() {
         return iManager;
     }
 
+    /**
+     * @return Cart
+     */
     public Cart getCart() {
         return cart;
     }
 
+    /**
+     * @return CartGrid
+     */
     public CartGrid getCartGrid() {
         return cartGrid;
     }
 
+    /**
+     * @return InventoryGrid
+     */
     public InventoryGrid getInventoryGrid() {
         return inventoryGrid;
     }
 
+    /**
+     * @return ManagerGrid
+     */
     public ManagerGrid getManagerGrid() {
         return managerGrid;
     }
 
+    /**
+     * @return VendingMachineManager
+     */
     public VendingMachineManager getVmManager() {
         return vmManager;
     }
 
+    /**
+     * Updates all Gui elements
+     */
     public void UpdateGui() {
         for (UpdatableGUINode node : updatableGuiNodes) {
             node.updateNode();
         }
     }
 
+    /**
+     * @param price
+     * @return String
+     */
     public String formatPrice(double price) {
         return FORMATTER.format(price);
     }
 
+    /**
+     * @return TotalPrice
+     */
     public TotalPrice getTotalPrice() {
         return totalPrice;
+    }
+
+    /**
+     * @param price
+     * @return String
+     */
+    public static String formatPriceStatic(double price){
+        return FORMATTER.format(price);
     }
 
 }

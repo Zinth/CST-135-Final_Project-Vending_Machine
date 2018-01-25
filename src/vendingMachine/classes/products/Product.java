@@ -11,7 +11,9 @@
 package vendingMachine.classes.products;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+import vendingMachine.classes.ServiceManager;
 
 abstract public class Product {
 
@@ -85,6 +87,18 @@ abstract public class Product {
     @Override
     public String toString() {
         return "Product{" + "productName=" + productName + ", price=" + price + ", quantity=" + quantity + ", dispenceLocation=" + '}';
+    }
+    
+    /**
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> toArrayList(){
+        ArrayList<String> properties = new ArrayList<>();
+        properties.add(productName);
+        properties.add(String.valueOf(price));
+        properties.add(String.valueOf(quantity));
+        properties.add(imageName);
+        return properties;
     }
 
     /**
