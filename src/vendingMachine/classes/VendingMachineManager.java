@@ -18,8 +18,15 @@ import vendingMachine.classes.products.Product;
 
 
 public class VendingMachineManager {
+    private final ServiceManager serviceManager;
     private final HashMap<String, ArrayList<Product>> vendingMachines = new HashMap<>();
-    
+
+    /**
+     * @param serviceManager 
+     */
+    public VendingMachineManager(ServiceManager serviceManager) {
+        this.serviceManager = serviceManager;
+    }
 
     /**
      * Add a vending machine to the manager
@@ -48,5 +55,11 @@ public class VendingMachineManager {
     
     public void removeVendingMachine(String vendingMachineName){
         vendingMachines.remove(vendingMachineName);
+    }
+    
+    public void switchVendingMachines(String vendingMachineName){
+        ArrayList<Product> productList = vendingMachines.get(vendingMachineName);
+        serviceManager.getIManager().setProductList(productList);
+        serviceManager.UpdateGui();
     }
 }
