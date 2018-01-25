@@ -14,16 +14,19 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
 
 public class AlertWindow extends Application {
-    private Text txtError;
+    private Text txtError = new Text();
     private Stage alertStage = new Stage();
 
     /**
@@ -33,34 +36,49 @@ public class AlertWindow extends Application {
      */
     @Override
     public void start(Stage alertStage) throws Exception {
-        HBox pane = new HBox(); // Create HBox to hold things
-        pane.setAlignment(Pos.CENTER); // Center components in the pane
-
-        //Create and format text for displaying error message
-        txtError = new Text("Error 000: No error message defined!");
-        txtError.setFill(Color.RED);
-        txtError.setWrappingWidth(250);
-        txtError.setFont(new Font("Calibri", 20.0));
-
-        //Create Btn that closes the alert window
-        Button btnOk = new Button("OK");
-        btnOk.setOnAction(event -> alertStage.hide());
-
-        //Add nodes to pane
-        pane.getChildren().addAll(txtError, btnOk);
-
-        //Set up Scene and Stage
-        Scene scene = new Scene(pane, 300, 300);
-        alertStage.setScene(scene);
-        alertStage.setAlwaysOnTop(true); // Keeps alert window on top
+       
     }
 
     /**
      * Displays the Alert Message Window with errorMsg.
      * @param errorMsg
      */
-    public void showAlert(String errorMsg){
+    public void showAlert(String errorMsg, int txtSize, Color color){
+         VBox pane = new VBox(); // Create HBox to hold things
+        pane.setAlignment(Pos.CENTER); // Center components in the pane
+        pane.setStyle("-fx-background-color: #7D869C;"
+                + "-fx-border-width: 5px;"
+                + "-fx-border-color: #54428E");
+
+        //Create and format text for displaying error message
+        txtError = new Text("Error 000: No error message defined!");
+        txtError.setFill(color);
+        txtError.setWrappingWidth(250);
+        txtError.setFont(Font.font("Calibri", FontWeight.BOLD, txtSize));
         txtError.setText(errorMsg);
+        txtError.setTextAlignment(TextAlignment.CENTER);
+
+        //Create Btn that closes the alert window
+        Button btnOk = new CustomButtons("OK", event -> alertStage.hide());
+
+        //Add nodes to pane
+        pane.getChildren().addAll(txtError, btnOk);
+
+        //Set up Scene and Stage
+        Scene scene = new Scene(pane);
+        alertStage.initModality(Modality.APPLICATION_MODAL); // make sure you can only click this window. 
+        alertStage.setScene(scene);
+        alertStage.setAlwaysOnTop(true); // Keeps alert window on top
         alertStage.show();
     }
+
+    public Text getTxtError() {
+        return txtError;
+    }
+
+    public void setTxtError(Text txtError) {
+        this.txtError = txtError;
+    }
+    
+    
 }

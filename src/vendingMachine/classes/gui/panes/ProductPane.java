@@ -23,7 +23,7 @@ import vendingMachine.classes.ServiceManager;
 
 public class ProductPane extends VBox {
 
-    protected final String LABEL_STYLE = "-fx-text-fill: white; -fx-label-padding: 5; ";
+    protected final String LABEL_STYLE = "-fx-text-fill: white; -fx-label-padding: 2; ";
     protected final String BTN_NORMAL = "-fx-background-color: \n"
             + "#090a0c,\n"
             + "linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n"
@@ -36,7 +36,7 @@ public class ProductPane extends VBox {
             + "linear-gradient(#395cab, #223768);";
     
     protected ImageView productImage;
-    private Label productInfo;
+    protected Label productInfo;
     protected Label stockLabel;
     protected ServiceManager serviceManager;
 
@@ -62,7 +62,7 @@ public class ProductPane extends VBox {
 
         // Label for displaying the price of the product
         productInfo = new Label(product.getProductName() + "\n" + serviceManager.formatPrice(product.getPrice()));
-        productInfo.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
+        productInfo.setFont(Font.font("Calibri", FontWeight.BOLD, 12));
         productInfo.setWrapText(true);
         productInfo.setStyle(LABEL_STYLE);
         productInfo.setTextAlignment(TextAlignment.CENTER);
@@ -71,7 +71,7 @@ public class ProductPane extends VBox {
         this.getChildren().addAll(productInfo, productImage, stockLabel);
 
         //TODO: Fromat StackPane to look good.
-        this.setStyle("-fx-background-color: #7D869C; -fx-border-width: 3px; -fx-border-color: #54428E");
+        this.setStyle("-fx-background-color: #7D869C;");
         this.setAlignment(Pos.CENTER);
     }
 

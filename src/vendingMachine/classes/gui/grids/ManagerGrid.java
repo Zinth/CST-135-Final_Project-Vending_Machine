@@ -11,6 +11,7 @@
 
 package vendingMachine.classes.gui.grids;
 
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import vendingMachine.classes.gui.panes.ManagerPane;
 import vendingMachine.classes.ServiceManager;
@@ -29,6 +30,12 @@ public class ManagerGrid extends GridPane implements UpdatableGUINode{
     public ManagerGrid(ServiceManager serviceManager, int columns) {
         this.serviceManager = serviceManager;
         this.columns = columns;
+        
+        //Style
+        this.setHgap(5);
+        this.setVgap(5);
+        this.setPadding(new Insets(0,5,0,5));
+        this.setMaxWidth(100);
     }
 
     /**

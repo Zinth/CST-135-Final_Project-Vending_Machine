@@ -15,6 +15,7 @@ import vendingMachine.classes.gui.panes.CartPane;
 import vendingMachine.classes.products.Product;
 
 import java.util.Map;
+import javafx.geometry.Insets;
 import vendingMachine.classes.ServiceManager;
 import vendingMachine.interfaces.UpdatableGUINode;
 
@@ -34,8 +35,11 @@ public final class CartGrid extends GridPane implements UpdatableGUINode{
         this.columns = columns;
         updateNode();
         
-        this.setHgap(10);
-        this.setVgap(10);
+        this.setHgap(5);
+        this.setVgap(5);
+        this.setPadding(new Insets(5,5,5,5));
+        this.setMaxWidth(100);
+        
     }
     
     /**

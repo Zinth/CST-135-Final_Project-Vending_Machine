@@ -28,6 +28,9 @@ public class CartPane extends ProductPane {
         quantityLabel.setStyle(LABEL_STYLE);
         quantityLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
         
+        //remove product price
+        productInfo.setText(product.getProductName());
+        
         this.setOnMouseClicked(event -> {
             //Remove quantity or product from the cart
             serviceManager.getCart().removeFromCart(product);

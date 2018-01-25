@@ -11,9 +11,11 @@
  */
 package vendingMachine.classes.gui;
 
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import vendingMachine.classes.ServiceManager;
 import vendingMachine.interfaces.UpdatableGUINode;
 
@@ -28,10 +30,12 @@ public class TotalPrice extends Text implements UpdatableGUINode{
         super();
         this.serviceManager = serviceManager;
         double cost = serviceManager.getCart().getTotalCost();
+        this.setTextAlignment(TextAlignment.CENTER);
         setText("Total: "+serviceManager.formatPrice(cost));
         
         //Format Total Price
-        this.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
+        this.setFont(Font.font("Calibri", FontWeight.BOLD, 36));
+        this.setFill(Color.WHITE);
     }
     /**
      * Instructs the service manager on how to update this node.

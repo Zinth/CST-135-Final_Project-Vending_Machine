@@ -17,6 +17,7 @@ import vendingMachine.classes.products.Product;
 
 import java.util.HashMap;
 import java.util.Map;
+import javafx.scene.paint.Color;
 
 public class Cart {
 
@@ -43,7 +44,7 @@ public class Cart {
                     cartList.remove(product);
                 }
             }else{
-                alert.showAlert("Error C02: Product is not longer in the cart");
+                alert.showAlert("Error C02: Product is not longer in the cart", 16, Color.RED);
             }
     }
 
@@ -62,7 +63,14 @@ public class Cart {
             cartList.replace(product, newQuantity);
         }
     }
-
+    
+    /**
+     * Purchase product Simulator
+     */
+    public void checkOut(){
+        cartList.clear();
+    }
+    
     /**
      * Get the total cost of all items in cart.
      * @return totalCost
