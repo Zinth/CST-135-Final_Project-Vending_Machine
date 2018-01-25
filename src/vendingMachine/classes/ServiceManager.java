@@ -39,7 +39,7 @@ public final class ServiceManager {
         inventoryGrid = new InventoryGrid(this, 6);
         managerGrid = new ManagerGrid(this, 6);
         restock = new Restock(this);
-        vmManager = new VendingMachineManager();
+        vmManager = new VendingMachineManager(this);
         vmManager.addVendingMachine("Vending Machine 1", iManager.getProducts());
         updatableGuiNodes.add(totalPrice);
         updatableGuiNodes.add(cartGrid);
