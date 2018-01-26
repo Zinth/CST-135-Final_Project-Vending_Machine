@@ -87,7 +87,7 @@ public class Chips extends Snack {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nChips{" + "flavor=" + flavor + ", servingSize=" + servingSize + ", baked=" + baked + ", glutenFree=" + glutenFree + '}';
+        return super.toString() + "\nFlavor: " + flavor + "\nServing Size: " + servingSize + "\nBaked: " + baked + "\nGluten Free: " + glutenFree;
     }
 
     /**

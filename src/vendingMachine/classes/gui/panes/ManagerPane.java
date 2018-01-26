@@ -25,6 +25,13 @@ public class ManagerPane extends ProductPane {
 
     public ManagerPane(ServiceManager serviceManager, Product product){
         super(serviceManager, product);
+        
+        //set StockLabel text
+        stockLabel.setText("Stock: " + String.valueOf(product.getQuantity()));
+        
+        //Add remove nodes
+        infoVBox.getChildren().remove(productInfo);
+        infoVBox.getChildren().add(stockLabel);
 
         Button btnIncrease = new Button("+");
         btnIncrease.setOnAction(event -> {
@@ -45,27 +52,15 @@ public class ManagerPane extends ProductPane {
         });
         
         //Button set text Font
-        btnDecrease.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
+        btnDecrease.setFont(Font.font("", FontWeight.BOLD, 12));
         btnDecrease.setTextFill(Color.WHITE);
-        btnIncrease.setFont(Font.font("Calibri", FontWeight.BOLD, 16));
+        btnIncrease.setFont(Font.font("", FontWeight.BOLD, 12));
         btnIncrease.setTextFill(Color.WHITE);
         
-        //Set buttons default Style
-        btnDecrease.setStyle(BTN_NORMAL);
-        btnIncrease.setStyle(BTN_NORMAL);
-        
-        //Set buttons style on hover
-        btnDecrease.setOnMouseEntered(e -> {btnDecrease.setStyle(BTN_HOVER);});
-        btnIncrease.setOnMouseEntered(e -> {btnIncrease.setStyle(BTN_HOVER);});
-        
-        //Set buttons style back to normal on mouse exit
-        btnDecrease.setOnMouseExited(e -> {btnDecrease.setStyle(BTN_NORMAL);});
-        btnIncrease.setOnMouseExited(e -> {btnIncrease.setStyle(BTN_NORMAL);});
-
         HBox btnHBox = new HBox();
         btnHBox.setPadding(new Insets(10));
         btnHBox.getChildren().addAll(btnIncrease, btnDecrease);
 
-        this.getChildren().addAll(btnHBox);
+        infoVBox.getChildren().addAll(btnHBox);
     }
 }

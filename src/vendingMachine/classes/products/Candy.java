@@ -84,7 +84,7 @@ public class Candy extends Snack {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nCandy{" + "servingSize=" + servingSize + ", flavor=" + flavor + ", sugarFree=" + sugarFree + ", glutenFree=" + glutenFree + '}';
+        return super.toString() + "\nServing Size: " + servingSize + "\nFlavor: " + flavor + "\nSugar Free: " + sugarFree + "ntGluten Free: " + glutenFree;
     }
 
     @Override

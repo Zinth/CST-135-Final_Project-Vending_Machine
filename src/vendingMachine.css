@@ -1,0 +1,177 @@
+/* 
+    Created on : Jan 26, 2018, 8:18:30 AM
+    Author     : Christopher Hyde
+*/
+
+/*
+    COLOR SHYME
+    Background color = #7D869C
+    Border Color = #54428E
+    Alt background coler = #A2ABAB
+
+*/
+
+.main{
+    -fx-background-color: #7D869C;
+    -fx-border-width: 0 5px 5px 5px;
+    -fx-border-color: #54428E;
+    -fx-vgap: 5px;
+}
+
+.grid{
+    -fx-alignment: CENTER;
+    -fx-padding: 5px 5px 5px 5px;
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
+.inventoryGrid{
+    -fx-alignment: CENTER;
+    -fx-padding: 5px 5px 5px 5px;
+    -fx-hgap: 5px;
+    -fx-border-color: #54428E; 
+    -fx-border-width: 5px 5px 5px 5px;
+    -fx-background-color: #A2ABAB;
+}
+
+.inventoryVBox{
+    -fx-border-width: 0px 0px 5px 0px;
+    -fx-border-color: #54428E;
+}
+
+.scroll-pane{
+    -fx-background-color: #7D869C;
+    -fx-border-width: 4px;
+    -fx-border-color: #54428E;
+}
+.scroll-pane > .viewport  { 
+    -fx-background-color: #A2ABAB; 
+}
+
+.label{
+    -fx-text-fill: white;
+    -fx-label-padding: 3;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 14;
+}
+
+.textwhite{
+    -fx-text-fill: white;
+    -fx-label-padding: 1;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 16;
+}
+
+.button{
+    -fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-text-fill: white;
+    -fx-label-padding: 1;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 16;
+}
+
+.button:hover{
+    -fx-background-color: #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-text-fill: white;
+    -fx-label-padding: 1;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 16;
+}
+
+tooltip{
+    -fx-text-fill: white;
+    -fx-label-padding: 1;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 32;
+}
+
+/*
+    ---------------------------------------------------------------------------------------
+    Menu CSS format template credit: Markus Weninger
+    @URL https://stackoverflow.com/a/45352793
+    ---------------------------------------------------------------------------------------
+*/
+
+/* VARIABLE DEFINITIONS: Only these 4 variables have to be adjusted, the rest is copy-paste */
+* {
+    -fx-my-menu-color: #54428E;                  /* Change according to your needs */
+    -fx-my-menu-color-highlighted: #8275AC;      /* Change according to your needs */
+    -fx-my-menu-font-color: #FFFFFF;             /* Change according to your needs */
+    -fx-my-menu-font-color-highlighted: #FFFFFF; /* Change according to your needs */
+}
+
+/* MENU BAR + Top-level MENU BUTTONS */
+/*** The menu bar itself ***/    
+.menu-bar {
+    -fx-background-color: -fx-my-menu-color;
+}
+
+/*** Top-level menu itself (not selected / hovered) ***/
+.menu-bar > .container > .menu-button {
+    -fx-background-color: -fx-my-menu-color;
+}
+
+/*** Top-level menu's label (not selected / hovered) ***/
+.menu-bar > .container > .menu-button > .label {
+    -fx-text-fill: -fx-my-menu-font-color;
+}
+
+/*** Top-level menu's label (disabled) ***/
+.menu-bar > .container > .menu-button > .label:disabled {
+    -fx-opacity: 1.0;
+}
+
+/*** Top-level menu itself (selected / hovered) ***/
+.menu-bar > .container > .menu-button:hover,
+.menu-bar > .container > .menu-button:focused,
+.menu-bar > .container > .menu-button:showing {
+    -fx-background-color: -fx-my-menu-color-highlighted;
+}
+
+/*** Top-level menu's label (selected / hovered) ***/
+.menu-bar > .container > .menu-button:hover > .label,
+.menu-bar > .container > .menu-button:focused > .label,
+.menu-bar > .container > .menu-button:showing > .label {
+    -fx-text-fill: -fx-my-menu-font-color-highlighted;
+}
+
+/* MENU ITEM (children of a MENU BUTTON) */
+/*** The item itself (not hovered / focused) ***/    
+.menu-item {
+    -fx-background-color: -fx-my-menu-color; 
+}
+
+/*** The item's label (not hovered / focused) ***/   
+.menu-item .label {
+    -fx-text-fill: -fx-my-menu-font-color;
+}
+
+/*** The item's label (disabled) ***/   
+.menu-item .label:disabled {
+    -fx-opacity: 1.0;
+}    
+
+/*** The item itself (hovered / focused) ***/    
+.menu-item:focused, .menu-item:hovered {
+    -fx-background-color: -fx-my-menu-color-highlighted; 
+}
+
+/*** The item's label (hovered / focused) ***/  
+.menu-item:focused .label, .menu-item:hovered .label {
+    -fx-text-fill: -fx-my-menu-font-color-highlighted;
+}
+
+/* CONTEXT MENU */
+/*** The context menu that contains a menu's menu items ***/  
+.context-menu {
+    -fx-background-color: -fx-my-menu-color; 
+}
+
+
+

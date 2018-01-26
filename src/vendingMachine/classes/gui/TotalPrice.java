@@ -34,7 +34,6 @@ public class TotalPrice extends Text implements UpdatableGUINode{
         setText("Total: "+serviceManager.formatPrice(cost));
         
         //Format Total Price
-        this.setFont(Font.font("Calibri", FontWeight.BOLD, 36));
         this.setFill(Color.WHITE);
     }
     /**

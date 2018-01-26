@@ -86,7 +86,7 @@ abstract public class Product {
      */
     @Override
     public String toString() {
-        return "Product{" + "productName=" + productName + ", price=" + price + ", quantity=" + quantity + ", dispenceLocation=" + '}';
+        return "Name: " + productName + "\nStock: " + quantity + "\n";
     }
     
     /**

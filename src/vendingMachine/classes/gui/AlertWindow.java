@@ -66,6 +66,7 @@ public class AlertWindow extends Application {
 
         //Set up Scene and Stage
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add("vendingMachine.css");
         alertStage.initModality(Modality.APPLICATION_MODAL); // make sure you can only click this window. 
         alertStage.setScene(scene);
         alertStage.setAlwaysOnTop(true); // Keeps alert window on top

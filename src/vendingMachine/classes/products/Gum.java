@@ -78,7 +78,7 @@ public class Gum extends Snack {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nGum{" + "flavor=" + flavor + ", pieces=" + pieces + ", servingSize=" + servingSize + ", sugarFree=" + sugarFree + '}';
+        return super.toString() + "\nFlavor: " + flavor + "\nPieces: " + pieces + "\nServing Size: " + servingSize + "\nSugar Free: " + sugarFree;
     }
 
     /**

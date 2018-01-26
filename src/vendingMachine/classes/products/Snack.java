@@ -67,7 +67,7 @@ abstract public class Snack extends Product implements Comparable<Snack> {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nSnack{" + "weight=" + weight + ", calories=" + calories + '}';
+        return super.toString() + "\nInfo:" +"\nWeight: " + weight + "\nCalories: " + calories;
     }
 
     /**

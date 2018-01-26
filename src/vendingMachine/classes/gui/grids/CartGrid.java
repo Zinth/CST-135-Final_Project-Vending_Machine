@@ -35,9 +35,8 @@ public final class CartGrid extends GridPane implements UpdatableGUINode{
         this.columns = columns;
         updateNode();
         
-        this.setHgap(5);
-        this.setVgap(5);
-        this.setPadding(new Insets(5,5,5,5));
+        //Style
+        this.getStyleClass().add("grid");
         this.setMaxWidth(100);
         
     }

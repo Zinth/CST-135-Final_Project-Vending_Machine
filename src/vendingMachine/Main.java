@@ -12,23 +12,20 @@
  */
 package vendingMachine;
 
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -41,7 +38,6 @@ import vendingMachine.classes.gui.CustomButtons;
 public class Main extends Application {
 
     // Dispencer class creation
-    
     private final Insets PADDING = new Insets(5, 5, 5, 5);
     //private boolean managerMode = false;
     private BorderPane root;
@@ -49,11 +45,6 @@ public class Main extends Application {
     private final Group MANAGER_UI_GROUP = new Group();
     private ServiceManager serviceManager;
     private AlertWindow alert = new AlertWindow();
-   
-    public final String PANE_STYLE = "-fx-background-color: #7D869C;"
-            + "-fx-border-width: 4px;"
-            + "-fx-border-color: #54428E;";
-
 
     /**
      * Main Method
@@ -62,6 +53,7 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        System.out.println(javafx.scene.text.Font.getFamilies());
     }
 
     /**
@@ -74,16 +66,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //Create Service Manager
         serviceManager = new ServiceManager();
-        
+
         //-- Create Panes --
         //Create the root pane and format it.
         root = new BorderPane();
-        root.setPadding(PADDING);
         root.setPrefSize(1020, 800);
-        root.setStyle("-fx-background-color: #7D869C;"
-                + "-fx-border-width: 5px;"
-                + "-fx-border-color: #54428E");
-        
+        root.getStyleClass().add("main");
+
         //Create MenuBar;
         MenuBar menu = serviceManager.getMenuBar();
 
@@ -98,24 +87,25 @@ public class Main extends Application {
 
         //Create the Customer VBox
         VBox customerVBox = createCustomerUI();
-        
+
         //Create manager ScrollPane
         ScrollPane managerScroll = new ScrollPane();
         managerScroll.setMaxHeight(650);
-        managerScroll.setMinWidth(675);
-        managerScroll.setStyle(PANE_STYLE);
-        
+        managerScroll.setFitToWidth(true);
+
         //Create HBox to hold vending machine switching buttons
         HBox machineSwitcherHBox = machineButtonHBox(3); // change the arguement to reflect number of machines
-        
+
         // --- Create Buttons ---
         Button resetButton = new CustomButtons("res/images/refresh.png", "Reset Items");
+        resetButton.setShape(new Circle(3));
         resetButton.setOnAction(e -> {
             serviceManager.getIManager().resetProducts();
             serviceManager.UpdateGui();
         });
         //Button to display Manager Grid
         Button btnManager = new CustomButtons("res/images/manager.png", "Manager Mode");
+        btnManager.setShape(new Circle(3));
         //btnManager action event for changing if manager grid is displayed or not
         btnManager.setOnAction(event -> {
             if (serviceManager.isManagerMode()) {
@@ -143,7 +133,7 @@ public class Main extends Application {
         //Add managerGrid to managerVBox
         managerScroll.setContent(serviceManager.getManagerGrid());
         managerVBox.getChildren().addAll(machineSwitcherHBox, managerScroll);
-        
+
         //Add btnManager to bottomHBox
         rightVBox.getChildren().addAll(btnManager);
         //Set default UI Group for root Pane
@@ -151,13 +141,14 @@ public class Main extends Application {
         root.setAlignment(CUSTOMER_UI_GROUP, Pos.TOP_CENTER);
         //Add the bottomHBox to the bottom of root.
         root.setRight(rightVBox);
-        
+
         //Add Menu bar to root top
         root.setTop(menu);
 
         // --- Standard JavaFX ---
         //Set up default Scene
         Scene scene = new Scene(root, 1020, 800);
+        scene.getStylesheets().add("vendingMachine.css");
 
         //Set primaryStage
         primaryStage.setTitle("Vending Machine");
@@ -179,7 +170,7 @@ public class Main extends Application {
         customerVBox.setAlignment(Pos.TOP_CENTER);
         customerVBox.setMinSize(0, 0);
         customerVBox.setMaxSize(root.getMaxHeight(), root.getMaxWidth());
-        
+
         //Create hbox to hold product selection buttons
         HBox productSelectionHBox = new HBox();
         productSelectionHBox.setPadding(PADDING);
@@ -189,20 +180,18 @@ public class Main extends Application {
         VBox inventoryVBox = new VBox();
         inventoryVBox.setPadding(PADDING);
         inventoryVBox.setAlignment(Pos.CENTER);
-        inventoryVBox.setStyle("-fx-border-width: 0 0 5 0; ; -fx-border-color: #54428E;");
-        
+        inventoryVBox.getStyleClass().add("inventoryVBox");
+
         //vbox to hold cart grid , total price cost, and confirmation button
         VBox cartVBox = new VBox();
         cartVBox.setAlignment(Pos.CENTER);
         cartVBox.setPadding(PADDING);
         //cartVBox.setStyle(PANE_STYLE);
-        
+
         //Create manager ScrollPane
         ScrollPane cartScroll = new ScrollPane();
-        cartScroll.setMaxHeight(175);
-        cartScroll.setMinWidth(675);
-        cartScroll.setStyle(PANE_STYLE);
-        
+        cartScroll.setMaxHeight(300);
+        cartScroll.setFitToWidth(true);
 
         // --- Create Labels ---
         //Inventory Text Label
@@ -242,46 +231,47 @@ public class Main extends Application {
             //Sort the inventory grid to show only gum
             serviceManager.getInventoryGrid().setProductType("gum");
         });
-        
-       //Button for purchasing the product
-       Button btnPurchase = new CustomButtons("Check-Out", e ->{
-           serviceManager.getCart().checkOut();
-           serviceManager.UpdateGui();
-           alert.showAlert("Your purchase was successfull!", 36, Color.BLACK);
-       });
-       //Set btnPurchase properties
-       btnPurchase.setGraphic(serviceManager.getTotalPrice());
-       btnPurchase.setContentDisplay(ContentDisplay.TOP);
-        
+
+        //Button for purchasing the product
+        Button btnPurchase = new CustomButtons("Check-Out", e -> {
+            serviceManager.getCart().checkOut();
+            serviceManager.UpdateGui();
+            alert.showAlert("Your purchase was successfull!", 36, Color.BLACK);
+        });
+        //Set btnPurchase properties
+        btnPurchase.setGraphic(serviceManager.getTotalPrice());
+        btnPurchase.setContentDisplay(ContentDisplay.TOP);
+
         // --- Fill Panes ---
         //Add Nodes to panes
         customerVBox.getChildren().addAll(inventoryVBox, cartVBox);
         productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
-        inventoryVBox.getChildren().addAll(productSelectionHBox, inventoryLabel, serviceManager.getInventoryGrid());
+        inventoryVBox.getChildren().addAll(inventoryLabel, productSelectionHBox,  serviceManager.getInventoryGrid());
         cartVBox.getChildren().addAll(cartLabel, cartScroll, serviceManager.getTotalPrice(), btnPurchase);
         cartScroll.setContent(serviceManager.getCartGrid());
 
         // Return customerHBox Node
         return customerVBox;
     }
-    
+
     /**
-     * Create a number of buttons  to the number of vending machines to be managed
+     * Create a number of buttons to the number of vending machines to be
+     * managed
+     *
      * @param numOfMachines
      */
-    
-    public HBox machineButtonHBox(int numOfMachines){
+    public HBox machineButtonHBox(int numOfMachines) {
         HBox changeMachineHBox = new HBox();
-        
+
         //Loop through to create buttons for each machine
-        for(String vendingMachineName : this.serviceManager.getVmManager().getVendingMachineNames()){
+        for (String vendingMachineName : this.serviceManager.getVmManager().getVendingMachineNames()) {
             changeMachineHBox.getChildren().add(new CustomButtons(vendingMachineName, e -> {
                 //TODO: add code to change - Change Machine method should take an int for the machine number.
             }));
         }
-        
+
         return changeMachineHBox;
-        
+
     }
 
 }

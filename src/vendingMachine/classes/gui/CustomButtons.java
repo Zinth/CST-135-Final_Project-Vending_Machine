@@ -22,24 +22,41 @@ import javafx.scene.text.FontWeight;
 
 public class CustomButtons extends Button {
     
-    //Custom Button With text
+    //Custom Button With text and event
     public CustomButtons(String btnName, EventHandler<ActionEvent> event){
         //Set buttton Text Font and Color
-        this.setFont(Font.font("Calibri", FontWeight.BOLD, 36));
+        
         this.setTextFill(Color.WHITE);
         
-        //set Style
-        setBtnStyle();
+       
         
         //set Text
         this.setText(btnName);
         
         //Set Tooltip
-        this.setTooltip(new Tooltip("Press to Manage Vending Machine: " + btnName));
+        this.setTooltip(new Tooltip("Press to " + btnName));
         
         //Set event
         this.setOnAction(event);
         
+    }
+    
+    //Basic button with text
+     //Custom Button With text and tool tip
+    public CustomButtons(String btnName, Tooltip toolTip){
+        //Set buttton Text Font and Color
+        
+        this.setTextFill(Color.WHITE);
+        
+        //set Text
+        this.setText(btnName);
+        this.setTooltip(toolTip);
+        
+        //Set on click to show tooltip
+        this.setOnAction((event) -> {
+            toolTip.show(toolTip);
+        });
+      
     }
 
     //Custom Button with image
@@ -52,38 +69,12 @@ public class CustomButtons extends Button {
 
         //set graphic ImageView of button
         this.setGraphic(imageView);
-
-        //Set button Style
-        setBtnStyle();
-
+        
         //Set the tool tip for the button
         this.setTooltip(new Tooltip("Press to view " + btnName));
     }
     
-    public void setBtnStyle(){
-        this.setStyle("-fx-background-color: \n"
-                + "#090a0c,\n"
-                + "linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n"
-                + "linear-gradient(#20262b, #191d22),\n"
-                + "radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));");
-
-        this.setOnMouseEntered(event -> {
-            this.setStyle("-fx-background-color: \n"
-                + "#000000,\n"
-                + "linear-gradient(#7ebcea, #2f4b8f),\n"
-                + "linear-gradient(#426ab7, #263e75),\n"
-                + "linear-gradient(#395cab, #223768);");
-        });
-
-        this.setOnMouseExited(event -> {
-            this.setStyle("-fx-background-color: \n"
-                + "#090a0c,\n"
-                + "linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n"
-                + "linear-gradient(#20262b, #191d22),\n"
-                + "radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));");
-
-        });
-    }
+ 
     
     
 }

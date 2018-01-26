@@ -31,11 +31,13 @@ public class ManagerGrid extends GridPane implements UpdatableGUINode{
         this.serviceManager = serviceManager;
         this.columns = columns;
         
+        
+        
         //Style
-        this.setHgap(5);
-        this.setVgap(5);
-        this.setPadding(new Insets(0,5,0,5));
+        this.getStyleClass().add("grid");
         this.setMaxWidth(100);
+        
+        
     }
 
     /**

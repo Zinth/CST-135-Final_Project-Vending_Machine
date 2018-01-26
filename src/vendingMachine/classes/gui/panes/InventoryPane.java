@@ -21,7 +21,7 @@ import vendingMachine.classes.products.Product;
 public class InventoryPane extends ProductPane {
 
     private double X = 50;
-    private double Y = 100;
+    private double Y = 200;
     private ImageView animateImage;
     private AnimationPane animation;
 
@@ -44,7 +44,7 @@ public class InventoryPane extends ProductPane {
                 serviceManager.getIManager().decreaseQuantity(product);
                 updateStockLabel(product);
                 //Create animationPane
-                animation = new AnimationPane(50, 0, X, Y, animateImage);
+                animation = new AnimationPane(50, 75, X, Y, animateImage);
                 //Run Animation
                 this.toFront();
                 this.getChildren().add(animation);

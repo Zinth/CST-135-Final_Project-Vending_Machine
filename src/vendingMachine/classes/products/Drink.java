@@ -91,7 +91,7 @@ public class Drink extends Product implements Comparable<Drink> {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nDrink{" + "ounces=" + ounces + ", type=" + type + '}';
+        return super.toString() + "\nInfo" + "\nOunces: " + ounces + "\nType: " + type + "\nCalories: " + calories  + "\nSugar Free: " + sugarFree;
     }
 
     /**

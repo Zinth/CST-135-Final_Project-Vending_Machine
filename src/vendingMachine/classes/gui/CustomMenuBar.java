@@ -32,7 +32,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         Menu fileMenu = new Menu("_File");
 
         //Creat fileMenu Items
-        purchaseOrder = new MenuItem("Create _Purchase Order...");
+        purchaseOrder = new MenuItem("_Purchase Order...");
         export = new MenuItem("_Export Invenotry...");
         MenuItem exit = new MenuItem("E_xit");
 
@@ -63,9 +63,20 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         //Set action Events for helpMenu items
         usage.setOnAction((event) -> {
             if (!serviceManager.isManagerMode()) {
-                //TODO: add a pop window with image of Customer GUI control functionality
+                serviceManager.getALERT().showAlert("Catagory Buttons:\n Change the visable items in the vending machine.\n\n"
+                        + "Item Selection:\n Click on the item you wish to puchase to add it to the cart.\n\n"
+                        + "More Info:\n Hover over a item in the vending machine to get more information.\n\n"
+                        + "Remove Items:\n Remove Items from the cart by clicking on them.\n\n"
+                        + "Purchase Items:\n Click the Check-Out button to finalize your purchase.\n\n"
+                        + "Manager Mode:\n Click the Keyhole button to go to manager mode.", 16, Color.BLACK);
             } else {
-                //TODO: add a pop window with image of Manager GUI control functionality
+                 serviceManager.getALERT().showAlert("Machine Buttons:\n Changes the vending machine you want to manage .\n\n"
+                        + "Increase Stock:\n Click on the + button to increase stock of that product.\n\n"
+                        + "Decreace Stock:\n Click on the - button to decrease stock of that product\n\n"
+                        + "Reset Stock:\n Click the refresh button to reset all stock to default levels.\n\n"
+                        + "Purchase Orders:\n Go to File and click Purchase Order to generate purchase orders.\n\n"
+                        + "Export Inventory:\n Go to File and click Export to export the current inventory of a vending machine.\n\n"
+                        + "Exit Manager Mode:\n Click the Keyhole button to leave to manager mode.", 16, Color.BLACK);
             }
         });
 

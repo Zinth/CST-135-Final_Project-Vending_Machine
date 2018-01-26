@@ -40,11 +40,9 @@ public final class InventoryGrid extends GridPane implements UpdatableGUINode{
 
         //TODO: Add Any universal GridPane Formatting
 
-        this.setHgap(5);
-        this.setPadding(new Insets(0,5,0,5));
+        //Style
+        this.getStyleClass().add("inventoryGrid");
         this.setMaxWidth(100);
-        //this.setMaxHeight(100);
-        this.setStyle("-fx-border-color: #54428E; -fx-border-width: 5px;");
     }
 
     /**

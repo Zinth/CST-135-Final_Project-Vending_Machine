@@ -25,11 +25,9 @@ public class CartPane extends ProductPane {
 
         Label quantityLabel;
         quantityLabel = new Label("Quantity: "+quantity.toString());
-        quantityLabel.setStyle(LABEL_STYLE);
-        quantityLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 12));
         
         //remove product price
-        productInfo.setText(product.getProductName());
+        infoVBox.getChildren().remove(productInfo);
         
         this.setOnMouseClicked(event -> {
             //Remove quantity or product from the cart
@@ -38,8 +36,7 @@ public class CartPane extends ProductPane {
             //Refresh Grids
             serviceManager.UpdateGui();
         });
-        this.getChildren().add(quantityLabel);
-        this.getChildren().remove(stockLabel);
+        infoVBox.getChildren().add(quantityLabel);
 
         //Set the default style of the panel
         this.setStyle(BTN_NORMAL);
