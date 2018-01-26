@@ -1,2 +1,2 @@
 "Machine","Type","Name","Price","Quantity","imageName","Option 1","Option 2","Option 3","Option 4","Option 5","Option 6"
-"Candy","Skittles","1.0","3","skittlesCandy.png","1.0","Mix Fruit","false","false","2.17","251"
+"MACHINE Name", "Candy","Skittles","1.0","3","skittlesCandy.png","1.0","Mix Fruit","false","false","2.17","251"
