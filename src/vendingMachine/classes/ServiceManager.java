@@ -98,6 +98,15 @@ public final class ServiceManager {
             node.updateNode();
         }
     }
+    
+    public void UpdateCartGui(){
+        cartGrid.updateNode();
+        totalPrice.updateNode();
+    }
+    
+    public void UpdateInventoryGui(){
+        inventoryGrid.updateNode();
+    }
 
     /**
      * @param price

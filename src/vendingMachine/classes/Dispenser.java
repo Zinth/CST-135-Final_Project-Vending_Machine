@@ -99,7 +99,7 @@ public class Dispenser {
         productList.add(new Chips("Nacho Cheese", 1, true, false, 1, 120, "Dorito", 0.99, defaultQuantity, "doritosCoolRanch.png"));
 
         //Candy
-        productList.add(new Candy(1, "Mix Fruit", false, false, 2.17, 251, "Skittles", 1.00, defaultQuantity, "skittlesCandy.png" ));
+        productList.add(new Candy(1, "Mix Fruit", false, false, 2.17, 251, "Skittles", 1.00, 3, "skittlesCandy.png" ));
         productList.add(new Candy(1, "Peanutbutter & Chocolate", false, false, 1.53, 176, "Resees's", 1.25, defaultQuantity, "reseesCandy.png" ));
         productList.add(new Candy(1, "Mix Fruit", false, false, 2.07, 160, "Starburst", 1.00, defaultQuantity, "starburstCandy.png" ));
         productList.add(new Candy(1, "Milk Chocolate", false, false, 1.69, 230, "M&M's", 1.00, defaultQuantity, "mmCandy.png" ));

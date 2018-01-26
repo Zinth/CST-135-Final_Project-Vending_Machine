@@ -42,6 +42,7 @@ public class InventoryPane extends ProductPane {
                 //Add item to cart
                 serviceManager.getCart().addToCart(product);
                 serviceManager.getIManager().decreaseQuantity(product);
+                updateStockLabel(product);
                 //Create animationPane
                 animation = new AnimationPane(50, 0, X, Y, animateImage);
                 //Run Animation
@@ -66,6 +67,6 @@ public class InventoryPane extends ProductPane {
     public void finishAnimation() {
         this.getChildren().remove(animation);
         animateImage.setOpacity(1.0);
-        serviceManager.UpdateGui();
+        serviceManager.UpdateCartGui();
     }
 }

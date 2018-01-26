@@ -261,8 +261,9 @@ public class Main extends Application {
         HBox changeMachineHBox = new HBox();
         
         //Loop through to create buttons for each machine
-        for(int i = 0; i < numOfMachines; i++){
-            changeMachineHBox.getChildren().add(new CustomButtons(String.valueOf(i), e -> {
+//        for(int i = 0; i < numOfMachines; i++){
+        for(String vendingMachineName : this.serviceManager.getVmManager().getVendingMachineNames()){
+            changeMachineHBox.getChildren().add(new CustomButtons(vendingMachineName, e -> {
                 //TODO: add code to change - Change Machine method should take an int for the machine number.
             }));
         }

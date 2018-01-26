@@ -29,14 +29,18 @@ public class ManagerPane extends ProductPane {
         Button btnIncrease = new Button("+");
         btnIncrease.setOnAction(event -> {
             serviceManager.getIManager().increaseQuantity(product);
-            serviceManager.UpdateGui();
+            updateStockLabel(product);
+            serviceManager.UpdateCartGui();
+            serviceManager.UpdateInventoryGui();
         });
 
         Button btnDecrease = new Button("-");
         btnDecrease.setOnAction(event -> {
             if(product.getQuantity() > 0){
                 serviceManager.getIManager().decreaseQuantity(product);
-                serviceManager.UpdateGui();
+                updateStockLabel(product);
+                serviceManager.UpdateCartGui();
+                serviceManager.UpdateInventoryGui();
             }
         });
         

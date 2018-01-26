@@ -23,3 +23,5 @@
 1,"Drink","Diet Pepsi",1.25,10,"dietPepsiDrink.png",16,"Soft Drink",0,TRUE,1,
 1,"Drink","Arrowhead Water",1.00,10,"arrowheadWaterDrink.png",16,"Water",0,TRUE,0,
 1,"Drink","Gatorade Fruit Punch",1.00,10,"gatoradeFruitPunchDrink.png",16,"Sport Drink",80,FALSE,0,
+
+2,"Drink","Gatorade Fruit Punch",1.00,10,"myOwnFruitPunchDrink.png",16,"Sport Drink",80,FALSE,0,

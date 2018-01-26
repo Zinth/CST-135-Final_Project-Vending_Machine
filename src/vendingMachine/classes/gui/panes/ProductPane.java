@@ -74,6 +74,9 @@ public class ProductPane extends VBox {
         this.setStyle("-fx-background-color: #7D869C;");
         this.setAlignment(Pos.CENTER);
     }
+    protected void updateStockLabel(Product product){
+        stockLabel.setText("Stock: " + String.valueOf(product.getQuantity()));
+    }
 
     /**
      * get the X position of the Pane

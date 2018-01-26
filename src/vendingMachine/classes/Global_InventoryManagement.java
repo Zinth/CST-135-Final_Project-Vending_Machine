@@ -165,5 +165,15 @@ public class Global_InventoryManagement extends Product {
         }
         writer.close();
     }
+    
+//    public void exportToCsv(String vendingMachineName){
+//        ArrayList<Product> allProducts = findLowInventory(vendingMachineName);
+//        CsvUtil csvUtil = new CsvUtil(vendingMachineName+"_purchaseOrder.csv");
+//        csvUtil.writeLine(PO_HEADER);
+//        lowInventoryProducts.stream().forEach((product) -> {
+//            csvUtil.writeLine(product.toArrayList());
+//        });
+//        csvUtil.finalizeWrite();
+//    }
 
 }

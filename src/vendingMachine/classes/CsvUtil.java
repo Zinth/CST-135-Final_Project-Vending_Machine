@@ -76,6 +76,7 @@ public class CsvUtil {
     /**
      * Read a csv into a hash map.
      * Usage: 
+     *  CsvUtil csvUtil = newCsvUtil("pathToFile.csv");
      *    Iterator it = csvUtil.readCSV().entrySet().iterator();
      *        while (it.hasNext()) {
      *            Map.Entry pair = (Map.Entry)it.next();
