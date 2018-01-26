@@ -8,6 +8,7 @@
 
 package vendingMachine.classes.gui.panes;
 
+import java.io.IOException;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -18,6 +19,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import vendingMachine.classes.products.Product;
 import vendingMachine.classes.ServiceManager;
+import vendingMachine.classes.products.Candy;
+import vendingMachine.classes.products.Chips;
+import vendingMachine.classes.products.Drink;
 
 
 
@@ -36,6 +40,7 @@ public class ProductPane extends VBox {
             + "linear-gradient(#395cab, #223768);";
     
     protected ImageView productImage;
+    private Image image;
     protected Label productInfo;
     protected Label stockLabel;
     protected ServiceManager serviceManager;
@@ -50,8 +55,24 @@ public class ProductPane extends VBox {
      */
     public ProductPane(ServiceManager serviceManager, Product product) {
         this.serviceManager = serviceManager;
+        
         // Create an ImageView of the product image
+        try{ //Make sure image at path exists
         productImage = new ImageView(new Image("res/images/" + product.getImageName()));
+        
+        }catch(IllegalArgumentException e){
+            //If not set the product Default image. 
+            if(product instanceof Drink){
+                productImage = new ImageView(new Image("res/images/defaultDrink.png"));
+            }else if (product instanceof Chips){
+                productImage = new ImageView(new Image("res/images/defaultChips.png"));
+            }else if(product instanceof Candy){
+                productImage = new ImageView(new Image("res/images/defaultCandy.png"));
+            }else{
+                productImage = new ImageView(new Image("res/images/defaultGum.png"));
+            }
+        }
+        //Edit ImagaeView's size Limit.
         productImage.setFitWidth(100);
         productImage.setFitHeight(100);
 
