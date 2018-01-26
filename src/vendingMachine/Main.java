@@ -15,12 +15,16 @@ package vendingMachine;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -39,7 +43,7 @@ public class Main extends Application {
     // Dispencer class creation
     
     private final Insets PADDING = new Insets(5, 5, 5, 5);
-    private boolean managerMode = false;
+    //private boolean managerMode = false;
     private BorderPane root;
     private final Group CUSTOMER_UI_GROUP = new Group();
     private final Group MANAGER_UI_GROUP = new Group();
@@ -79,6 +83,9 @@ public class Main extends Application {
         root.setStyle("-fx-background-color: #7D869C;"
                 + "-fx-border-width: 5px;"
                 + "-fx-border-color: #54428E");
+        
+        //Create MenuBar;
+        MenuBar menu = serviceManager.getMenuBar();
 
         //Create the Manager VBox to hold the managerGrid
         VBox managerVBox = new VBox();
@@ -111,17 +118,19 @@ public class Main extends Application {
         Button btnManager = new CustomButtons("res/images/manager.png", "Manager Mode");
         //btnManager action event for changing if manager grid is displayed or not
         btnManager.setOnAction(event -> {
-            if (managerMode) {
+            if (serviceManager.isManagerMode()) {
                 root.setCenter(CUSTOMER_UI_GROUP);
-                managerMode = false;
+                serviceManager.setManagerMode(false);
                 rightVBox.getChildren().remove(resetButton);
                 serviceManager.UpdateGui();
+                serviceManager.getMenuBar().updateNode();
             } else {
                 // Else have scene contain managerVBox
                 root.setCenter(MANAGER_UI_GROUP);
-                managerMode = true;
+                serviceManager.setManagerMode(true);
                 rightVBox.getChildren().add(resetButton);
                 serviceManager.UpdateGui();
+                serviceManager.getMenuBar().updateNode();
             }
         });
         // --- Nodes to Groups ---
@@ -142,6 +151,9 @@ public class Main extends Application {
         root.setAlignment(CUSTOMER_UI_GROUP, Pos.TOP_CENTER);
         //Add the bottomHBox to the bottom of root.
         root.setRight(rightVBox);
+        
+        //Add Menu bar to root top
+        root.setTop(menu);
 
         // --- Standard JavaFX ---
         //Set up default Scene
@@ -168,7 +180,6 @@ public class Main extends Application {
         customerVBox.setMinSize(0, 0);
         customerVBox.setMaxSize(root.getMaxHeight(), root.getMaxWidth());
         
-
         //Create hbox to hold product selection buttons
         HBox productSelectionHBox = new HBox();
         productSelectionHBox.setPadding(PADDING);
@@ -178,6 +189,7 @@ public class Main extends Application {
         VBox inventoryVBox = new VBox();
         inventoryVBox.setPadding(PADDING);
         inventoryVBox.setAlignment(Pos.CENTER);
+        inventoryVBox.setStyle("-fx-border-width: 0 0 5 0; ; -fx-border-color: #54428E;");
         
         //vbox to hold cart grid , total price cost, and confirmation button
         VBox cartVBox = new VBox();
@@ -187,18 +199,18 @@ public class Main extends Application {
         
         //Create manager ScrollPane
         ScrollPane cartScroll = new ScrollPane();
-        cartScroll.setMaxHeight(200);
-        
+        cartScroll.setMaxHeight(175);
+        cartScroll.setMinWidth(675);
         cartScroll.setStyle(PANE_STYLE);
         
 
         // --- Create Labels ---
         //Inventory Text Label
-        Text inventoryLabel = new Text("___________________\nVending Machine");
+        Text inventoryLabel = new Text("Vending Machine");
         inventoryLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
         inventoryLabel.setTextAlignment(TextAlignment.CENTER);
         //Invenotry Cart Label
-        Text cartLabel = new Text("___________________\nCart");
+        Text cartLabel = new Text("Cart");
         cartLabel.setTextAlignment(TextAlignment.CENTER);
         cartLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
 
@@ -237,6 +249,7 @@ public class Main extends Application {
            serviceManager.UpdateGui();
            alert.showAlert("Your purchase was successfull!", 36, Color.BLACK);
        });
+       //Set btnPurchase properties
        btnPurchase.setGraphic(serviceManager.getTotalPrice());
        btnPurchase.setContentDisplay(ContentDisplay.TOP);
         
@@ -261,7 +274,6 @@ public class Main extends Application {
         HBox changeMachineHBox = new HBox();
         
         //Loop through to create buttons for each machine
-//        for(int i = 0; i < numOfMachines; i++){
         for(String vendingMachineName : this.serviceManager.getVmManager().getVendingMachineNames()){
             changeMachineHBox.getChildren().add(new CustomButtons(vendingMachineName, e -> {
                 //TODO: add code to change - Change Machine method should take an int for the machine number.

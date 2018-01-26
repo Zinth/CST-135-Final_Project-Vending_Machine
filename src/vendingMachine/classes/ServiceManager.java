@@ -14,6 +14,8 @@ package vendingMachine.classes;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import vendingMachine.classes.gui.AlertWindow;
+import vendingMachine.classes.gui.CustomMenuBar;
 import vendingMachine.classes.gui.TotalPrice;
 import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.gui.grids.InventoryGrid;
@@ -27,11 +29,16 @@ public final class ServiceManager {
     private final CartGrid cartGrid;
     private final InventoryGrid inventoryGrid;
     private final ManagerGrid managerGrid;
+    private final CustomMenuBar menuBar;
     private final ArrayList<UpdatableGUINode> updatableGuiNodes = new ArrayList<>();
     private final static NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
     private final TotalPrice totalPrice;
     private final Restock restock;
     private final VendingMachineManager vmManager;
+    private final AlertWindow ALERT = new AlertWindow();
+    
+    //Edit by Chris Hyde - moved managerMode boolean to service Manager
+    private boolean managerMode = false; 
 
     public ServiceManager() {
         totalPrice = new TotalPrice(this);
@@ -39,6 +46,7 @@ public final class ServiceManager {
         inventoryGrid = new InventoryGrid(this, 6);
         managerGrid = new ManagerGrid(this, 6);
         restock = new Restock(this);
+        menuBar = new CustomMenuBar(this);
         vmManager = new VendingMachineManager(this);
         vmManager.addVendingMachine("Vending Machine 1", iManager.getProducts());
         updatableGuiNodes.add(totalPrice);
@@ -130,5 +138,35 @@ public final class ServiceManager {
     public static String formatPriceStatic(double price){
         return FORMATTER.format(price);
     }
+
+    /**
+     * @return 
+     */
+    public CustomMenuBar getMenuBar() {
+        return menuBar;
+    }
+
+    /**
+     * @return 
+     */
+    public AlertWindow getALERT() {
+        return ALERT;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public boolean isManagerMode() {
+        return managerMode;
+    }
+
+    /**
+     * @param managerMode 
+     */
+    public void setManagerMode(boolean managerMode) {
+        this.managerMode = managerMode;
+    }
+    
+    
 
 }
