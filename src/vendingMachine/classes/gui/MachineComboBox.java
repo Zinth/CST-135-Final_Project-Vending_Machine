@@ -1,7 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @project Milestone6
+ * @course CST-135
+ * @author James Ray
+ * @author Christopher Hyde
+ * @author Robert Wade
+ * @teacher Dr. Lively
+ * @date 01/27/18
+ *
+ * @about This class creates Panes of products for the manager.
  */
 package vendingMachine.classes.gui;
 
@@ -10,10 +16,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ComboBox;
 import vendingMachine.classes.ServiceManager;
 
-/**
- *
- * @author jamesray
- */
 public class MachineComboBox extends ComboBox{
 
     public MachineComboBox(ServiceManager serviceManager) {
@@ -23,7 +25,7 @@ public class MachineComboBox extends ComboBox{
                 @Override
                 public void changed(ObservableValue ov, String oldValue, String newValue) { 
                     serviceManager.getVmManager().switchVendingMachines(newValue);
-                }   
+                }
         });
     }
 

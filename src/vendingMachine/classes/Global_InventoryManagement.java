@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import javafx.scene.paint.Color;
 import vendingMachine.classes.products.Product;
 import vendingMachine.classes.products.Candy;
 
@@ -56,21 +58,57 @@ public class Global_InventoryManagement extends Product {
                         Product candy = new Candy();
                         serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(candy);
                         addCandy(inventoryList.get(i));
+                        allProducts.add(candy);
                         break;
 
                     case "Chips":
+                        Product chips = new Chips();
+                        serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(chips);
                         addChips(inventoryList.get(i));
+                        allProducts.add(chips);
                         break;
 
                     case "Drink":
+                        Product drink = new Drink();
+                        serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(drink);
                         addDrink(inventoryList.get(i));
+                        allProducts.add(drink);
                         break;
 
                     case "Gum":
+                        Product gum = new Gum(inventoryList.get(i)[]);
+                        serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(gum);
                         addGum(inventoryList.get(i));
+                        allProducts.add(gum);
                         break;
                 }
             }
+
+
+
+            recursiveSortName(allProducts, 2, allProducts.size());
+            recursiveSortQuantity(allProducts, 2, allProducts.size());
+
+            String productSearchName = "Lays";
+
+            recursiveSearchByName(productSearchName, allProducts, 2, allProducts.size());
+            System.out.println("-----Name Search Results-----");
+
+            if (nameSearchResults.size() > 0){
+                System.out.println("Searched for " + productSearchName + "...");
+
+                for (Product product : nameSearchResults) {
+                    System.out.println("Dispenser ID: " + product.getProductName() + ", Qty: " + product.getQuantity());
+                }
+            } else {
+                System.out.println("Product name " + productSearchName + " was not found");
+            }
+
+            System.out.println("-------------- Sorted Products --------------");
+            for (Product prod : allProducts) {
+            System.out.println(prod.getProductName() + " : " + prod.getQuantity());
+        }
+
     }
     private void addChips(String[] strings) {
     }
@@ -197,6 +235,14 @@ public class Global_InventoryManagement extends Product {
             writer.println(line.toString());
         }
         writer.close();
+    }
+    
+    public void exportAll(){
+        Set<String> vendingMachinesNames = this.serviceManager.getVmManager().getVendingMachineNames();
+        vendingMachinesNames.stream().forEach((vendingMachineName) -> {
+            exportToCsv(vendingMachineName);
+        });
+        serviceManager.getALERT().showAlert("Inventory exported for all Vending Machines!", 20, Color.CORAL);
     }
     
     public void exportToCsv(String vendingMachineName){
