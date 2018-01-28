@@ -15,6 +15,7 @@ package vendingMachine.classes;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import vendingMachine.classes.gui.AlertWindow;
+import vendingMachine.classes.gui.CustomButtons;
 import vendingMachine.classes.gui.CustomMenuBar;
 import vendingMachine.classes.gui.TotalPrice;
 import vendingMachine.classes.gui.grids.CartGrid;
@@ -157,7 +158,7 @@ public final class ServiceManager {
     public AlertWindow getALERT() {
         return ALERT;
     }
-    
+
     /**
      * @return boolean
      */
@@ -170,6 +171,7 @@ public final class ServiceManager {
      */
     public void setManagerMode(boolean managerMode) {
         this.managerMode = managerMode;
+        this.menuBar.updateNode();
     }
     
     

@@ -17,10 +17,13 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import vendingMachine.classes.ServiceManager;
+import vendingMachine.interfaces.UpdatableGUINode;
 
-public class CustomButtons extends Button {
+public class CustomButtons extends Button implements UpdatableGUINode {
+    
+    private ServiceManager serviceManager;
+    private boolean manager;
     
     //Custom Button With text and event
     public CustomButtons(String btnName, EventHandler<ActionEvent> event){
@@ -60,8 +63,10 @@ public class CustomButtons extends Button {
     }
 
     //Custom Button with image
-    public CustomButtons(String imagePath, String btnName){
+    public CustomButtons(ServiceManager serviceManager, boolean manager, String imagePath, String btnName){
 
+        this.serviceManager = serviceManager;
+        this.manager = manager;
         //Image that will be displayed on the button
         ImageView imageView = new ImageView(new Image(imagePath));
         imageView.setFitWidth(100);
@@ -72,6 +77,19 @@ public class CustomButtons extends Button {
         
         //Set the tool tip for the button
         this.setTooltip(new Tooltip("Press to view " + btnName));
+        updateNode();
+    }
+
+    @Override
+    public void updateNode() {
+        System.out.println(serviceManager.isManagerMode());
+        System.out.println(manager);
+        
+        if((serviceManager.isManagerMode() && manager == true) || manager == false){
+            this.setVisible(true);
+        }else{
+            this.setVisible(false);
+        }
     }
     
  

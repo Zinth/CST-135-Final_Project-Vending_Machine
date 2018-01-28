@@ -99,30 +99,29 @@ public class Main extends Application {
         ComboBox switchMachines = machineComboBox(); // change the arguement to reflect number of machines
 
         // --- Create Buttons ---
-        Button resetButton = new CustomButtons("res/images/refresh.png", "Reset Items");
+        CustomButtons resetButton = new CustomButtons(serviceManager, true, "res/images/refresh.png", "Reset Items");
         resetButton.setShape(new Circle(3));
         resetButton.setOnAction(e -> {
             serviceManager.getIManager().resetProducts();
             serviceManager.UpdateGui();
         });
+        
         //Button to display Manager Grid
-        Button btnManager = new CustomButtons("res/images/manager.png", "Manager Mode");
+        Button btnManager = new CustomButtons(serviceManager, false, "res/images/manager.png", "Manager Mode");
         btnManager.setShape(new Circle(3));
         //btnManager action event for changing if manager grid is displayed or not
         btnManager.setOnAction(event -> {
             if (serviceManager.isManagerMode()) {
                 root.setCenter(CUSTOMER_UI_GROUP);
                 serviceManager.setManagerMode(false);
-                rightVBox.getChildren().remove(resetButton);
+                resetButton.updateNode();
                 serviceManager.UpdateGui();
-                serviceManager.getMenuBar().updateNode();
             } else {
                 // Else have scene contain managerVBox
                 root.setCenter(MANAGER_UI_GROUP);
                 serviceManager.setManagerMode(true);
-                rightVBox.getChildren().add(resetButton);
+                resetButton.updateNode();
                 serviceManager.UpdateGui();
-                serviceManager.getMenuBar().updateNode();
             }
         });
         // --- Nodes to Groups ---
@@ -135,6 +134,7 @@ public class Main extends Application {
         //Add managerGrid to managerVBox
         managerScroll.setContent(serviceManager.getManagerGrid());
         managerVBox.getChildren().addAll(switchMachines, managerScroll);
+        rightVBox.getChildren().add(resetButton);
 
         //Add btnManager to bottomHBox
         rightVBox.getChildren().addAll(btnManager);
@@ -207,28 +207,28 @@ public class Main extends Application {
 
         // --- Selection Buttons ---
         //Button for selecting Drink with picture
-        Button btnDrink = new CustomButtons("res/images/drinks.png", "Drinks");
+        Button btnDrink = new CustomButtons(serviceManager, false, "res/images/drinks.png", "Drinks");
         btnDrink.setOnAction(event -> {
             //Sort the inventory grid to show only drinks
             serviceManager.getInventoryGrid().setProductType("drink");
         });
 
         //Button for selecting Chips with picture
-        Button btnChip = new CustomButtons("res/images/chips.png", "Chips");
+        Button btnChip = new CustomButtons(serviceManager, false, "res/images/chips.png", "Chips");
         btnChip.setOnAction(event -> {
             //Sort the inventory grid to show only chips
             serviceManager.getInventoryGrid().setProductType("chips");
         });
 
         //Button for selecting Snack with picture
-        Button btnCandy = new CustomButtons("res/images/candy.png", "Candy");
+        Button btnCandy = new CustomButtons(serviceManager, false, "res/images/candy.png", "Candy");
         btnCandy.setOnAction(event -> {
             //Sort the inventory grid to show only candy
             serviceManager.getInventoryGrid().setProductType("candy");
         });
 
         //Button for selecting Gum with picture
-        Button btnGum = new CustomButtons("res/images/gum.png", "Gums");
+        Button btnGum = new CustomButtons(serviceManager, false, "res/images/gum.png", "Gums");
         btnGum.setOnAction(event -> {
             //Sort the inventory grid to show only gum
             serviceManager.getInventoryGrid().setProductType("gum");

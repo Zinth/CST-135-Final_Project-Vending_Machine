@@ -36,8 +36,7 @@ public class ManagerGrid extends GridPane implements UpdatableGUINode{
         //Style
         this.getStyleClass().add("grid");
         this.setMaxWidth(100);
-        
-        
+
     }
 
     /**

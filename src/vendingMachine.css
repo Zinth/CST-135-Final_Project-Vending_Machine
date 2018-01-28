@@ -17,6 +17,9 @@
     -fx-border-color: #54428E;
     -fx-vgap: 5px;
 }
+.normal-text-field{
+    -fx-text-fill: white;
+}
 
 .grid{
     -fx-alignment: CENTER;
@@ -89,6 +92,20 @@ tooltip{
     -fx-label-padding: 1;
     -fx-font-family: "Arial Black";
     -fx-font-size: 32;
+}
+
+.combo-box-base {
+    -fx-background-color: #54428E;
+    -fx-shadow-highlight-color: #8275AC; 
+    -fx-outer-border: #54428E;
+    -fx-inner-border: white;
+    -fx-border-width: 5px;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-text-fill: -fx-my-menu-font-color;
+    -fx-label-padding: 3;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 14;
 }
 
 /*
