@@ -58,7 +58,9 @@ public class PurchaseOrder extends Application {
         
         //Lable for isntructions
         Label info1 = new Label("Select a vending machine:");
+        info1.getStyleClass().add("labelBlack");
         Label info2 = new Label("Select an action:");
+        info2.getStyleClass().add("labelBlack");
         
         //Action HBox to hold Buttons
         HBox actions = new HBox(createPO, createAllPOs);
