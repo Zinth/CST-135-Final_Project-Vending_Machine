@@ -13,6 +13,7 @@ package vendingMachine.classes;
 
 import java.util.ArrayList;
 import java.util.Set;
+import javafx.scene.paint.Color;
 import vendingMachine.classes.products.Product;
 
 public class Restock {
@@ -49,6 +50,7 @@ public class Restock {
         vendingMachinesNames.stream().forEach((vendingMachineName) -> {
             createPO(vendingMachineName);
         });
+        serviceManager.getALERT().showAlert("Purchase Orders Created!", 20, Color.CORAL);
     }
 
     /**

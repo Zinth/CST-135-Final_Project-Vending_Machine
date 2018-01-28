@@ -57,7 +57,7 @@ public final class ServiceManager {
         File folder = new File("src/res/input");
         File[] listOfFiles = folder.listFiles();
         for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
+            if (listOfFiles[i].isFile() && listOfFiles[i].getName().endsWith(".csv")) {
                 gIManager.csvInventoryImport(listOfFiles[i].getName());
             }
 

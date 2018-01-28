@@ -13,8 +13,9 @@ nbproject/
 *.mf
 *.xml
 /build/
-/dist/
+/dist/*
 dist/
 src/out/
 *.iml
 dist/*
+src/res/output/*.csv
