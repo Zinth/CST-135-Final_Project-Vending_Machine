@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import vendingMachine.classes.products.Product;
 import vendingMachine.classes.products.Candy;
 import vendingMachine.classes.products.Drink;
+import vendingMachine.classes.products.Gum;
 
 
 public class Global_InventoryManagement extends Product {
@@ -73,10 +74,8 @@ public class Global_InventoryManagement extends Product {
                         break;
 
                     case "Gum":
-                        Product gum = new Gum(inventoryList.get(i)[]);
+                        Product gum = addGum(inventoryList.get(i));
                         serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(gum);
-                        addGum(inventoryList.get(i));
-                        allProducts.add(gum);
                         break;
                 }
             }
@@ -138,7 +137,20 @@ public class Global_InventoryManagement extends Product {
         allProducts.add(drink);
         return drink;
     }
-    private void addGum(String[] strings) {
+    private Product addGum(String[] strings) {
+        String flavor = strings[6];
+        int pieces = Integer.valueOf(strings[7]);
+        double servingSize = Double.valueOf(strings[8]);
+        boolean sugarFree = Boolean.valueOf(strings[9]);
+        double weight = Double.valueOf(strings[10]);
+        int calories = Integer.valueOf(strings[11]);
+        String productName = strings[2];
+        double price = Double.valueOf(strings[3]);
+        int quantity = Integer.valueOf(strings[4]);
+        String imageName = strings[5];
+        Product gum = new Gum(flavor, pieces, servingSize, sugarFree, weight, calories, productName, price, quantity, imageName);
+        allProducts.add(gum);
+        return gum;
     }
 
     /**
