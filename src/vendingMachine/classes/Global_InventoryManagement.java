@@ -9,6 +9,7 @@ import java.util.Set;
 import javafx.scene.paint.Color;
 import vendingMachine.classes.products.Product;
 import vendingMachine.classes.products.Candy;
+import vendingMachine.classes.products.Chips;
 import vendingMachine.classes.products.Drink;
 import vendingMachine.classes.products.Gum;
 
