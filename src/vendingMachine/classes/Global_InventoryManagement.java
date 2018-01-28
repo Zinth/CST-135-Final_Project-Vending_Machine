@@ -54,32 +54,30 @@ public class Global_InventoryManagement extends Product {
 
             
             for (int i = 0; i < inventoryList.size(); i++){
-                String vendingMachineName = inventoryList.get(i)[0];
-                serviceManager.getVmManager().addVendingMachine(vendingMachineName);
-                switch (inventoryList.get(i)[1]){
-                    case "Candy":
-                        Product candy = addCandy(inventoryList.get(i));
-                        serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(candy);
-                        break;
+            String vendingMachineName = inventoryList.get(i)[0];
+            serviceManager.getVmManager().addVendingMachine(vendingMachineName);
+            switch (inventoryList.get(i)[1]){
+                case "Candy":
+                    Product candy = addCandy(inventoryList.get(i));
+                    serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(candy);
+                    break;
 
-                    case "Chips":
-                        Product chips = new Chips();
-                        serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(chips);
-                        addChips(inventoryList.get(i));
-                        allProducts.add(chips);
-                        break;
+                case "Chips":
+                    Product chips = addChips(inventoryList.get(i));
+                    serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(chips);
+                    break;
 
-                    case "Drink":
-                        Product drink = addDrink(inventoryList.get(i));
-                        serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(drink);
-                        break;
+                case "Drink":
+                    Product drink = addDrink(inventoryList.get(i));
+                    serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(drink);
+                    break;
 
-                    case "Gum":
-                        Product gum = addGum(inventoryList.get(i));
-                        serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(gum);
-                        break;
-                }
+                case "Gum":
+                    Product gum = addGum(inventoryList.get(i));
+                    serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(gum);
+                    break;
             }
+        }
 
 
 
@@ -107,7 +105,20 @@ public class Global_InventoryManagement extends Product {
         }
 
     }
-    private void addChips(String[] strings) {
+    private Product addChips(String[] strings) {
+        double servingSize = Double.valueOf(strings[7]);
+        String flavor = strings[6];
+        boolean baked = Boolean.valueOf(strings[8]);
+        boolean glutenFree = Boolean.valueOf(strings[9]);
+        double weight = Double.valueOf(strings[10]);
+        int calories = Integer.valueOf(strings[11]);
+        String productName = strings[2];
+        double price = Double.valueOf(strings[3]);
+        int quantity = Integer.valueOf(strings[4]);
+        String imageName = strings[5];
+        Product chips = new Chips(servingSize, baked, glutenFree, weight, calories, flavor, productName, price, quantity, imageName);
+        allProducts.add(chips);
+        return chips;
     }
     private Product addCandy(String[] strings) {
         double servingSize = Double.valueOf(strings[6]);
