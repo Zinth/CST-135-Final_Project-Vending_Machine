@@ -10,11 +10,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import vendingMachine.classes.ServiceManager;
@@ -27,12 +30,15 @@ public class PurchaseOrder extends Application {
     public void load(ServiceManager serviceManager) {
         this.serviceManager = serviceManager;
         Stage poStage = new Stage();
+        //ComboBox
         ComboBox switchMachines = new MachineComboBox(serviceManager, new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String oldValue, String newValue) {
                 currentVendingMachineSelection = newValue;
             }
         });
+        
+        //Buttons
         Button createPO = new CustomButtons("Create PO", new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -49,10 +55,26 @@ public class PurchaseOrder extends Application {
                 serviceManager.getRestock().createAllPOs();
             }
         });
+        
+        //Lable for isntructions
+        Label info1 = new Label("Select a vending machine:");
+        Label info2 = new Label("Select an action:");
+        
+        //Action HBox to hold Buttons
         HBox actions = new HBox(createPO, createAllPOs);
+        actions.setAlignment(Pos.CENTER);
+        
+        
+        VBox itemBox = new VBox();
+        itemBox.setSpacing(5);
+        itemBox.setAlignment(Pos.CENTER);
+        
         StackPane root = new StackPane();
         root.getStyleClass().add("main");
-        root.getChildren().addAll(switchMachines, actions);
+        
+        //Add Nodes to Panes
+        itemBox.getChildren().addAll(info1, switchMachines, info2, actions);
+        root.getChildren().addAll(itemBox);
 
         Scene scene = new Scene(root, 300, 250);
 

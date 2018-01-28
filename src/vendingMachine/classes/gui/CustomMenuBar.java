@@ -61,7 +61,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         });
 
         //Add File Menu items to fileMenu
-        fileMenu.getItems().addAll(purchaseOrder, new SeparatorMenuItem(), export, new SeparatorMenuItem(), exit);
+        fileMenu.getItems().addAll(productSearch, new SeparatorMenuItem(), purchaseOrder, export, new SeparatorMenuItem(), exit);
 
         //Create helpMenu
         Menu helpMenu = new Menu("_Help");
@@ -127,9 +127,11 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         if(serviceManager.isManagerMode()){
             purchaseOrder.setDisable(false);
             export.setDisable(false);
+            productSearch.setDisable(false);
         }else{
             purchaseOrder.setDisable(true);
             export.setDisable(true);
+            productSearch.setDisable(true);
         }
     }
     
