@@ -13,7 +13,7 @@
 
 .main{
     -fx-background-color: #7D869C;
-    -fx-border-width: 0 5px 5px 5px;
+    -fx-border-width: 5px;
     -fx-border-color: #54428E;
     -fx-vgap: 5px;
 }

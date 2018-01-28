@@ -13,11 +13,14 @@
 package vendingMachine;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
@@ -93,7 +96,7 @@ public class Main extends Application {
         managerScroll.setFitToWidth(true);
 
         //Create HBox to hold vending machine switching buttons
-        HBox machineSwitcherHBox = machineButtonHBox(3); // change the arguement to reflect number of machines
+        ComboBox switchMachines = machineComboBox(); // change the arguement to reflect number of machines
 
         // --- Create Buttons ---
         Button resetButton = new CustomButtons("res/images/refresh.png", "Reset Items");
@@ -131,7 +134,7 @@ public class Main extends Application {
         // --- Add Nodes to Panes ---
         //Add managerGrid to managerVBox
         managerScroll.setContent(serviceManager.getManagerGrid());
-        managerVBox.getChildren().addAll(machineSwitcherHBox, managerScroll);
+        managerVBox.getChildren().addAll(switchMachines, managerScroll);
 
         //Add btnManager to bottomHBox
         rightVBox.getChildren().addAll(btnManager);
@@ -259,17 +262,22 @@ public class Main extends Application {
      *
      * @param numOfMachines
      */
-    public HBox machineButtonHBox(int numOfMachines) {
-        HBox changeMachineHBox = new HBox();
-
-        //Loop through to create buttons for each machine
+    public ComboBox machineComboBox() {
+        ComboBox vendingMachine = new ComboBox();
+        
+        //Loop through vendingMachines and add them to comboBox
         for (String vendingMachineName : this.serviceManager.getVmManager().getVendingMachineNames()) {
-            changeMachineHBox.getChildren().add(new CustomButtons(vendingMachineName, e -> {
-                //TODO: add code to change - Change Machine method should take an int for the machine number.
-            }));
+            vendingMachine.getItems().add(vendingMachineName); 
         }
+        // Combobox on change change vending machines
+        vendingMachine.valueProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue ov, String oldValue, String newValue) { 
+                    serviceManager.getVmManager().switchVendingMachines(newValue);
+                }   
+        });
 
-        return changeMachineHBox;
+        return vendingMachine;
 
     }
 
