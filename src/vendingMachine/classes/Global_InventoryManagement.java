@@ -116,7 +116,7 @@ public class Global_InventoryManagement extends Product {
         double price = Double.valueOf(strings[3]);
         int quantity = Integer.valueOf(strings[4]);
         String imageName = strings[5];
-        Product chips = new Chips(servingSize, baked, glutenFree, weight, calories, flavor, productName, price, quantity, imageName);
+        Product chips = new Chips(flavor, servingSize, baked, glutenFree, weight, calories, productName, price, quantity, imageName);
         allProducts.add(chips);
         return chips;
     }

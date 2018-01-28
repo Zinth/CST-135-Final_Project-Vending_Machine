@@ -24,7 +24,6 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
     private MenuItem purchaseOrder;
     private MenuItem export;
     private MenuItem productSearch;
-    private SearchWindow search = new SearchWindow();
     
     
     public CustomMenuBar(ServiceManager serviceManager) {
@@ -52,6 +51,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         
         productSearch.setOnAction((event) -> {
             //Launch Search Window
+            SearchWindow search = new SearchWindow();
             search.showWinow();
         });
 
