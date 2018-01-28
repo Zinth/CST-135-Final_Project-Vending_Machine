@@ -17,6 +17,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomMenuBar;
+import vendingMachine.classes.gui.PurchaseOrder;
 import vendingMachine.classes.gui.TotalPrice;
 import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.gui.grids.InventoryGrid;
@@ -181,4 +182,7 @@ public final class ServiceManager {
         this.menuBar.updateNode();
     }
 
+    public Restock getRestock() {
+        return restock;
+    }
 }

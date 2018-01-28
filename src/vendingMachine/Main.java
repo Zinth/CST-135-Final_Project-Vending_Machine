@@ -135,10 +135,9 @@ public class Main extends Application {
         //Add managerGrid to managerVBox
         managerScroll.setContent(serviceManager.getManagerGrid());
         managerVBox.getChildren().addAll(switchMachines, managerScroll);
-        rightVBox.getChildren().add(resetButton);
 
         //Add btnManager to bottomHBox
-        rightVBox.getChildren().addAll(btnManager);
+        rightVBox.getChildren().addAll(btnManager, resetButton);
         //Set default UI Group for root Pane
         root.setCenter(CUSTOMER_UI_GROUP);
         root.setAlignment(CUSTOMER_UI_GROUP, Pos.TOP_CENTER);
