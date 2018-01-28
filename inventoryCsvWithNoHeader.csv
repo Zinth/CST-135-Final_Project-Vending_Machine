@@ -1,24 +1,24 @@
-1,"Chips","Lays",0.99,10,"laysBbq.png","Barbecue",1,FALSE,FALSE,1,139
-1,"Chips","Lays",0.99,10,"laysClassic.png","Classic",1,FALSE,FALSE,1,152
-1,"Chips","Fritos",0.99,10,"fritosOriginal.png","Original",1,TRUE,FALSE,1,160
-1,"Chips","Fritos Chili Cheese",0.99,10,"fritosChiliCheese.png","Chili Cheese",1,TRUE,FALSE,1,160
-1,"Chips","Dorito Nacho Cheese",0.99,10,"doritosNachoCheese.png","Cool Ranch",1,TRUE,FALSE,1,180
-1,"Chips","Dorito Cool Ranch",0.99,10,"doritosCoolRanch.png","Nacho Cheese",1,TRUE,FALSE,1,120
-1,"Candy","Skittles",1.00,10,"skittlesCandy.png",1,"Mix Fruit",FALSE,FALSE,2.17,251
-1,"Candy","Resees’s",1.25,10,"reseesCandy.png",1,"Peanutbutter & Chocolate",FALSE,FALSE,1.53,176
-1,"Candy","Starburst",1.00,10,"starburstCandy.png",1,"Mix Fruit",FALSE,FALSE,2.07,160
-1,"Candy","M&M’s",1.00,10,"mmCandy.png",1,"Milk Chocolate",FALSE,FALSE,1.69,230
-1,"Candy","Hershey Bar",1.25,10,"hershyCandy.png",1,"Milk Chocolate",FALSE,FALSE,1.55,214
-1,"Candy","Snickers",1.00,10,"snickersCandy.png",1,"Chocolate",FALSE,FALSE,2,266
-1,"Gum","Trident",0.50,10,"tridentTropicalTwist.png","Tropical Twist",8,1,TRUE,21.2,1
-1,"Gum","Trident",0.50,10,"tridentCinnamon.png","Cinnamon",8,1,TRUE,21.2,1
-1,"Gum","Juicy Fruit",0.75,10,"juicyFruit.png","Original",8,1,TRUE,21.6,1
-1,"Gum","Juicy Fruit",0.75,10,"juicyFruitSourWatermelon.png","Sour Watermelon",8,1,TRUE,21.6,1
-1,"Gum","Big Red",0.35,10,"bigRed.png","Cinnamon",5,1,FALSE,13.5,10
-1,"Gum","Wrigley’s",0.35,10,"doublemint.png","Doublemint",5,1,FALSE,13.3,10
-1,"Drink","Coca-Cola",1.25,10,"cokeDrink.png",16,"Soft Drink",187,FALSE,1,
-1,"Drink","Diet Coca-Cola",1.25,10,"dietCokeDrink.png",16,"Soft Drink",0,TRUE,1,
-1,"Drink","Pepsi",1.25,10,"pepsiDrink.png",16,"Soft Drink",200,FALSE,1,
-1,"Drink","Diet Pepsi",1.25,10,"dietPepsiDrink.png",16,"Soft Drink",0,TRUE,1,
-1,"Drink","Arrowhead Water",1.00,10,"arrowheadWaterDrink.png",16,"Water",0,TRUE,0,
-1,"Drink","Gatorade Fruit Punch",1.00,10,"gatoradeFruitPunchDrink.png",16,"Sport Drink",80,FALSE,0,
+Purple Group,Chips,Lays,0.99,10,laysBbq.png,Barbecue,1,FALSE,FALSE,1,139
+Purple Group,Chips,Lays,0.99,10,laysClassic.png,Classic,1,FALSE,FALSE,1,152
+Purple Group,Chips,Fritos,0.99,10,fritosOriginal.png,Original,1,TRUE,FALSE,1,160
+Purple Group,Chips,Fritos Chili Cheese,0.99,10,fritosChiliCheese.png,Chili Cheese,1,TRUE,FALSE,1,160
+Purple Group,Chips,Dorito Nacho Cheese,0.99,10,doritosNachoCheese.png,Cool Ranch,1,TRUE,FALSE,1,180
+Purple Group,Chips,Dorito Cool Ranch,0.99,10,doritosCoolRanch.png,Nacho Cheese,1,TRUE,FALSE,1,120
+Purple Group,Candy,Skittles,1,10,skittlesCandy.png,1,Mix Fruit,FALSE,FALSE,2.17,251
+Purple Group,Candy,Resees’s,1.25,10,reseesCandy.png,1,Peanutbutter & Chocolate,FALSE,FALSE,1.53,176
+Purple Group,Candy,Starburst,1,10,starburstCandy.png,1,Mix Fruit,FALSE,FALSE,2.07,160
+Purple Group,Candy,M&M’s,1,10,mmCandy.png,1,Milk Chocolate,FALSE,FALSE,1.69,230
+Purple Group,Candy,Hershey Bar,1.25,10,hershyCandy.png,1,Milk Chocolate,FALSE,FALSE,1.55,214
+Purple Group,Candy,Snickers,1,10,snickersCandy.png,1,Chocolate,FALSE,FALSE,2,266
+Purple Group,Gum,Trident,0.5,10,tridentTropicalTwist.png,Tropical Twist,8,1,TRUE,21.2,1
+Purple Group,Gum,Trident,0.5,10,tridentCinnamon.png,Cinnamon,8,1,TRUE,21.2,1
+Purple Group,Gum,Juicy Fruit,0.75,10,juicyFruit.png,Original,8,1,TRUE,21.6,1
+Purple Group,Gum,Juicy Fruit,0.75,10,juicyFruitSourWatermelon.png,Sour Watermelon,8,1,TRUE,21.6,1
+Purple Group,Gum,Big Red,0.35,10,bigRed.png,Cinnamon,5,1,FALSE,13.5,10
+Purple Group,Gum,Wrigley’s,0.35,10,doublemint.png,Doublemint,5,1,FALSE,13.3,10
+Purple Group,Drink,Coca-Cola,1.25,10,cokeDrink.png,16,Soft Drink,187,FALSE,1,
+Purple Group,Drink,Diet Coca-Cola,1.25,10,dietCokeDrink.png,16,Soft Drink,0,TRUE,1,
+Purple Group,Drink,Pepsi,1.25,10,pepsiDrink.png,16,Soft Drink,200,FALSE,1,
+Purple Group,Drink,Diet Pepsi,1.25,10,dietPepsiDrink.png,16,Soft Drink,0,TRUE,1,
+Purple Group,Drink,Arrowhead Water,1,10,arrowheadWaterDrink.png,16,Water,0,TRUE,0,
+Purple Group,Drink,Gatorade Fruit Punch,1,10,gatoradeFruitPunchDrink.png,16,Sport Drink,80,FALSE,0,
