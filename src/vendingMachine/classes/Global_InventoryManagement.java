@@ -11,7 +11,7 @@ import vendingMachine.classes.products.Candy;
 
 public class Global_InventoryManagement extends Product {
 
-    ArrayList<Product>allProducts = new ArrayList<Product>();
+    ArrayList<Product> allProducts = new ArrayList<Product>();
     ArrayList<Product> nameSearchResults = new ArrayList<Product>();
     ServiceManager serviceManager;
     private final static ArrayList<String> EXPORT_HEADER = new ArrayList<String>() {{
@@ -186,7 +186,7 @@ public class Global_InventoryManagement extends Product {
      * @throws FileNotFoundException
      */
     public void writeToCallStackFile() throws FileNotFoundException{
-        File file = new File("callStack");
+        File file = new File("callStack.txt");
 
         PrintWriter writer = new PrintWriter(file);
 

@@ -44,6 +44,7 @@ public class ManagerGrid extends GridPane implements UpdatableGUINode{
      */
     @Override
     public void updateNode(){
+        this.getChildren().clear();
         int productCounter = 0;
         for(int i = 0; i < serviceManager.getIManager().getProducts().size(); i++){
             for(int j = 0; j < getColumns(); j++){

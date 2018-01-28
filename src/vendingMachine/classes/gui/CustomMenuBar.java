@@ -41,6 +41,8 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
 
         //Set action Events to fileMenu items.
         purchaseOrder.setOnAction(e -> {
+            PurchaseOrder purchaseOrderGui = new PurchaseOrder();
+            purchaseOrderGui.load(serviceManager);
             //TODO: add creating of purchase order CSV
         });
 

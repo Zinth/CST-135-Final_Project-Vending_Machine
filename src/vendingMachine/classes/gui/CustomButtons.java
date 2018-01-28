@@ -81,10 +81,7 @@ public class CustomButtons extends Button implements UpdatableGUINode {
     }
 
     @Override
-    public void updateNode() {
-        System.out.println(serviceManager.isManagerMode());
-        System.out.println(manager);
-        
+    public void updateNode() {        
         if((serviceManager.isManagerMode() && manager == true) || manager == false){
             this.setVisible(true);
         }else{

@@ -1,0 +1,24 @@
+Green Group,Chips,Lays,0.99,15,bad.png,Barbecue,1,FALSE,FALSE,1,139
+Green Group,Chips,Lays,0.99,15,bad.png,Classic,1,FALSE,FALSE,1,152
+Green Group,Chips,Fritos,0.99,15,bad.png,Original,1,TRUE,FALSE,1,160
+Green Group,Chips,Fritos Chili Cheese,0.99,15,bad.png,Chili Cheese,1,TRUE,FALSE,1,160
+Green Group,Chips,Dorito Nacho Cheese,0.99,15,bad.png,Cool Ranch,1,TRUE,FALSE,1,180
+Green Group,Chips,Dorito Cool Ranch,0.99,15,bad.png,Nacho Cheese,1,TRUE,FALSE,1,120
+Green Group,Candy,Skittles,1,15,bad.png,1,Mix Fruit,FALSE,FALSE,2.17,251
+Green Group,Candy,Resees’s,1.25,15,bad.png,1,Peanutbutter & Chocolate,FALSE,FALSE,1.53,176
+Green Group,Candy,Starburst,1,15,bad.png,1,Mix Fruit,FALSE,FALSE,2.07,160
+Green Group,Candy,M&M’s,1,15,bad.png,1,Milk Chocolate,FALSE,FALSE,1.69,230
+Green Group,Candy,Hershey Bar,1.25,15,bad.png,1,Milk Chocolate,FALSE,FALSE,1.55,214
+Green Group,Candy,Snickers,1,15,bad.png,1,Chocolate,FALSE,FALSE,2,266
+Green Group,Gum,Trident,0.5,15,bad.png,Tropical Twist,8,1,TRUE,21.2,1
+Green Group,Gum,Trident,0.5,15,bad.png,Cinnamon,8,1,TRUE,21.2,1
+Green Group,Gum,Juicy Fruit,0.75,15,bad.png,Original,8,1,TRUE,21.6,1
+Green Group,Gum,Juicy Fruit,0.75,15,bad.png,Sour Watermelon,8,1,TRUE,21.6,1
+Green Group,Gum,Big Red,0.35,15,bad.png,Cinnamon,5,1,FALSE,13.5,10
+Green Group,Gum,Wrigley’s,0.35,15,bad.png,Doublemint,5,1,FALSE,13.3,10
+Green Group,Drink,Coca-Cola,1.25,15,bad.png,16,Soft Drink,187,FALSE,1,
+Green Group,Drink,Diet Coca-Cola,1.25,15,bad.png,16,Soft Drink,0,TRUE,1,
+Green Group,Drink,Pepsi,1.25,15,bad.png,16,Soft Drink,200,FALSE,1,
+Green Group,Drink,Diet Pepsi,1.25,15,bad.png,16,Soft Drink,0,TRUE,1,
+Green Group,Drink,Arrowhead Water,1,15,bad.png,16,Water,0,TRUE,0,
+Green Group,Drink,Gatorade Fruit Punch,1,15,bad.png,16,Sport Drink,80,FALSE,0,
