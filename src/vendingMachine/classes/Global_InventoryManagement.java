@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import javafx.scene.paint.Color;
 import vendingMachine.classes.products.Product;
 import vendingMachine.classes.products.Candy;
 
@@ -197,6 +199,14 @@ public class Global_InventoryManagement extends Product {
             writer.println(line.toString());
         }
         writer.close();
+    }
+    
+    public void exportAll(){
+        Set<String> vendingMachinesNames = this.serviceManager.getVmManager().getVendingMachineNames();
+        vendingMachinesNames.stream().forEach((vendingMachineName) -> {
+            exportToCsv(vendingMachineName);
+        });
+        serviceManager.getALERT().showAlert("Inventory exported for all Vending Machines!", 20, Color.CORAL);
     }
     
     public void exportToCsv(String vendingMachineName){

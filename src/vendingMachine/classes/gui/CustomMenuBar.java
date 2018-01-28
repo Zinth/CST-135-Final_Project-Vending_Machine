@@ -43,16 +43,16 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         purchaseOrder.setOnAction(e -> {
             PurchaseOrder purchaseOrderGui = new PurchaseOrder();
             purchaseOrderGui.load(serviceManager);
-            //TODO: add creating of purchase order CSV
         });
 
         export.setOnAction(e -> {
-            //TODO: add creating of export CSV
+            ExportInventory exportInventoryGui = new ExportInventory();
+            exportInventoryGui.load(serviceManager);
         });
         
         productSearch.setOnAction((event) -> {
             //Launch Search Window
-            search.showWinow();;
+            search.showWinow();
         });
 
         exit.setOnAction(e -> {

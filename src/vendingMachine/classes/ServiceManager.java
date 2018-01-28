@@ -185,4 +185,9 @@ public final class ServiceManager {
     public Restock getRestock() {
         return restock;
     }
+
+    public Global_InventoryManagement getgIManager() {
+        return gIManager;
+    }
+    
 }
