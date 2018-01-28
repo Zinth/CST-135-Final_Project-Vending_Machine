@@ -12,10 +12,10 @@
  */
 package vendingMachine.classes;
 
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import vendingMachine.classes.gui.AlertWindow;
-import vendingMachine.classes.gui.CustomButtons;
 import vendingMachine.classes.gui.CustomMenuBar;
 import vendingMachine.classes.gui.TotalPrice;
 import vendingMachine.classes.gui.grids.CartGrid;
@@ -38,9 +38,9 @@ public final class ServiceManager {
     private final VendingMachineManager vmManager;
     private final AlertWindow ALERT = new AlertWindow();
     private final Global_InventoryManagement gIManager;
-    
+
     //Edit by Chris Hyde - moved managerMode boolean to service Manager
-    private boolean managerMode = false; 
+    private boolean managerMode = false;
 
     public ServiceManager() {
         totalPrice = new TotalPrice(this);
@@ -53,13 +53,20 @@ public final class ServiceManager {
         vmManager.addVendingMachine("Default");
         vmManager.getVendingMachine("Default").addAll(iManager.getProducts());
         gIManager = new Global_InventoryManagement(this);
-        gIManager.csvInventoryImport("inventoryCsvWithNoHeader.csv");
-        
+        File folder = new File("src/res/input");
+        File[] listOfFiles = folder.listFiles();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                gIManager.csvInventoryImport(listOfFiles[i].getName());
+            }
+
+        }
+
         updatableGuiNodes.add(totalPrice);
         updatableGuiNodes.add(cartGrid);
         updatableGuiNodes.add(inventoryGrid);
         updatableGuiNodes.add(managerGrid);
-        restock.createAllPOs();
+        updatableGuiNodes.add(menuBar);
     }
 
     /**
@@ -112,13 +119,13 @@ public final class ServiceManager {
             node.updateNode();
         }
     }
-    
-    public void UpdateCartGui(){
+
+    public void UpdateCartGui() {
         cartGrid.updateNode();
         totalPrice.updateNode();
     }
-    
-    public void UpdateInventoryGui(){
+
+    public void UpdateInventoryGui() {
         inventoryGrid.updateNode();
     }
 
@@ -141,19 +148,19 @@ public final class ServiceManager {
      * @param price
      * @return String
      */
-    public static String formatPriceStatic(double price){
+    public static String formatPriceStatic(double price) {
         return FORMATTER.format(price);
     }
 
     /**
-     * @return 
+     * @return
      */
     public CustomMenuBar getMenuBar() {
         return menuBar;
     }
 
     /**
-     * @return 
+     * @return
      */
     public AlertWindow getALERT() {
         return ALERT;
@@ -167,13 +174,11 @@ public final class ServiceManager {
     }
 
     /**
-     * @param managerMode 
+     * @param managerMode
      */
     public void setManagerMode(boolean managerMode) {
         this.managerMode = managerMode;
         this.menuBar.updateNode();
     }
-    
-    
 
 }

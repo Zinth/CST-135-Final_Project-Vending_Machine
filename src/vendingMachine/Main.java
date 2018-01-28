@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 import vendingMachine.classes.ServiceManager;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomButtons;
+import vendingMachine.classes.gui.MachineComboBox;
 
 public class Main extends Application {
 
@@ -96,7 +97,7 @@ public class Main extends Application {
         managerScroll.setFitToWidth(true);
 
         //Create HBox to hold vending machine switching buttons
-        ComboBox switchMachines = machineComboBox(); // change the arguement to reflect number of machines
+        ComboBox switchMachines = new MachineComboBox(serviceManager); // change the arguement to reflect number of machines
 
         // --- Create Buttons ---
         CustomButtons resetButton = new CustomButtons(serviceManager, true, "res/images/refresh.png", "Reset Items");
@@ -254,31 +255,6 @@ public class Main extends Application {
 
         // Return customerHBox Node
         return customerVBox;
-    }
-
-    /**
-     * Create a number of buttons to the number of vending machines to be
-     * managed
-     *
-     * @param numOfMachines
-     */
-    public ComboBox machineComboBox() {
-        ComboBox vendingMachine = new ComboBox();
-        
-        //Loop through vendingMachines and add them to comboBox
-        for (String vendingMachineName : this.serviceManager.getVmManager().getVendingMachineNames()) {
-            vendingMachine.getItems().add(vendingMachineName); 
-        }
-        // Combobox on change change vending machines
-        vendingMachine.valueProperty().addListener(new ChangeListener<String>() {
-                @Override
-                public void changed(ObservableValue ov, String oldValue, String newValue) { 
-                    serviceManager.getVmManager().switchVendingMachines(newValue);
-                }   
-        });
-
-        return vendingMachine;
-
     }
 
 }

@@ -6,34 +6,31 @@
 package vendingMachine.classes.gui;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import vendingMachine.classes.ServiceManager;
 
 public class PurchaseOrder extends Application {
     
-    @Override
-    public void start(Stage primaryStage) {
-        
+    public void load(ServiceManager serviceManager) {
+        Stage poStage = new Stage();
+        ComboBox switchMachines = new MachineComboBox(serviceManager); // change the arguement to reflect number of machines
         StackPane root = new StackPane();
         root.getStyleClass().add("main");
 //        root.getChildren().add(btn);
         
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        poStage.setTitle("Hello World!");
+        poStage.setScene(scene);
+        poStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        
     }
-    
+
 }
