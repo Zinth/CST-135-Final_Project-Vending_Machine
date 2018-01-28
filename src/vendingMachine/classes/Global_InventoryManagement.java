@@ -11,15 +11,17 @@ import java.util.List;
 import vendingMachine.classes.CsvUtil;
 import vendingMachine.classes.products.Product;
 import com.opencsv.CSVReader;
+import vendingMachine.classes.products.Candy;
 
 
 public class Global_InventoryManagement extends Product {
 
     ArrayList<Product>allProducts = new ArrayList<Product>();
     ArrayList<Product> nameSearchResults = new ArrayList<Product>();
+    ServiceManager serviceManager;
 
-    Global_InventoryManagement(){
-
+    Global_InventoryManagement(ServiceManager serviceManager){
+        this.serviceManager = serviceManager;
     }
 
     /**
@@ -29,43 +31,46 @@ public class Global_InventoryManagement extends Product {
      * Imports inventory from CSV file.
      */
 
-    public void csvInventoryImport(Dispenser dispenser){
+    public void csvInventoryImport(String path){
 
         //Read from CSV file.
-//            CSVReader inventory = new CSVReader(new FileReader("inventoryCsvWithHeader.csv"));
-            CsvUtil inventory = new CsvUtil("inventoryCsvWithHeader.csv");
+            CsvUtil inventory = new CsvUtil(path);
 
             List<String[]> inventoryList = inventory.readCSV();
+            System.out.println(inventoryList);
 
+            
             for (int i = 0; i < inventoryList.size(); i++){
-                
-                switch (inventoryList.get(i)[0]){
+                String vendingMachineName = inventoryList.get(i)[0];
+                serviceManager.getVmManager().addVendingMachine(vendingMachineName);
+                switch (inventoryList.get(i)[1]){
                     case "Candy":
-                        addCandy(dispenser, inventoryList.get(i));
+                        Product candy = new Candy();
+                        serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(candy);
+                        addCandy(inventoryList.get(i));
                         break;
 
                     case "Chips":
-                        addChips(dispenser, inventoryList.get(i));
+                        addChips(inventoryList.get(i));
                         break;
 
                     case "Drink":
-                        addDrink(dispenser, inventoryList.get(i));
+                        addDrink(inventoryList.get(i));
                         break;
 
                     case "Gum":
-                        addGum(dispenser, inventoryList.get(i));
+                        addGum(inventoryList.get(i));
                         break;
                 }
-
             }
     }
-    private void addChips(Dispenser dispenser, String[] strings) {
+    private void addChips(String[] strings) {
     }
-    private void addCandy(Dispenser dispenser, String[] strings) {
+    private void addCandy(String[] strings) {
     }
-    private void addDrink(Dispenser dispenser, String[] strings) {
+    private void addDrink(String[] strings) {
     }
-    private void addGum(Dispenser dispenser, String[] strings) {
+    private void addGum(String[] strings) {
     }
 
     /**

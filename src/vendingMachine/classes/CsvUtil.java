@@ -34,12 +34,7 @@ public class CsvUtil {
      * @param path 
      */
     public CsvUtil(String path) {
-        try {
             file = new File(path);
-            fileWriter = new FileWriter(file);
-        } catch (IOException ex) {
-            Logger.getLogger(CsvUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -48,6 +43,7 @@ public class CsvUtil {
      */
     public void writeLine(List<String> values){
         try {
+            fileWriter = new FileWriter(file);
             StringBuilder sb = new StringBuilder();
             boolean first = true;
             for (String value : values) {

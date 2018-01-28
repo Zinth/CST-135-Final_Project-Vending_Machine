@@ -33,9 +33,13 @@ public class VendingMachineManager {
      * @param vendingMachineName
      * @param products 
      */
-    public void addVendingMachine(String vendingMachineName, ArrayList<Product> products){
-        vendingMachines.put(vendingMachineName, products);
+    public void addVendingMachine(String vendingMachineName){
+        if(!vendingMachines.containsKey(vendingMachineName)){
+            ArrayList<Product> products = new ArrayList<>();
+            vendingMachines.put(vendingMachineName, products);
+        }
     }
+
     /**
      * Get a specific Vending Machine
      * @param vendingMachineName

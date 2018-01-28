@@ -36,6 +36,7 @@ public final class ServiceManager {
     private final Restock restock;
     private final VendingMachineManager vmManager;
     private final AlertWindow ALERT = new AlertWindow();
+    private final Global_InventoryManagement gIManager;
     
     //Edit by Chris Hyde - moved managerMode boolean to service Manager
     private boolean managerMode = false; 
@@ -48,7 +49,9 @@ public final class ServiceManager {
         restock = new Restock(this);
         menuBar = new CustomMenuBar(this);
         vmManager = new VendingMachineManager(this);
-        vmManager.addVendingMachine("Vending Machine 1", iManager.getProducts());
+        gIManager = new Global_InventoryManagement(this);
+        gIManager.csvInventoryImport("inventoryCsvWithNoHeader.csv");
+        
         updatableGuiNodes.add(totalPrice);
         updatableGuiNodes.add(cartGrid);
         updatableGuiNodes.add(inventoryGrid);
