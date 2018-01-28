@@ -18,11 +18,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +29,10 @@ public class CsvUtil {
     private final static char QUOTES = '"';
     private final static char FIELD_SEPORATOR = ',';
 
+    /**
+     * Constructor
+     * @param path 
+     */
     public CsvUtil(String path) {
         try {
             file = new File(path);
@@ -41,6 +42,10 @@ public class CsvUtil {
         }
     }
 
+    /**
+     * Write multiple lines to a CSV file.
+     * @param values 
+     */
     public void writeLine(List<String> values){
         try {
             StringBuilder sb = new StringBuilder();
@@ -59,12 +64,19 @@ public class CsvUtil {
             Logger.getLogger(CsvUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /**
+     * Write a single line to a CSV file.
+     * @param lines 
+     */
     public void writeLines(List<List<String>> lines){
         for(List<String> line : lines){
             writeLine(line);
         }
     }
     
+    /**
+     * Finish writing to the file to close it.
+     */
     public void finalizeWrite(){
         try {
             fileWriter.close();
@@ -88,20 +100,17 @@ public class CsvUtil {
      *   } 
      * @return 
      */
-    public HashMap<Integer, String[]> readCSV(){
+    public List<String[]> readCSV(){
         BufferedReader br = null;
         String line;
-        HashMap<Integer, String[]> linesAndValues = new HashMap<>();
+        List<String[]> values = new ArrayList<>();
 
         try {
 
             br = new BufferedReader(new FileReader(file));
-            int lineNumber = 1;
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                
-                linesAndValues.put(lineNumber, line.split(","));
-                lineNumber++;
+                values.add(line.split(","));
             }
 
         } catch (FileNotFoundException e) {
@@ -117,6 +126,6 @@ public class CsvUtil {
                 }
             }
         }
-        return linesAndValues;
+        return values;
     }
 }

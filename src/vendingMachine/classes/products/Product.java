@@ -13,7 +13,6 @@ package vendingMachine.classes.products;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-import vendingMachine.classes.ServiceManager;
 
 abstract public class Product {
 

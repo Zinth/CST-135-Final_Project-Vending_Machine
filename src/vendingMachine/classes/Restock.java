@@ -12,9 +12,6 @@
 package vendingMachine.classes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import vendingMachine.classes.products.Product;
 
@@ -25,15 +22,16 @@ public class Restock {
         add("Machine");
         add("Type");
         add("Name");
-        add("Price");
+//        add("Price");
         add("Quantity");
-        add("imageName");
-        add("Option 1");
-        add("Option 2");
-        add("Option 3");
-        add("Option 4");
-        add("Option 5");
-        add("Option 6");
+        add("Total Cost");
+//        add("imageName");
+//        add("Option 1");
+//        add("Option 2");
+//        add("Option 3");
+//        add("Option 4");
+//        add("Option 5");
+//        add("Option 6");
     }};
 
     public Restock(ServiceManager serviceManager) {
@@ -56,9 +54,9 @@ public class Restock {
 
     public void createAllPOs(){
         Set<String> vendingMachinesNames = this.serviceManager.getVmManager().getVendingMachineNames();
-        for(String vendingMachineName : vendingMachinesNames){
+        vendingMachinesNames.stream().forEach((vendingMachineName) -> {
             createPO(vendingMachineName);
-        }
+        });
     }
 
     /**
@@ -70,7 +68,17 @@ public class Restock {
         CsvUtil csvUtil = new CsvUtil(vendingMachineName+"_purchaseOrder.csv");
         csvUtil.writeLine(PO_HEADER);
         lowInventoryProducts.stream().forEach((product) -> {
-            csvUtil.writeLine(product.toArrayList());
+            ArrayList<String> poProductInfo = new ArrayList<>();
+            poProductInfo.add(vendingMachineName);
+            poProductInfo.add(product.getClass().getSimpleName());
+            poProductInfo.add(product.getProductName());
+            int orderQuantity = serviceManager.getIManager().defaultQuantity - product.getQuantity();
+            poProductInfo.add(String.valueOf(orderQuantity));
+            double totalPrice = product.getPrice() * orderQuantity;
+            poProductInfo.add(serviceManager.formatPrice(totalPrice));
+            
+            csvUtil.writeLine(poProductInfo);
+//            csvUtil.writeLine(product.toArrayList());
         });
         csvUtil.finalizeWrite();
     }

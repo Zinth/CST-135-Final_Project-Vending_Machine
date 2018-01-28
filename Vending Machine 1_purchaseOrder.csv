@@ -1,1 +1,3 @@
-"Machine","Type","Name","Price","Quantity","imageName","Option 1","Option 2","Option 3","Option 4","Option 5","Option 6"
+"Machine","Type","Name","Quantity","Total Cost"
+"Vending Machine 1","Chips","Lays","7","$6.93"
+"Vending Machine 1","Chips","Dorito","8","$7.92"

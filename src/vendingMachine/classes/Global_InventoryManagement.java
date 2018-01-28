@@ -29,14 +29,13 @@ public class Global_InventoryManagement extends Product {
      * Imports inventory from CSV file.
      */
 
-    public void csvInventoryImport(Dispenser dispenser) throws IOException{
+    public void csvInventoryImport(Dispenser dispenser){
 
         //Read from CSV file.
-        try{
+//            CSVReader inventory = new CSVReader(new FileReader("inventoryCsvWithHeader.csv"));
+            CsvUtil inventory = new CsvUtil("inventoryCsvWithHeader.csv");
 
-            CSVReader inventory = new CSVReader(new FileReader("inventoryCsvWithHeader.csv"));
-
-            List<String[]> inventoryList = inventory.readAll();
+            List<String[]> inventoryList = inventory.readCSV();
 
             for (int i = 0; i < inventoryList.size(); i++){
                 
@@ -59,11 +58,6 @@ public class Global_InventoryManagement extends Product {
                 }
 
             }
-
-
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
     }
     private void addChips(Dispenser dispenser, String[] strings) {
     }

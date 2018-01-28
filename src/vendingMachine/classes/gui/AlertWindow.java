@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 
 public class AlertWindow extends Application {
     private Text txtError = new Text();
-    private Stage alertStage = new Stage();
 
     /**
      * Cunstroctor for alert messages
@@ -44,6 +43,7 @@ public class AlertWindow extends Application {
      * @param errorMsg
      */
     public void showAlert(String errorMsg, int txtSize, Color color){
+        Stage alertStage = new Stage();
          VBox pane = new VBox(); // Create HBox to hold things
         pane.setAlignment(Pos.CENTER); // Center components in the pane
         pane.setStyle("-fx-background-color: #7D869C;"
