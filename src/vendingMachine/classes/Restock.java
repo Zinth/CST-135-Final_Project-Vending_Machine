@@ -60,6 +60,7 @@ public class Restock {
     public void createPO(String vendingMachineName){
         ArrayList<Product> lowInventoryProducts = findLowInventory(vendingMachineName);
         CsvUtil csvUtil = new CsvUtil(vendingMachineName+"_purchaseOrder.csv");
+        csvUtil.startWrite();
         csvUtil.writeLine(PO_HEADER);
         lowInventoryProducts.stream().forEach((product) -> {
             ArrayList<String> poProductInfo = new ArrayList<>();
