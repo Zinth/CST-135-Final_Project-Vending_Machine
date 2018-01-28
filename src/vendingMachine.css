@@ -55,6 +55,13 @@
     -fx-font-size: 14;
 }
 
+.labelBlack{
+    -fx-text-fill: black;
+    -fx-label-padding: 3;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 14;
+}
+
 .textwhite{
     -fx-text-fill: white;
     -fx-label-padding: 1;

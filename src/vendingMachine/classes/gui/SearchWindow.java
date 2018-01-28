@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,16 +24,17 @@ public class SearchWindow extends Application {
 
     private TextField searchField;
     private Label productInfo;
-    private Stage search;
+    private Stage search = new Stage();
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Pane root = new Pane();
+    public void start(Stage search){
+        VBox root = new VBox();
+        root.getStyleClass().add("main");
         
         //box for holding the search nodes
         VBox searchBox = new VBox();
         searchBox.setAlignment(Pos.CENTER);
-        searchBox.getStyleClass().add("inventoryPane");
+        searchBox.getStyleClass().add("inventoryVBox");
         
         //box for holding the result nodes
         VBox resultBox = new VBox();
@@ -40,10 +42,13 @@ public class SearchWindow extends Application {
 
         //Lable for instructing user.
         Label resultLabel = new Label("Result:");
+        resultLabel.getStyleClass().add("labelBlack");
         //Label to hold product info
-        productInfo = new Label();
+        productInfo = new Label("Your product will apear here.");
+        productInfo.getStyleClass().add("labelBlack");
         //Lable for instructing user.
         Label searchLabel = new Label("Please enter a product name to search for and press Search:");
+        searchLabel.getStyleClass().add("labelBlack");
         //TextField for getting user input
         searchField = new TextField();
 
@@ -64,15 +69,17 @@ public class SearchWindow extends Application {
         //Scene and Stage setup
         Scene scene = new Scene(root);
         scene.getStylesheets().add("vendingMachine.css");
-        search = new Stage();
         search.setScene(scene);
         search.initModality(Modality.APPLICATION_MODAL); // make sure you can only click this window. 
         search.setScene(scene);
         search.setAlwaysOnTop(true); // Keeps alert window on top
+        search.showAndWait();
+        
     }
     
     public void showWinow(){
-        search.show();
+        start(search);
+       
     }
  
 
