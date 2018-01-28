@@ -43,7 +43,7 @@ public class CsvUtil {
      */
     public void writeLine(List<String> values){
         try {
-            fileWriter = new FileWriter(file);
+            fileWriter = new FileWriter(System.getProperty("user.dir")+"/src/res/output/"+file);
             StringBuilder sb = new StringBuilder();
             boolean first = true;
             for (String value : values) {
@@ -103,7 +103,7 @@ public class CsvUtil {
 
         try {
 
-            br = new BufferedReader(new FileReader(file));
+            br = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/src/res/input/"+file));
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 values.add(line.split(","));

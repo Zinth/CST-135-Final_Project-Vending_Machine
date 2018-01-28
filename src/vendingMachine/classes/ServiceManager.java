@@ -49,6 +49,8 @@ public final class ServiceManager {
         restock = new Restock(this);
         menuBar = new CustomMenuBar(this);
         vmManager = new VendingMachineManager(this);
+        vmManager.addVendingMachine("Default");
+        vmManager.getVendingMachine("Default").addAll(iManager.getProducts());
         gIManager = new Global_InventoryManagement(this);
         gIManager.csvInventoryImport("inventoryCsvWithNoHeader.csv");
         

@@ -14,6 +14,20 @@ public class Global_InventoryManagement extends Product {
     ArrayList<Product>allProducts = new ArrayList<Product>();
     ArrayList<Product> nameSearchResults = new ArrayList<Product>();
     ServiceManager serviceManager;
+    private final static ArrayList<String> EXPORT_HEADER = new ArrayList<String>() {{
+        add("Machine");
+        add("Type");
+        add("Name");
+        add("Price");
+        add("Quantity");
+        add("imageName");
+        add("Option 1");
+        add("Option 2");
+        add("Option 3");
+        add("Option 4");
+        add("Option 5");
+        add("Option 6");
+    }};
 
     Global_InventoryManagement(ServiceManager serviceManager){
         this.serviceManager = serviceManager;
@@ -32,7 +46,6 @@ public class Global_InventoryManagement extends Product {
             CsvUtil inventory = new CsvUtil(path);
 
             List<String[]> inventoryList = inventory.readCSV();
-            System.out.println(inventoryList);
 
             
             for (int i = 0; i < inventoryList.size(); i++){
@@ -186,14 +199,17 @@ public class Global_InventoryManagement extends Product {
         writer.close();
     }
     
-//    public void exportToCsv(String vendingMachineName){
-//        ArrayList<Product> allProducts = findLowInventory(vendingMachineName);
-//        CsvUtil csvUtil = new CsvUtil(vendingMachineName+"_purchaseOrder.csv");
-//        csvUtil.writeLine(PO_HEADER);
-//        lowInventoryProducts.stream().forEach((product) -> {
-//            csvUtil.writeLine(product.toArrayList());
-//        });
-//        csvUtil.finalizeWrite();
-//    }
+    public void exportToCsv(String vendingMachineName){
+        ArrayList<Product> allProducts = serviceManager.getVmManager().getVendingMachine(vendingMachineName);
+        CsvUtil csvUtil = new CsvUtil(vendingMachineName+"_inventory.csv");
+        csvUtil.writeLine(EXPORT_HEADER);
+        allProducts.stream().forEach((product) -> {
+            ArrayList<String> productInfo = new ArrayList<>();
+            productInfo.add(0, vendingMachineName);
+            productInfo.addAll(product.toArrayList());
+            csvUtil.writeLine(productInfo);
+        });
+        csvUtil.finalizeWrite();
+    }
 
 }
