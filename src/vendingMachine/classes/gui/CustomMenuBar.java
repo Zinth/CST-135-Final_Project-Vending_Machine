@@ -23,6 +23,8 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
     private ServiceManager serviceManager;
     private MenuItem purchaseOrder;
     private MenuItem export;
+    private MenuItem productSearch;
+    private SearchWindow search = new SearchWindow();
     
     
     public CustomMenuBar(ServiceManager serviceManager) {
@@ -34,6 +36,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         //Creat fileMenu Items
         purchaseOrder = new MenuItem("_Purchase Order...");
         export = new MenuItem("_Export Invenotry...");
+        productSearch = new MenuItem("Product _Search");
         MenuItem exit = new MenuItem("E_xit");
 
         //Set action Events to fileMenu items.
@@ -43,6 +46,11 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
 
         export.setOnAction(e -> {
             //TODO: add creating of export CSV
+        });
+        
+        productSearch.setOnAction((event) -> {
+            //Launch Search Window
+            search.showWinow();;
         });
 
         exit.setOnAction(e -> {

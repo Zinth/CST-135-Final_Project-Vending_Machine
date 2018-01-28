@@ -17,9 +17,7 @@
     -fx-border-color: #54428E;
     -fx-vgap: 5px;
 }
-.normal-text-field{
-    -fx-text-fill: white;
-}
+
 
 .grid{
     -fx-alignment: CENTER;

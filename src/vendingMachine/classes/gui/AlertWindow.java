@@ -46,10 +46,8 @@ public class AlertWindow extends Application {
         Stage alertStage = new Stage();
          VBox pane = new VBox(); // Create HBox to hold things
         pane.setAlignment(Pos.CENTER); // Center components in the pane
-        pane.setStyle("-fx-background-color: #7D869C;"
-                + "-fx-border-width: 5px;"
-                + "-fx-border-color: #54428E");
-
+        pane.getStyleClass().add("main");
+        
         //Create and format text for displaying error message
         txtError = new Text("Error 000: No error message defined!");
         txtError.setFill(color);
