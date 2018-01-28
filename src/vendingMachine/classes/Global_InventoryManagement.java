@@ -55,10 +55,8 @@ public class Global_InventoryManagement extends Product {
                 serviceManager.getVmManager().addVendingMachine(vendingMachineName);
                 switch (inventoryList.get(i)[1]){
                     case "Candy":
-                        Product candy = new Candy();
+                        Product candy = addCandy(inventoryList.get(i));
                         serviceManager.getVmManager().getVendingMachine(vendingMachineName).add(candy);
-                        addCandy(inventoryList.get(i));
-                        allProducts.add(candy);
                         break;
 
                     case "Chips":
@@ -112,7 +110,20 @@ public class Global_InventoryManagement extends Product {
     }
     private void addChips(String[] strings) {
     }
-    private void addCandy(String[] strings) {
+    private Product addCandy(String[] strings) {
+        double servingSize = Double.valueOf(strings[6]);
+        String flavor = strings[7];
+        boolean sugarFree = Boolean.valueOf(strings[8]);
+        boolean glutenFree = Boolean.valueOf(strings[9]);
+        double weight = Double.valueOf(strings[10]);
+        int calories = Integer.valueOf(strings[11]);
+        String productName = strings[2];
+        double price = Double.valueOf(strings[3]);
+        int quantity = Integer.valueOf(strings[4]);
+        String imageName = strings[5];
+        Product candy = new Candy(servingSize, flavor, sugarFree, glutenFree, weight, calories, productName, price, quantity, imageName);   
+        allProducts.add(candy);
+        return candy;
     }
     private void addDrink(String[] strings) {
     }

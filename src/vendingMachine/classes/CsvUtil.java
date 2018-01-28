@@ -37,13 +37,19 @@ public class CsvUtil {
             file = new File(path);
     }
 
+    public void startWrite(){
+        try {
+            fileWriter = new FileWriter(System.getProperty("user.dir")+"/src/res/output/"+file);
+        } catch (IOException ex) {
+            Logger.getLogger(CsvUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * Write multiple lines to a CSV file.
      * @param values 
      */
     public void writeLine(List<String> values){
         try {
-            fileWriter = new FileWriter(System.getProperty("user.dir")+"/src/res/output/"+file);
             StringBuilder sb = new StringBuilder();
             boolean first = true;
             for (String value : values) {
