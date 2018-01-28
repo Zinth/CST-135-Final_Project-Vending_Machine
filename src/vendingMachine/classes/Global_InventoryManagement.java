@@ -39,6 +39,24 @@ public class Global_InventoryManagement extends Product {
             List<String[]> inventoryList = inventory.readAll();
 
             for (int i = 0; i < inventoryList.size(); i++){
+                
+                switch (inventoryList.get(i)[0]){
+                    case "Candy":
+                        addCandy(dispenser, inventoryList.get(i));
+                        break;
+
+                    case "Chips":
+                        addChips(dispenser, inventoryList.get(i));
+                        break;
+
+                    case "Drink":
+                        addDrink(dispenser, inventoryList.get(i));
+                        break;
+
+                    case "Gum":
+                        addGum(dispenser, inventoryList.get(i));
+                        break;
+                }
 
             }
 
@@ -46,6 +64,14 @@ public class Global_InventoryManagement extends Product {
         }catch (FileNotFoundException e){
             e.printStackTrace();
         }
+    }
+    private void addChips(Dispenser dispenser, String[] strings) {
+    }
+    private void addCandy(Dispenser dispenser, String[] strings) {
+    }
+    private void addDrink(Dispenser dispenser, String[] strings) {
+    }
+    private void addGum(Dispenser dispenser, String[] strings) {
     }
 
     /**
