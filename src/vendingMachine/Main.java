@@ -13,8 +13,6 @@
 package vendingMachine;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -22,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -90,6 +89,11 @@ public class Main extends Application {
 
         //Create the Customer VBox
         VBox customerVBox = createCustomerUI();
+        
+        //Create Manager Screen Label
+        Label managerLabel = new Label("Manager Mode");
+        managerLabel.getStyleClass().add("labelHeader");
+        
 
         //Create manager ScrollPane
         ScrollPane managerScroll = new ScrollPane();
@@ -134,7 +138,7 @@ public class Main extends Application {
         // --- Add Nodes to Panes ---
         //Add managerGrid to managerVBox
         managerScroll.setContent(serviceManager.getManagerGrid());
-        managerVBox.getChildren().addAll(switchMachines, managerScroll);
+        managerVBox.getChildren().addAll(managerLabel,switchMachines, managerScroll);
 
         //Add btnManager to bottomHBox
         rightVBox.getChildren().addAll(btnManager, resetButton);

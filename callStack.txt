@@ -48,7 +48,7 @@ vendingMachine.classes.Global_InventoryManagement.recursiveSearchByName(Global_I
 vendingMachine.classes.Global_InventoryManagement.recursiveSearchByName(Global_InventoryManagement.java:262)
 vendingMachine.classes.Global_InventoryManagement.csvInventoryImport(Global_InventoryManagement.java:89)
 vendingMachine.classes.ServiceManager.<init>(ServiceManager.java:61)
-vendingMachine.Main.start(Main.java:71)
+vendingMachine.Main.start(Main.java:70)
 com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863)
 com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326)
 com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295)
