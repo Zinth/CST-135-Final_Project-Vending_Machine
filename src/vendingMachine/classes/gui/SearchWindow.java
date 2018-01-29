@@ -5,16 +5,21 @@
  */
 package vendingMachine.classes.gui;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import vendingMachine.classes.ServiceManager;
+import vendingMachine.classes.products.Product;
 
 /**
  *
@@ -25,17 +30,18 @@ public class SearchWindow extends Application {
     private TextField searchField;
     private Label productInfo;
     private Stage search = new Stage();
+    private ServiceManager serviceManager;
 
     @Override
-    public void start(Stage search){
+    public void start(Stage search) {
         VBox root = new VBox();
         root.getStyleClass().add("main");
-        
+
         //box for holding the search nodes
         VBox searchBox = new VBox();
         searchBox.setAlignment(Pos.CENTER);
         searchBox.getStyleClass().add("inventoryVBox");
-        
+
         //box for holding the result nodes
         VBox resultBox = new VBox();
         resultBox.setAlignment(Pos.CENTER);
@@ -56,11 +62,27 @@ public class SearchWindow extends Application {
         CustomButtons searchButton = new CustomButtons("Search", e -> {
             //Get the Input from user 
             String input = searchField.getText().toLowerCase();
-            
-            //TODO search(input)
 
+            //TODO search(input)
+            HashMap<String, ArrayList<Product>> searchResults = serviceManager.getgIManager().recursiveSearchByName(input);
+            if (!searchResults.isEmpty()) {
+                productInfo.setText("Search Results for "+input);
+                Iterator it = searchResults.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                    String vendingMachineName = (String) pair.getKey();
+                    ArrayList<Product> products = (ArrayList<Product>) pair.getValue();
+                    for (Product product : products) {
+                        productInfo.setText(productInfo.getText()+ "\n Found in "+vendingMachineName+ " with a stock of "+product.getQuantity());
+                    }
+                    it.remove(); // avoids a ConcurrentModificationException
+                }
+                search.sizeToScene();
+            } else {
+                serviceManager.getALERT().showAlert("Product name " + input + " was not found", 18, Color.RED);
+            }
         });
-        
+
         //Add nodes to panes
         searchBox.getChildren().addAll(searchLabel, searchField, searchButton);
         resultBox.getChildren().addAll(resultLabel, productInfo);
@@ -72,15 +94,14 @@ public class SearchWindow extends Application {
         search.setScene(scene);
         search.initModality(Modality.APPLICATION_MODAL); // make sure you can only click this window. 
         search.setScene(scene);
-        search.setAlwaysOnTop(true); // Keeps alert window on top
         search.showAndWait();
-        
+
     }
-    
-    public void showWinow(){
+
+    public void showWinow(ServiceManager serviceManager) {
+        this.serviceManager = serviceManager;
         start(search);
-       
+
     }
- 
 
 }

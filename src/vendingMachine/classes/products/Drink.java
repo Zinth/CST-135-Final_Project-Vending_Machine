@@ -11,6 +11,7 @@
 package vendingMachine.classes.products;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Drink extends Product implements Comparable<Drink> {
@@ -92,6 +93,21 @@ public class Drink extends Product implements Comparable<Drink> {
     @Override
     public String toString() {
         return super.toString() + "\nInfo" + "\nOunces: " + ounces + "\nType: " + type + "\nCalories: " + calories  + "\nSugar Free: " + sugarFree;
+    }
+    
+    @Override
+    public ArrayList<String> toArrayList() {
+        ArrayList<String> parentProperties = super.toArrayList();
+        ArrayList<String> properties = new ArrayList<>();
+        parentProperties.add(0, getClass().getSimpleName());
+        properties.add(String.valueOf(ounces));
+        properties.add(type);
+        properties.add(String.valueOf(calories));
+        properties.add(String.valueOf(sugarFree));
+        properties.add(String.valueOf(caffeine));
+        properties.add(String.valueOf(getCalories()));
+        parentProperties.addAll(properties);
+        return parentProperties;
     }
 
     /**

@@ -52,7 +52,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         productSearch.setOnAction((event) -> {
             //Launch Search Window
             SearchWindow search = new SearchWindow();
-            search.showWinow();
+            search.showWinow(serviceManager);
         });
 
         exit.setOnAction(e -> {

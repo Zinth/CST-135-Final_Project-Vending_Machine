@@ -10,6 +10,7 @@
  */
 package vendingMachine.classes.products;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -88,6 +89,21 @@ public class Chips extends Snack {
     @Override
     public String toString() {
         return super.toString() + "\nFlavor: " + flavor + "\nServing Size: " + servingSize + "\nBaked: " + baked + "\nGluten Free: " + glutenFree;
+    }
+
+    @Override
+    public ArrayList<String> toArrayList() {
+        ArrayList<String> parentProperties = super.toArrayList();
+        ArrayList<String> properties = new ArrayList<>();
+        parentProperties.add(0, getClass().getSimpleName());
+        properties.add(flavor);
+        properties.add(String.valueOf(servingSize));
+        properties.add(String.valueOf(baked));
+        properties.add(String.valueOf(glutenFree));
+        properties.add(String.valueOf(getWeight()));
+        properties.add(String.valueOf(getCalories()));
+        parentProperties.addAll(properties);
+        return parentProperties;
     }
 
     /**

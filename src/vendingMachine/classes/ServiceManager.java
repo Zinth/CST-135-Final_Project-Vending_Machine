@@ -53,7 +53,7 @@ public final class ServiceManager {
         vmManager = new VendingMachineManager(this);
         vmManager.addVendingMachine("Default");
         vmManager.getVendingMachine("Default").addAll(iManager.getProducts());
-        gIManager = new Global_InventoryManagement(this);
+        gIManager = new Global_InventoryManagement(this, iManager.getProducts());
         File folder = new File("src/res/input");
         File[] listOfFiles = folder.listFiles();
         for (int i = 0; i < listOfFiles.length; i++) {
@@ -62,7 +62,7 @@ public final class ServiceManager {
             }
 
         }
-
+        vmManager.switchVendingMachines("Purple Group");
         updatableGuiNodes.add(totalPrice);
         updatableGuiNodes.add(cartGrid);
         updatableGuiNodes.add(inventoryGrid);
