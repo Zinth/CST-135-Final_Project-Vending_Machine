@@ -37,6 +37,7 @@ import vendingMachine.classes.ServiceManager;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomButtons;
 import vendingMachine.classes.gui.MachineComboBox;
+import vendingMachine.classes.gui.panes.CustomerPane;
 
 public class Main extends Application {
 
@@ -150,6 +151,10 @@ public class Main extends Application {
 
         //Add Menu bar to root top
         root.setTop(menu);
+        
+        //ANIMATION TEST
+       
+        root.setLeft(new CustomerPane(serviceManager, 5));
 
         // --- Standard JavaFX ---
         //Set up default Scene
