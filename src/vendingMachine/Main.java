@@ -37,7 +37,7 @@ import vendingMachine.classes.ServiceManager;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomButtons;
 import vendingMachine.classes.gui.MachineComboBox;
-import vendingMachine.classes.gui.panes.CustomerPane;
+import vendingMachine.classes.gui.panes.CustomerLinePane;
 
 public class Main extends Application {
 
@@ -78,6 +78,8 @@ public class Main extends Application {
 
         //Create MenuBar;
         MenuBar menu = serviceManager.getMenuBar();
+        
+        
 
         //Create the Manager VBox to hold the managerGrid
         VBox managerVBox = new VBox();
@@ -152,10 +154,9 @@ public class Main extends Application {
         //Add Menu bar to root top
         root.setTop(menu);
         
-        //ANIMATION TEST
-       
-        root.setLeft(new CustomerPane(serviceManager, 5));
-
+        //Add Customer Animation Que Line to root
+        root.setLeft(serviceManager.getCustomerLine());
+        
         // --- Standard JavaFX ---
         //Set up default Scene
         Scene scene = new Scene(root, 1020, 800);

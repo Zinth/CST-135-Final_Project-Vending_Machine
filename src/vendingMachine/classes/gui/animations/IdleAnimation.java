@@ -58,13 +58,8 @@ public IdleAnimation(){
     );
     animation.play();
 
-    
-    
     //Add the animation to this pane
     this.getChildren().add(idleAnimation);
-    
-    System.out.print(animation.getStatus());
-    
 }
 
 }

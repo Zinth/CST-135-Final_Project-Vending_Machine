@@ -17,11 +17,11 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomMenuBar;
-import vendingMachine.classes.gui.PurchaseOrder;
 import vendingMachine.classes.gui.TotalPrice;
 import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.gui.grids.InventoryGrid;
 import vendingMachine.classes.gui.grids.ManagerGrid;
+import vendingMachine.classes.gui.panes.CustomerLinePane;
 import vendingMachine.interfaces.UpdatableGUINode;
 
 public final class ServiceManager {
@@ -32,6 +32,7 @@ public final class ServiceManager {
     private final InventoryGrid inventoryGrid;
     private final ManagerGrid managerGrid;
     private final CustomMenuBar menuBar;
+    private final CustomerLinePane customerLine;
     private final ArrayList<UpdatableGUINode> updatableGuiNodes = new ArrayList<>();
     private final static NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
     private final TotalPrice totalPrice;
@@ -42,6 +43,7 @@ public final class ServiceManager {
 
     //Edit by Chris Hyde - moved managerMode boolean to service Manager
     private boolean managerMode = false;
+    private boolean customerQue = false;
 
     public ServiceManager() {
         totalPrice = new TotalPrice(this);
@@ -50,6 +52,7 @@ public final class ServiceManager {
         managerGrid = new ManagerGrid(this, 6);
         restock = new Restock(this);
         menuBar = new CustomMenuBar(this);
+        customerLine = new CustomerLinePane(this);
         vmManager = new VendingMachineManager(this);
         vmManager.addVendingMachine("Default");
         vmManager.getVendingMachine("Default").addAll(iManager.getProducts());
@@ -182,12 +185,40 @@ public final class ServiceManager {
         this.menuBar.updateNode();
     }
 
+    /**
+     * @return  restock
+     */
     public Restock getRestock() {
         return restock;
     }
 
+    /**
+     * @return gIManager
+     */
+    
     public Global_InventoryManagement getgIManager() {
         return gIManager;
     }
+
+    public CustomerLinePane getCustomerLine() {
+        return customerLine;
+    }
+    
+    /**
+     * @return 
+     */
+    public boolean isCustomerQue() {
+        return customerQue;
+    }
+    
+    /**
+     * @param customerQue 
+     */
+    public void setCustomerQue(boolean customerQue) {
+        this.customerQue = customerQue;
+        this.customerLine.updateVisible();
+    }
+    
+    
     
 }
