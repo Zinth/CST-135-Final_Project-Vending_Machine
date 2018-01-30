@@ -157,6 +157,8 @@ public class Main extends Application {
         //Add Customer Animation Que Line to root
         root.setLeft(serviceManager.getCustomerLine());
         
+        serviceManager.setCustomerQue(true);
+        
         // --- Standard JavaFX ---
         //Set up default Scene
         Scene scene = new Scene(root, 1020, 800);

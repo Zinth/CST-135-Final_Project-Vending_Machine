@@ -9,6 +9,7 @@
  */
 package vendingMachine.classes.gui.animations;
 
+import java.util.Random;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -28,8 +29,10 @@ private final ImageView idleTwo = new ImageView(new Image("res/animations/idleTw
 private final ImageView idleThree = new ImageView(new Image("res/animations/idleThree.png"));
 private final ImageView idleFour = new ImageView(new Image("res/animations/idleFour.png"));
 
+
 //Group to hold image view
 private Group idleAnimation;
+private Random rand = new Random();
 
 public IdleAnimation(){
     //Create and set first image in the group idleAnimation
@@ -39,21 +42,27 @@ public IdleAnimation(){
     Timeline animation = new Timeline();
     animation.setCycleCount(Animation.INDEFINITE);
     
+    //Get Random start animation start Time.
+    int start = rand.nextInt(750) + 250; 
+    
     //Set key frames so that a blink happens every 20 seconds
-    animation.getKeyFrames().addAll(new KeyFrame(Duration.millis(2000), e -> {
-            idleAnimation.getChildren().setAll(idleOne);
-        }), new KeyFrame(Duration.millis(2100), e -> {
+    animation.getKeyFrames().addAll(
+            new KeyFrame(Duration.millis(start), e -> {
+                    idleAnimation.getChildren().setAll(idleOne);
+        }), new KeyFrame(Duration.millis(start + 1000), e -> {
                     idleAnimation.getChildren().setAll(idleTwo);
-        }), new KeyFrame(Duration.millis(2400), e -> {
-                    idleAnimation.getChildren().setAll(idleOne);
-        }), new KeyFrame(Duration.millis(4000), e -> {
+        }), new KeyFrame(Duration.millis(start + 1050), e -> {
                     idleAnimation.getChildren().setAll(idleThree);
-        }), new KeyFrame(Duration.millis(4100), e -> {
+        }), new KeyFrame(Duration.millis(start + 1100), e -> {
                     idleAnimation.getChildren().setAll(idleFour);
-        }), new KeyFrame(Duration.millis(4200), e -> {
-                    idleAnimation.getChildren().setAll(idleThree);
-        }), new KeyFrame(Duration.millis(4300), e -> {
+        }), new KeyFrame(Duration.millis(start + 1600), e -> {
                     idleAnimation.getChildren().setAll(idleOne);
+        }), new KeyFrame(Duration.millis(start + 2100), e -> {
+                    idleAnimation.getChildren().setAll(idleTwo);
+        }), new KeyFrame(Duration.millis(start + 2600), e -> {
+                    idleAnimation.getChildren().setAll(idleOne);
+        }), new KeyFrame(Duration.millis(start + 3100), e -> {
+                    idleAnimation.getChildren().setAll(idleTwo);
         })
     );
     animation.play();
