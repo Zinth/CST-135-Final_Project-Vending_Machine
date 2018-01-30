@@ -11,6 +11,7 @@ public class Customers {
     
     private String name; 
     private String wantedItem;
+    private String category;
     
     /**
      * Constructor for Customers
@@ -55,6 +56,21 @@ public class Customers {
      */
     public void setWantedItems(String wantedItem) {
         this.wantedItem = wantedItem;
+    }
+
+    /**
+     * @return category
+     */
+    public String getCatagory() {
+        return category;
+    }
+
+    /**
+     * set category
+     * @param catagory 
+     */
+    public void setCatagory(String catagory) {
+        this.category = catagory;
     }
     
     

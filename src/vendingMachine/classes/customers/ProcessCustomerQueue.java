@@ -23,18 +23,24 @@ public class ProcessCustomerQueue{
     public ProcessCustomerQueue(ServiceManager serviceManager){
         this.serviceManager = serviceManager;
         
-        
+        //TODO: ONCE CSV IS CREATED REPLACE PATH STRING AND UN_COMMENT BELOW
+        //populateCustomerQue("res/input/customerList.csv");
     }
     
+    /**
+     * Reads from a CSV file and add customers from the List of String arrays generated.
+     * @param path to .CSV File
+     */
     public void populateCustomerQue(String path){
          //get a new CSVUtil
         CsvUtil customer = new CsvUtil(path);
         
-        //Read from CSV file.
+        //Read from CSV file. (This acts like a 2D Array)
         List<String[]> customerList = customer.readCSV();
 
         //Interate through the list of String[]
         for (int i = 0; i < customerList.size(); i++) {
+            //Interate through the String[] at customerList index (i). 
             for (int j =0; j < customerList.get(i).length; j++)
                 //Add new customers to the customerQue
                addCustomer(new Customers(customerList.get(j)[i], customerList.get(j)[i]));
@@ -88,7 +94,7 @@ public class ProcessCustomerQueue{
         if (customerQue.isEmpty()){
             return true;
         }else{
-            return false;
+            return false; // TODO: Throw Alert Message here
         }
     }
     
