@@ -14,10 +14,13 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
+import vendingMachine.classes.ServiceManager;
 /**
  *
  * @author Chris
@@ -33,14 +36,21 @@ private final ImageView idleFour = new ImageView(new Image("res/animations/idleF
 //Group to hold image view
 private Group idleAnimation;
 private Random rand = new Random();
+private Tooltip toolTip;
 
-public IdleAnimation(){
+public IdleAnimation(String customerName){
+    
     //Create and set first image in the group idleAnimation
     idleAnimation = new Group(idleOne);
     
     //Create the Timeline that will switch images at keyframe intervals
     Timeline animation = new Timeline();
     animation.setCycleCount(Animation.INDEFINITE);
+    
+    //Set up tootip
+    toolTip = new Tooltip("Customer:\n" + customerName);
+    toolTip.setFont(Font.font("Arial", 16));
+    Tooltip.install(this, toolTip);
     
     //Get Random start animation start Time.
     int start = rand.nextInt(750) + 250; 
@@ -71,4 +81,8 @@ public IdleAnimation(){
     this.getChildren().add(idleAnimation);
 }
 
+    public Tooltip getToolTip() {
+        return toolTip;
+    }
+    
 }

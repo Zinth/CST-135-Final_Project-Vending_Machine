@@ -24,6 +24,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
     private MenuItem purchaseOrder;
     private MenuItem export;
     private MenuItem productSearch;
+    private MenuItem simulateCustomers;
     
     
     public CustomMenuBar(ServiceManager serviceManager) {
@@ -36,6 +37,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         purchaseOrder = new MenuItem("_Purchase Order...");
         export = new MenuItem("_Export Invenotry...");
         productSearch = new MenuItem("Product _Search");
+        simulateCustomers= new MenuItem("_Simulate Customers");
         MenuItem exit = new MenuItem("E_xit");
 
         //Set action Events to fileMenu items.
@@ -54,6 +56,14 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
             SearchWindow search = new SearchWindow();
             search.showWinow(serviceManager);
         });
+        
+        simulateCustomers.setOnAction((event) -> {
+            //Turn customer simulation on and off
+            if(!serviceManager.isCustomerQueMode())
+                serviceManager.setCustomerQueMode(true);
+            else
+                serviceManager.setCustomerQueMode(false);
+        });
 
         exit.setOnAction(e -> {
             //Exit the Program. 
@@ -61,7 +71,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         });
 
         //Add File Menu items to fileMenu
-        fileMenu.getItems().addAll(productSearch, new SeparatorMenuItem(), purchaseOrder, export, new SeparatorMenuItem(), exit);
+        fileMenu.getItems().addAll(productSearch, new SeparatorMenuItem(), purchaseOrder, export, new SeparatorMenuItem(), simulateCustomers, exit);
 
         //Create helpMenu
         Menu helpMenu = new Menu("_Help");
@@ -128,10 +138,12 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
             purchaseOrder.setDisable(false);
             export.setDisable(false);
             productSearch.setDisable(false);
+            simulateCustomers.setDisable(true);
         }else{
             purchaseOrder.setDisable(true);
             export.setDisable(true);
             productSearch.setDisable(true);
+            simulateCustomers.setDisable(false);
         }
     }
     

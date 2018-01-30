@@ -34,7 +34,7 @@ public class CustomerLinePane extends VBox implements UpdatableGUINode{
         this.setSpacing(2);
         this.setPadding(new Insets(5,0,5,0));
         
-       updateVisible();
+        updateVisible();
         updateNode();
     }
     
@@ -42,40 +42,29 @@ public class CustomerLinePane extends VBox implements UpdatableGUINode{
      * Populates the VBox with Customers
      * @param numberOfCustomers 
      */
-    public void populateLine(int numberOfCustomers){
-        if (numberOfCustomers > 0) {
-            
+    public void populateLine(){
             //Create the Line
-            for (int i = 0; i < numberOfCustomers -1; i++) {
-                this.getChildren().add(new IdleAnimation());  
+            for (int i = serviceManager.getCustomerQueue().getCustomerQue().getSize() -1; i > 0; i--) {
+                this.getChildren().add(serviceManager.getCustomerQueue().getCustomerQue().getList().get(i).getAnimation());  
             }
              //Set the first customer being serived
-            this.getChildren().addAll( new Label("Serving"), new Separator(), new IdleAnimation()); 
-        }
-        
+            this.getChildren().addAll( new Label("Serving"), new Separator(), serviceManager.getCustomerQueue().getCustomerQue().getFirst().getAnimation()); 
     }
     
     public void updateVisible(){
-         if (serviceManager.isCustomerQue() == true) {
+         if (serviceManager.isCustomerQueMode() == true && serviceManager.isManagerMode() == false) {
             this.setVisible(true);
         } else {
             this.setVisible(false);
         }
-         System.out.println(serviceManager.isCustomerQue());
+         System.out.println(serviceManager.isCustomerQueMode());
     }
     /**
      * Called when in the Customer finished part of the CustomerQue Loop
      */
     public void updateNode(){
-      
-        //Change rather or not this pane is visable based on boolean CustomerQue in Service Manager
-       
-            //Add functionality to change number of customers in line (something like below.)
-//          populateLine(currentQueLength)
-
-            
-            //Temp for testing
-            populateLine(10); // --- REMOVE ME ---
+       this.getChildren().clear();
+       populateLine();
        
     }  
 }

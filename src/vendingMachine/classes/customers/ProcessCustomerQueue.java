@@ -11,6 +11,7 @@
  */
 package vendingMachine.classes.customers;
 
+import vendingMachine.classes.GenericQueue;
 import java.util.LinkedList;
 import java.util.List;
 import javafx.scene.paint.Color;
@@ -21,7 +22,12 @@ public class ProcessCustomerQueue{
     
     private ServiceManager serviceManager;
     private GenericQueue<Customers> customerQue = new GenericQueue<>();
+    private String[] customerNames;
     
+    /**
+     * CONSTRUCTOR
+     * @param serviceManager 
+     */
     public ProcessCustomerQueue(ServiceManager serviceManager){
         this.serviceManager = serviceManager;
 
@@ -39,13 +45,19 @@ public class ProcessCustomerQueue{
         
         //Read from CSV file. (This acts like a 2D Array)
         List<String[]> customerList = customer.readCSV();
-
+        
+        //Inialize the customerNames String[]
+        customerNames = new String[customerList.size()];
         //Interate through the list of String[]
         for (int i = 1; i < customerList.size(); i++) {
             customerQue.addTo(createCustomers(customerList.get(i)));
         }
     }
     
+    /**
+     * @param strings
+     * @return customer
+     */
     public Customers createCustomers(String[] strings){
         String name = strings[0];
         String category = strings[1];
@@ -54,13 +66,15 @@ public class ProcessCustomerQueue{
         return customer;
     }
 
+    /**
+     * @return string
+     */
     @Override
     public String toString(){
         return "Customers in line: " + customerQue.toString();
     }
     
     /**
-     * 
      * @return customerQue
      */
     public GenericQueue<Customers> getCustomerQue() {

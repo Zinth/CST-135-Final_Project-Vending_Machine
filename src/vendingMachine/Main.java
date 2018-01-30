@@ -157,10 +157,8 @@ public class Main extends Application {
         //Add Customer Animation Que Line to root
         root.setLeft(serviceManager.getCustomerLine());
         
-        serviceManager.setCustomerQue(true);
-        
-        ProcessCustomerQueue test = new ProcessCustomerQueue(serviceManager);
-        System.out.print(test);
+        //Add Customer Info Pane to root
+        root.setBottom(serviceManager.getCustomerInfo());
         
         // --- Standard JavaFX ---
         //Set up default Scene
@@ -212,13 +210,11 @@ public class Main extends Application {
 
         // --- Create Labels ---
         //Inventory Text Label
-        Text inventoryLabel = new Text("Vending Machine");
-        inventoryLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
-        inventoryLabel.setTextAlignment(TextAlignment.CENTER);
+        Label inventoryLabel = new Label("Vending Machine");
+        inventoryLabel.getStyleClass().add("labelHeader");
         //Invenotry Cart Label
-        Text cartLabel = new Text("Cart");
-        cartLabel.setTextAlignment(TextAlignment.CENTER);
-        cartLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
+        Label cartLabel = new Label("Cart");
+        cartLabel.getStyleClass().add("labelHeader");
 
         // --- Selection Buttons ---
         //Button for selecting Drink with picture

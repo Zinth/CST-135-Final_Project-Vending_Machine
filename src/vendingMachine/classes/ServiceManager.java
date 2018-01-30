@@ -15,12 +15,14 @@ package vendingMachine.classes;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import vendingMachine.classes.customers.ProcessCustomerQueue;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomMenuBar;
 import vendingMachine.classes.gui.TotalPrice;
 import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.gui.grids.InventoryGrid;
 import vendingMachine.classes.gui.grids.ManagerGrid;
+import vendingMachine.classes.gui.panes.CustomerInfoPane;
 import vendingMachine.classes.gui.panes.CustomerLinePane;
 import vendingMachine.interfaces.UpdatableGUINode;
 
@@ -32,7 +34,6 @@ public final class ServiceManager {
     private final InventoryGrid inventoryGrid;
     private final ManagerGrid managerGrid;
     private final CustomMenuBar menuBar;
-    private final CustomerLinePane customerLine;
     private final ArrayList<UpdatableGUINode> updatableGuiNodes = new ArrayList<>();
     private final static NumberFormat FORMATTER = NumberFormat.getCurrencyInstance();
     private final TotalPrice totalPrice;
@@ -40,10 +41,16 @@ public final class ServiceManager {
     private final VendingMachineManager vmManager;
     private final AlertWindow ALERT = new AlertWindow();
     private final Global_InventoryManagement gIManager;
-
-    //Edit by Chris Hyde - moved managerMode boolean to service Manager
+    
+    
+    //CustomerQue
+    private final CustomerLinePane customerLine;
+    private final CustomerInfoPane customerInfo;
+    private final ProcessCustomerQueue customerQueue = new ProcessCustomerQueue(this);;
+    
+    //none constants
     private boolean managerMode = false;
-    private boolean customerQue = false;
+    private boolean customerQueMode = false;
 
     public ServiceManager() {
         totalPrice = new TotalPrice(this);
@@ -53,6 +60,7 @@ public final class ServiceManager {
         restock = new Restock(this);
         menuBar = new CustomMenuBar(this);
         customerLine = new CustomerLinePane(this);
+        customerInfo = new CustomerInfoPane(this);
         vmManager = new VendingMachineManager(this);
         vmManager.addVendingMachine("Default");
         vmManager.getVendingMachine("Default").addAll(iManager.getProducts());
@@ -71,6 +79,7 @@ public final class ServiceManager {
         updatableGuiNodes.add(inventoryGrid);
         updatableGuiNodes.add(managerGrid);
         updatableGuiNodes.add(menuBar);
+        updatableGuiNodes.add(customerLine);
     }
 
     /**
@@ -183,6 +192,8 @@ public final class ServiceManager {
     public void setManagerMode(boolean managerMode) {
         this.managerMode = managerMode;
         this.menuBar.updateNode();
+        this.customerLine.updateVisible();
+        this.customerInfo.updateVisible();
     }
 
     /**
@@ -207,18 +218,30 @@ public final class ServiceManager {
     /**
      * @return 
      */
-    public boolean isCustomerQue() {
-        return customerQue;
+    public boolean isCustomerQueMode() {
+        return customerQueMode;
     }
     
     /**
-     * @param customerQue 
+     * @param customerQueMode 
      */
-    public void setCustomerQue(boolean customerQue) {
-        this.customerQue = customerQue;
+    public void setCustomerQueMode(boolean customerQueMode) {
+        this.customerQueMode = customerQueMode;
         this.customerLine.updateVisible();
+        this.customerInfo.updateVisible();
     }
     
-    
-    
+    /**
+     * @return customerQueue 
+     */
+    public ProcessCustomerQueue getCustomerQueue() {
+        return customerQueue;
+    }
+
+    /**
+     * @return customerInfo 
+     */
+    public CustomerInfoPane getCustomerInfo() {
+        return customerInfo;
+    }
 }

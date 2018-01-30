@@ -9,7 +9,7 @@
  *
  * @about Generic Class for handling Queue's
  */
-package vendingMachine.classes.customers;
+package vendingMachine.classes;
 
 import java.util.LinkedList;
 
@@ -67,6 +67,10 @@ public class GenericQueue<E> {
         }else{
             return false; // TODO: Throw Alert Message here
         }
+    }
+    
+    public LinkedList<E> getList(){
+        return list;
     }
     
     /**
