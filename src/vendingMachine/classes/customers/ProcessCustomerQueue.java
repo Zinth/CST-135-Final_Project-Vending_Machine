@@ -1,30 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @project Milestone5
+ * @course CST-135
+ * @author James Ray
+ * @author Christopher Hyde
+ * @author Robert Wade
+ * @teacher Dr. Lively
+ * @date 01/30/18
+ *
+ * @about Class for processing Customer Queue's
  */
 package vendingMachine.classes.customers;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import javafx.scene.paint.Color;
 import vendingMachine.classes.CsvUtil;
 import vendingMachine.classes.ServiceManager;
 
-/**
- *
- * @author Chris
- */
 public class ProcessCustomerQueue{
     
     private ServiceManager serviceManager;
-    private LinkedList<Customers> customerQue = new LinkedList<>();
+    private GenericQueue<Customers> customerQue = new GenericQueue<>();
     
     public ProcessCustomerQueue(ServiceManager serviceManager){
         this.serviceManager = serviceManager;
-        
-        //TODO: ONCE CSV IS CREATED REPLACE PATH STRING AND UN_COMMENT BELOW
-        //populateCustomerQue("res/input/customerList.csv");
+
+        populateCustomerQue("testQue.csv");
+       
     }
     
     /**
@@ -39,72 +41,30 @@ public class ProcessCustomerQueue{
         List<String[]> customerList = customer.readCSV();
 
         //Interate through the list of String[]
-        for (int i = 0; i < customerList.size(); i++) {
-            //Interate through the String[] at customerList index (i). 
-            for (int j =0; j < customerList.get(i).length; j++)
-                //Add new customers to the customerQue
-               addCustomer(new Customers(customerList.get(j)[i], customerList.get(j)[i]));
+        for (int i = 1; i < customerList.size(); i++) {
+            customerQue.addTo(createCustomers(customerList.get(i)));
         }
+    }
+    
+    public Customers createCustomers(String[] strings){
+        String name = strings[0];
+        String category = strings[1];
+        String product = strings[2];
+        Customers customer = new Customers(name, category, product);
+        return customer;
     }
 
-    /**
-     *  Add customer to Queue
-     * @param customer 
-     */
-    public void addCustomer(Customers customer){
-        customerQue.addLast(customer);
-    }
-    
-    /**
-     * @return the queue with the first customer removed. 
-     */
-    public Customers removeCustomer(){
-        if (!isEmpty()){
-            return customerQue.removeFirst();
-        }else{
-            return null; // TODO: Throw Alert Message here
-        }
-    }
-    
-    /**
-     * Get first customer in line. 
-     * @return Customers
-     */
-    public Customers getFirst(){
-         if (!isEmpty()){
-            return customerQue.getFirst();
-        }else{
-            return null; // TODO: Throw Alert Message here
-        }
-        
-    }
-    
-    /**
-     * @return size of Queue
-     */
-    public int getSize(){
-        return customerQue.size();
-    }
-    
-    /**
-     * Check is Queue is empty.
-     * @return boolean
-     */
-    public boolean isEmpty(){
-        if (customerQue.isEmpty()){
-            return true;
-        }else{
-            return false; // TODO: Throw Alert Message here
-        }
-    }
-    
-    /**
-     * @return the Queue as String 
-     */
     @Override
     public String toString(){
-        return "Customers in Line " + customerQue.toString();
+        return "Customers in line: " + customerQue.toString();
     }
-   
+    
+    /**
+     * 
+     * @return customerQue
+     */
+    public GenericQueue<Customers> getCustomerQue() {
+        return customerQue;
+    }
    
 }

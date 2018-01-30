@@ -34,10 +34,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import vendingMachine.classes.ServiceManager;
+import vendingMachine.classes.customers.ProcessCustomerQueue;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomButtons;
 import vendingMachine.classes.gui.MachineComboBox;
-import vendingMachine.classes.gui.panes.CustomerLinePane;
 
 public class Main extends Application {
 
@@ -158,6 +158,9 @@ public class Main extends Application {
         root.setLeft(serviceManager.getCustomerLine());
         
         serviceManager.setCustomerQue(true);
+        
+        ProcessCustomerQueue test = new ProcessCustomerQueue(serviceManager);
+        System.out.print(test);
         
         // --- Standard JavaFX ---
         //Set up default Scene

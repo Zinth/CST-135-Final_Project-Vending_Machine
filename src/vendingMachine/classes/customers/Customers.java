@@ -18,9 +18,10 @@ public class Customers {
      * @param name
      * @param wantedItem 
      */
-    public Customers(String name, String wantedItem){
+    public Customers(String name,String category, String wantedItem){
         this.name = name; 
-        this.wantedItem = wantedItem; //Products they will want to purchase. 
+        this.wantedItem = wantedItem; //Products they will want to purchase.
+        this.category = category;
     }
     
     @Override
@@ -67,7 +68,7 @@ public class Customers {
 
     /**
      * set category
-     * @param catagory 
+     * @param category 
      */
     public void setCatagory(String catagory) {
         this.category = catagory;
