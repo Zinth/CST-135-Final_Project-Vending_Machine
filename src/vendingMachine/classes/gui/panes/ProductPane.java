@@ -46,6 +46,7 @@ public class ProductPane extends StackPane {
     protected Label stockLabel = new Label();
     protected ServiceManager serviceManager;
     protected VBox infoVBox;
+    protected Product product;
 
     //basic constructor
     public ProductPane(){}
@@ -57,7 +58,7 @@ public class ProductPane extends StackPane {
      */
     public ProductPane(ServiceManager serviceManager, Product product) {
         this.serviceManager = serviceManager;
-        
+        this.product = product;
         
         //Create a VBox to hold most conent
         infoVBox = new VBox();

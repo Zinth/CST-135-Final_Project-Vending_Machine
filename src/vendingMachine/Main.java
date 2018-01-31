@@ -34,7 +34,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import vendingMachine.classes.ServiceManager;
-import vendingMachine.classes.customers.ProcessCustomerQueue;
+import vendingMachine.classes.customers_simulation.ProcessCustomerQueue;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomButtons;
 import vendingMachine.classes.gui.MachineComboBox;
@@ -170,6 +170,17 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(true); // Prevent user resizing
         primaryStage.show();
+        
+        
+        //CODE TESTING BELOW
+        
+       serviceManager.getCustomerQueue().test();
+       
+     /*for(int i = 0; i < serviceManager.getInventoryGrid().getChildren().size(); i++){
+            System.out.println("TEST: " + serviceManager.getInventoryGrid().getChildren().get(i).toString());
+       }*/
+    
+        //CODE TESTING ABOVE
     }
 
     /**

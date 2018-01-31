@@ -15,7 +15,7 @@ package vendingMachine.classes;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import vendingMachine.classes.customers.ProcessCustomerQueue;
+import vendingMachine.classes.customers_simulation.ProcessCustomerQueue;
 import vendingMachine.classes.gui.AlertWindow;
 import vendingMachine.classes.gui.CustomMenuBar;
 import vendingMachine.classes.gui.TotalPrice;
@@ -24,6 +24,7 @@ import vendingMachine.classes.gui.grids.InventoryGrid;
 import vendingMachine.classes.gui.grids.ManagerGrid;
 import vendingMachine.classes.gui.panes.CustomerInfoPane;
 import vendingMachine.classes.gui.panes.CustomerLinePane;
+import vendingMachine.classes.gui.panes.EventLog;
 import vendingMachine.interfaces.UpdatableGUINode;
 
 public final class ServiceManager {
@@ -46,6 +47,7 @@ public final class ServiceManager {
     //CustomerQue
     private final CustomerLinePane customerLine;
     private final CustomerInfoPane customerInfo;
+    private final EventLog eventLog = new EventLog();
     private final ProcessCustomerQueue customerQueue = new ProcessCustomerQueue(this);;
     
     //none constants
@@ -243,5 +245,9 @@ public final class ServiceManager {
      */
     public CustomerInfoPane getCustomerInfo() {
         return customerInfo;
+    }
+
+    public EventLog getEventLog() {
+        return eventLog;
     }
 }

@@ -69,4 +69,8 @@ public class InventoryPane extends ProductPane {
         animateImage.setOpacity(1.0);
         serviceManager.UpdateCartGui();
     }
+    
+    public String toString(){
+        return product.getProductName();
+    }
 }

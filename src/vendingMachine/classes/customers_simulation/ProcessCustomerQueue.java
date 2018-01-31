@@ -9,12 +9,10 @@
  *
  * @about Class for processing Customer Queue's
  */
-package vendingMachine.classes.customers;
+package vendingMachine.classes.customers_simulation;
 
 import vendingMachine.classes.GenericQueue;
-import java.util.LinkedList;
 import java.util.List;
-import javafx.scene.paint.Color;
 import vendingMachine.classes.CsvUtil;
 import vendingMachine.classes.ServiceManager;
 
@@ -22,7 +20,7 @@ public class ProcessCustomerQueue{
     
     private ServiceManager serviceManager;
     private GenericQueue<Customers> customerQue = new GenericQueue<>();
-    private String[] customerNames;
+    private SimulatedActions actions;
     
     /**
      * CONSTRUCTOR
@@ -30,9 +28,9 @@ public class ProcessCustomerQueue{
      */
     public ProcessCustomerQueue(ServiceManager serviceManager){
         this.serviceManager = serviceManager;
+        actions  = new SimulatedActions(serviceManager);
 
         populateCustomerQue("testQue.csv");
-       
     }
     
     /**
@@ -46,8 +44,7 @@ public class ProcessCustomerQueue{
         //Read from CSV file. (This acts like a 2D Array)
         List<String[]> customerList = customer.readCSV();
         
-        //Inialize the customerNames String[]
-        customerNames = new String[customerList.size()];
+       
         //Interate through the list of String[]
         for (int i = 1; i < customerList.size(); i++) {
             customerQue.addTo(createCustomers(customerList.get(i)));
@@ -66,6 +63,10 @@ public class ProcessCustomerQueue{
         return customer;
     }
 
+    public void test(){
+        actions.selectItem(customerQue.getFirst());
+    }
+    
     /**
      * @return string
      */

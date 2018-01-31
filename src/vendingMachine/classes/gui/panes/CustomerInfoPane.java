@@ -20,7 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import vendingMachine.classes.ServiceManager;
-import vendingMachine.classes.customers.Customers;
+import vendingMachine.classes.customers_simulation.Customers;
 import vendingMachine.interfaces.UpdatableGUINode;
 
 /**
@@ -35,13 +35,12 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
     private Label productWantedLabel = new Label();
     private Label productPurchasedLabel = new Label();
     private Label pricePaidLabel = new Label();
-    private TextArea alertLog = new TextArea();
+    private TextArea alertLog;
     
     public CustomerInfoPane(ServiceManager serviceManager){
         this.serviceManager = serviceManager;
         
-        //TEMP
-        customer = new Customers("DEFAULT", "DEFAULT", "DEFUALT");
+        alertLog = serviceManager.getEventLog();
         
         //Set general Style
         this.setStyle("-fx-background-color: #54428E");
@@ -93,11 +92,7 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
         info.getChildren().addAll(lineHeader, label);
         return info;
     }
-    
-    public void newAlert(String alertMSG){
-        alertLog.setText(alertMSG + "/n");
-    }
-    
+ 
     /**
      * update the text of the customer info Labels
      */
