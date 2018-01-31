@@ -17,6 +17,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import vendingMachine.classes.customers_simulation.ProcessCustomerQueue;
 import vendingMachine.classes.gui.AlertWindow;
+import vendingMachine.classes.gui.ButtonManager;
 import vendingMachine.classes.gui.CustomMenuBar;
 import vendingMachine.classes.gui.TotalPrice;
 import vendingMachine.classes.gui.grids.CartGrid;
@@ -42,6 +43,7 @@ public final class ServiceManager {
     private final VendingMachineManager vmManager;
     private final AlertWindow ALERT = new AlertWindow();
     private final Global_InventoryManagement gIManager;
+    private final ButtonManager btnManager = new ButtonManager(this);
     
     
     //CustomerQue
@@ -250,4 +252,13 @@ public final class ServiceManager {
     public EventLog getEventLog() {
         return eventLog;
     }
+    
+    /**
+     * @return btnManager 
+     */
+    public ButtonManager getBtnManager() {
+        return btnManager;
+    }
+    
+    
 }
