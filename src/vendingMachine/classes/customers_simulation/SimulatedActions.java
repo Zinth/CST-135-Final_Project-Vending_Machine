@@ -6,12 +6,15 @@
 package vendingMachine.classes.customers_simulation;
 
 import java.util.Random;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 import vendingMachine.classes.ServiceManager;
 
 /**
@@ -33,8 +36,9 @@ public class SimulatedActions {
     public int getItemIndex(String wantedProduct){
         int result = -1;
          for(int i = 0; i < serviceManager.getInventoryGrid().getChildren().size(); i++){
-             System.out.println("TEST: productName = |" + serviceManager.getInventoryGrid().getChildren().get(i).toString() + "|  wantedProduct = |" + wantedProduct + "|");
              String temp = serviceManager.getInventoryGrid().getChildren().get(i).toString();
+             
+             System.out.println("TEST: productName = |" + temp + "|  wantedProduct = |" + wantedProduct + "|");
              if(wantedProduct.equals(temp)){
                 result = i;
              }
@@ -53,15 +57,29 @@ public class SimulatedActions {
 
             Node node = serviceManager.getInventoryGrid().getChildren().get(index);
             serviceManager.getEventLog().event(customer, " found " + customer.getWantedItem() + ".");
-            fireMouseEvent(node, MouseEvent.MOUSE_ENTERED, MouseButton.NONE);
-            fireMouseEvent(node, MouseEvent.MOUSE_CLICKED, MouseButton.PRIMARY);
-            fireMouseEvent(node, MouseEvent.MOUSE_EXITED, MouseButton.NONE);
+            buttonPress(node);
+            
             serviceManager.getEventLog().event(customer, " added " + customer.getWantedItem() + " to the cart.");
 
         } else {
             System.out.println("PRODUCT NOT FOUND");
         }
 
+    }
+    
+    //Button Press Animation Timeline
+    public void buttonPress(Node node) {
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(1);
+        timeline.getKeyFrames().addAll(
+                new KeyFrame(Duration.millis(500), e -> {
+                    fireMouseEvent(node, MouseEvent.MOUSE_ENTERED, MouseButton.NONE);
+                }), new KeyFrame(Duration.millis(750), e -> {
+                    fireMouseEvent(node, MouseEvent.MOUSE_CLICKED, MouseButton.PRIMARY);
+                }), new KeyFrame(Duration.millis(1000), e -> {
+                    fireMouseEvent(node, MouseEvent.MOUSE_EXITED, MouseButton.NONE);
+                }));
+        timeline.play();
     }
     
     public void fireMouseEvent(Node node, EventType<? extends MouseEvent> eventType, MouseButton button){

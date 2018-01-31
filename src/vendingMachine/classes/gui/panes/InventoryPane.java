@@ -70,7 +70,5 @@ public class InventoryPane extends ProductPane {
         serviceManager.UpdateCartGui();
     }
     
-    public String toString(){
-        return product.getProductName();
-    }
+   
 }

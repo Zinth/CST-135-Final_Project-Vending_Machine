@@ -16,12 +16,12 @@ public class EventLog extends TextArea{
     private int eventNumber = 0;
     
     /**
-     * Example log line "1: Rob found Reeses"
+     * Example log line "1: Rob found Reeses's"
      * @param event
      * @param customer 
      */
     public void event(Customers customer, String event){
         eventNumber++;
-       this.setText( eventNumber + ": "  + customer + event + "/n"); 
+       this.setText(this.getText() + eventNumber + ": "  + customer + event + "\n"); 
     }
 }
