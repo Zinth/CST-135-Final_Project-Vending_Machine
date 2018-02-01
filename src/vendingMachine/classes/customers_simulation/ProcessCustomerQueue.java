@@ -13,6 +13,10 @@ package vendingMachine.classes.customers_simulation;
 
 import vendingMachine.classes.GenericQueue;
 import java.util.List;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import vendingMachine.classes.CsvUtil;
 import vendingMachine.classes.ServiceManager;
 
@@ -62,7 +66,32 @@ public class ProcessCustomerQueue{
         Customers customer = new Customers(name, category, product);
         return customer;
     }
+    
+    public void nextCustomer(){
+        customerQue.removeFirst();
+        serviceManager.getEventLog().newCustomer();
+        serviceManager.getCustomerInfo().updateNode();
+    }
 
+    public void simulateCustomerQue() {
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(customerQue.getSize());
+        timeline.getKeyFrames().addAll(
+                new KeyFrame(Duration.millis(1), (event) -> {
+                    actions.playSimulation(customerQue.getFirst());
+                }), new KeyFrame(Duration.millis(5000), (event) -> {
+                    if(customerQue.getSize() > 1){
+                    nextCustomer();
+                    }else{
+                    customerQue.getList().clear();
+                    serviceManager.getALERT().showAlert("CUSTOMER SIMULATION:\n Customer simulation complete!", 14, Color.BLACK);
+                    //serviceManager.setCustomerQueMode(false);
+                    }
+                }));
+        
+        timeline.play();
+    }
+    
     public void test(){
         actions.playSimulation(customerQue.getFirst());
     }

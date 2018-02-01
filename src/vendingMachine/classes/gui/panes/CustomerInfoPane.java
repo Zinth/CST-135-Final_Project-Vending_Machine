@@ -34,7 +34,6 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
     private Label nameLabel = new Label();
     private Label productWantedLabel = new Label();
     private Label productPurchasedLabel = new Label();
-    private Label pricePaidLabel = new Label();
     private TextArea alertLog;
     
     public CustomerInfoPane(ServiceManager serviceManager){
@@ -60,7 +59,7 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
                 infoLine("Customer Name", nameLabel),
                 infoLine("Looking for", productWantedLabel),
                 infoLine("Purchased Item", productPurchasedLabel),
-                infoLine("Purchase Cost", pricePaidLabel));
+                infoLine("Purchase Cost", serviceManager.getTotalPrice()));
 
         //Set up the alerLog
         VBox logVBox = new VBox();
@@ -99,9 +98,7 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
     public void updateCustomerInfo(){
         nameLabel.setText(customer.getName());
         productWantedLabel.setText(customer.getWantedItem());
-        //TODO: FIND A WAY TO RETURN WHAT THE CUSTOMER BAUGHT AND DISPLAY HERE.
-        productPurchasedLabel.setText("NOT IMPLAMENTED YET");
-        pricePaidLabel.setText(serviceManager.getTotalPrice().getText());
+        serviceManager.getTotalPrice().updateNode();
     }
     /**
      * Only show this if customerQueMode is true
@@ -119,5 +116,11 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
         customer = serviceManager.getCustomerQueue().getCustomerQue().getFirst();
         updateCustomerInfo();
     }
+
+    public Label getProductPurchasedLabel() {
+        return productPurchasedLabel;
+    }
+    
+    
     
 }

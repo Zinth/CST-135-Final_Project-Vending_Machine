@@ -166,17 +166,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(true); // Prevent user resizing
         primaryStage.show();
-        
-        
-        //CODE TESTING BELOW
-        
-       serviceManager.getCustomerQueue().test();
-       
-     /*for(int i = 0; i < serviceManager.getInventoryGrid().getChildren().size(); i++){
-            System.out.println("TEST: " + serviceManager.getInventoryGrid().getChildren().get(i).toString());
-       }*/
-    
-        //CODE TESTING ABOVE
     }
 
     /**

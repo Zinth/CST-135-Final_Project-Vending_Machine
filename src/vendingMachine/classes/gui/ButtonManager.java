@@ -69,7 +69,9 @@ public class ButtonManager {
         btnPurchase = new CustomButtons("Check-Out", e -> {
             serviceManager.getCart().checkOut();
             serviceManager.UpdateGui();
+            if(!serviceManager.isCustomerQueMode()){
             serviceManager.getALERT().showAlert("Your purchase was successfull!", 36, Color.BLACK);
+            }
         });
         //Set btnPurchase properties
         btnPurchase.setGraphic(serviceManager.getTotalPrice());

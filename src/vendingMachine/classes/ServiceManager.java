@@ -84,6 +84,7 @@ public final class ServiceManager {
         updatableGuiNodes.add(managerGrid);
         updatableGuiNodes.add(menuBar);
         updatableGuiNodes.add(customerLine);
+        updatableGuiNodes.add(customerInfo);
     }
 
     /**

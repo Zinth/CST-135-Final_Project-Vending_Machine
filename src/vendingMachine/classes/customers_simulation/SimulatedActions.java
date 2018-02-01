@@ -103,11 +103,13 @@ public class SimulatedActions {
             serviceManager.getEventLog().event(customer, " added " + itemName + " to the cart.");
             System.out.println("PRODUCT NOT FOUND");
         }
+        serviceManager.getCustomerInfo().getProductPurchasedLabel().setText(itemName);
     }
     
     public void purchase(Customers customer){
+        serviceManager.getEventLog().event(customer, " purchased " + itemName + " for a " + serviceManager.getTotalPrice().getText() + ".");
         buttonPress(serviceManager.getBtnManager().getBtnPurchase());
-        serviceManager.getEventLog().event(customer, " purchased " + itemName + ".");
+        
     }
     
     //Button Press Animation Timeline
@@ -133,4 +135,10 @@ public class SimulatedActions {
                 true, true, true, true, true, true, null)
            );
     }
+
+    public String getItemName() {
+        return itemName;
+    }
+    
+    
 }
