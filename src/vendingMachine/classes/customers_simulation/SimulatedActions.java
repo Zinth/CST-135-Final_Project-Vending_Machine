@@ -107,6 +107,8 @@ public class SimulatedActions {
     }
     
     public void purchase(Customers customer){
+        serviceManager.getTotalPrice().updateNode();
+        serviceManager.getCustomerInfo().getPriceLabel().setText(serviceManager.getTotalPrice().getText());
         serviceManager.getEventLog().event(customer, " purchased " + itemName + " for a " + serviceManager.getTotalPrice().getText() + ".");
         buttonPress(serviceManager.getBtnManager().getBtnPurchase());
         

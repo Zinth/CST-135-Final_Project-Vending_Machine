@@ -68,6 +68,8 @@ public class ProcessCustomerQueue{
     }
     
     public void nextCustomer(){
+        serviceManager.getCustomerInfo().getProductPurchasedLabel().setText("");
+        serviceManager.getCustomerInfo().getPriceLabel().setText("");
         customerQue.removeFirst();
         serviceManager.getEventLog().newCustomer();
         serviceManager.getCustomerInfo().updateNode();
@@ -80,7 +82,7 @@ public class ProcessCustomerQueue{
                 new KeyFrame(Duration.millis(1), (event) -> {
                     actions.playSimulation(customerQue.getFirst());
                 }), new KeyFrame(Duration.millis(5000), (event) -> {
-                    if(customerQue.getSize() > 1){
+                    if(customerQue.getSize() > 0){
                     nextCustomer();
                     }else{
                     customerQue.getList().clear();
@@ -110,5 +112,5 @@ public class ProcessCustomerQueue{
     public GenericQueue<Customers> getCustomerQue() {
         return customerQue;
     }
-   
+
 }

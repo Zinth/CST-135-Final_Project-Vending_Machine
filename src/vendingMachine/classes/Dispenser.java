@@ -112,7 +112,7 @@ public class Dispenser {
         productList.add(new Gum("Original", 8, 1, true, 21.6, 1, "Juicy Fruit", 0.75, defaultQuantity, "juicyFruit.png"));
         productList.add(new Gum("Sour Watermelon", 8, 1, true, 21.6, 1, "Juicy Fruit Sour Watermelon", 0.75, defaultQuantity, "juicyFruitSourWatermelon.png"));
         productList.add(new Gum("Cinnamon", 5, 1, false, 13.5, 10, "Big Red", 0.35, defaultQuantity, "bigRed.png"));
-        productList.add(new Gum("Doublemint", 5, 1, false, 13.3, 10, "Wrigley's Doublemint", 0.35, defaultQuantity, "doublemint.png"));
+        productList.add(new Gum("Doublemint", 5, 1, false, 13.3, 10, "Doublemint", 0.35, defaultQuantity, "doublemint.png"));
 
         //Drinks
         productList.add(new Drink(16, "Soft Drink", 187, false, 1, "Coca-Cola", 1.25, 10, "cokeDrink.png"));

@@ -34,6 +34,7 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
     private Label nameLabel = new Label();
     private Label productWantedLabel = new Label();
     private Label productPurchasedLabel = new Label();
+    private Label priceLabel = new Label();
     private TextArea alertLog;
     
     public CustomerInfoPane(ServiceManager serviceManager){
@@ -59,7 +60,7 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
                 infoLine("Customer Name", nameLabel),
                 infoLine("Looking for", productWantedLabel),
                 infoLine("Purchased Item", productPurchasedLabel),
-                infoLine("Purchase Cost", serviceManager.getTotalPrice()));
+                infoLine("Purchase Price", priceLabel));
 
         //Set up the alerLog
         VBox logVBox = new VBox();
@@ -119,6 +120,10 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
 
     public Label getProductPurchasedLabel() {
         return productPurchasedLabel;
+    }
+
+    public Label getPriceLabel() {
+        return priceLabel;
     }
     
     
