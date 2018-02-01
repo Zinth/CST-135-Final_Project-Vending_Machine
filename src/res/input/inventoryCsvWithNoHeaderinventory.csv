@@ -1,4 +1,4 @@
-Purple Group,Chips,Lays,0.99,10,laysBbq.png,Barbecue,1,FALSE,FALSE,1,139
+Purple Group,Chips,Lays BBQ,0.99,10,laysBbq.png,Barbecue,1,FALSE,FALSE,1,139
 Purple Group,Chips,Lays,0.99,10,laysClassic.png,Classic,1,FALSE,FALSE,1,152
 Purple Group,Chips,Fritos,0.99,10,fritosOriginal.png,Original,1,TRUE,FALSE,1,160
 Purple Group,Chips,Fritos Chili Cheese,0.99,10,fritosChiliCheese.png,Chili Cheese,1,TRUE,FALSE,1,160
@@ -10,12 +10,12 @@ Purple Group,Candy,Starburst,1,10,starburstCandy.png,1,Mix Fruit,FALSE,FALSE,2.0
 Purple Group,Candy,M&M’s,1,10,mmCandy.png,1,Milk Chocolate,FALSE,FALSE,1.69,230
 Purple Group,Candy,Hershey Bar,1.25,10,hershyCandy.png,1,Milk Chocolate,FALSE,FALSE,1.55,214
 Purple Group,Candy,Snickers,1,10,snickersCandy.png,1,Chocolate,FALSE,FALSE,2,266
-Purple Group,Gum,Trident,0.5,10,tridentTropicalTwist.png,Tropical Twist,8,1,TRUE,21.2,1
-Purple Group,Gum,Trident,0.5,10,tridentCinnamon.png,Cinnamon,8,1,TRUE,21.2,1
+Purple Group,Gum,Trident Tropical Twist,0.5,10,tridentTropicalTwist.png,Tropical Twist,8,1,TRUE,21.2,1
+Purple Group,Gum,Trident Cinnamon,0.5,10,tridentCinnamon.png,Cinnamon,8,1,TRUE,21.2,1
 Purple Group,Gum,Juicy Fruit,0.75,10,juicyFruit.png,Original,8,1,TRUE,21.6,1
-Purple Group,Gum,Juicy Fruit,0.75,10,juicyFruitSourWatermelon.png,Sour Watermelon,8,1,TRUE,21.6,1
+Purple Group,Gum,Juicy Fruit Sour Watermelon,0.75,10,juicyFruitSourWatermelon.png,Sour Watermelon,8,1,TRUE,21.6,1
 Purple Group,Gum,Big Red,0.35,10,bigRed.png,Cinnamon,5,1,FALSE,13.5,10
-Purple Group,Gum,Wrigley’s,0.35,10,doublemint.png,Doublemint,5,1,FALSE,13.3,10
+Purple Group,Gum,Wrigley’s Doublemint,0.35,10,doublemint.png,Doublemint,5,1,FALSE,13.3,10
 Purple Group,Drink,Coca-Cola,1.25,10,cokeDrink.png,16,Soft Drink,187,FALSE,1,
 Purple Group,Drink,Diet Coca-Cola,1.25,10,dietCokeDrink.png,16,Soft Drink,0,TRUE,1,
 Purple Group,Drink,Pepsi,1.25,10,pepsiDrink.png,16,Soft Drink,200,FALSE,1,

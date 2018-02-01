@@ -19,23 +19,17 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import vendingMachine.classes.ServiceManager;
-import vendingMachine.classes.customers.ProcessCustomerQueue;
 import vendingMachine.classes.gui.AlertWindow;
+import vendingMachine.classes.gui.ButtonManager;
 import vendingMachine.classes.gui.CustomButtons;
 import vendingMachine.classes.gui.MachineComboBox;
 
@@ -48,6 +42,7 @@ public class Main extends Application {
     private final Group CUSTOMER_UI_GROUP = new Group();
     private final Group MANAGER_UI_GROUP = new Group();
     private ServiceManager serviceManager;
+    private ButtonManager btnManager;
     private AlertWindow alert = new AlertWindow();
 
     /**
@@ -69,7 +64,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //Create Service Manager
         serviceManager = new ServiceManager();
-
+        btnManager = serviceManager.getBtnManager();
+        
         //-- Create Panes --
         //Create the root pane and format it.
         root = new BorderPane();
@@ -107,7 +103,7 @@ public class Main extends Application {
         ComboBox switchMachines = new MachineComboBox(serviceManager); // change the arguement to reflect number of machines
 
         // --- Create Buttons ---
-        CustomButtons resetButton = new CustomButtons(serviceManager, true, "res/images/refresh.png", "Reset Items");
+        CustomButtons resetButton = new CustomButtons(serviceManager, true, "res/images/refresh.png", "Reset Items", 75, 75);
         resetButton.setShape(new Circle(3));
         resetButton.setOnAction(e -> {
             serviceManager.getIManager().resetProducts();
@@ -115,7 +111,7 @@ public class Main extends Application {
         });
         
         //Button to display Manager Grid
-        Button btnManager = new CustomButtons(serviceManager, false, "res/images/manager.png", "Manager Mode");
+        Button btnManager = new CustomButtons(serviceManager, false, "res/images/manager.png", "Manager Mode", 75,75);
         btnManager.setShape(new Circle(3));
         //btnManager action event for changing if manager grid is displayed or not
         btnManager.setOnAction(event -> {
@@ -154,11 +150,13 @@ public class Main extends Application {
         //Add Menu bar to root top
         root.setTop(menu);
         
+        //Add Customer Info Pane to root
+        root.setBottom(serviceManager.getCustomerInfo());
+        
         //Add Customer Animation Que Line to root
         root.setLeft(serviceManager.getCustomerLine());
         
-        //Add Customer Info Pane to root
-        root.setBottom(serviceManager.getCustomerInfo());
+        
         
         // --- Standard JavaFX ---
         //Set up default Scene
@@ -169,6 +167,7 @@ public class Main extends Application {
         primaryStage.setTitle("Vending Machine");
         primaryStage.setScene(scene);
         primaryStage.setResizable(true); // Prevent user resizing
+        primaryStage.sizeToScene();
         primaryStage.show();
     }
 
@@ -217,50 +216,15 @@ public class Main extends Application {
         cartLabel.getStyleClass().add("labelHeader");
 
         // --- Selection Buttons ---
-        //Button for selecting Drink with picture
-        Button btnDrink = new CustomButtons(serviceManager, false, "res/images/drinks.png", "Drinks");
-        btnDrink.setOnAction(event -> {
-            //Sort the inventory grid to show only drinks
-            serviceManager.getInventoryGrid().setProductType("drink");
-        });
-
-        //Button for selecting Chips with picture
-        Button btnChip = new CustomButtons(serviceManager, false, "res/images/chips.png", "Chips");
-        btnChip.setOnAction(event -> {
-            //Sort the inventory grid to show only chips
-            serviceManager.getInventoryGrid().setProductType("chips");
-        });
-
-        //Button for selecting Snack with picture
-        Button btnCandy = new CustomButtons(serviceManager, false, "res/images/candy.png", "Candy");
-        btnCandy.setOnAction(event -> {
-            //Sort the inventory grid to show only candy
-            serviceManager.getInventoryGrid().setProductType("candy");
-        });
-
-        //Button for selecting Gum with picture
-        Button btnGum = new CustomButtons(serviceManager, false, "res/images/gum.png", "Gums");
-        btnGum.setOnAction(event -> {
-            //Sort the inventory grid to show only gum
-            serviceManager.getInventoryGrid().setProductType("gum");
-        });
-
-        //Button for purchasing the product
-        Button btnPurchase = new CustomButtons("Check-Out", e -> {
-            serviceManager.getCart().checkOut();
-            serviceManager.UpdateGui();
-            alert.showAlert("Your purchase was successfull!", 36, Color.BLACK);
-        });
-        //Set btnPurchase properties
-        btnPurchase.setGraphic(serviceManager.getTotalPrice());
-        btnPurchase.setContentDisplay(ContentDisplay.TOP);
-
+        
+        
+        
         // --- Fill Panes ---
         //Add Nodes to panes
         customerVBox.getChildren().addAll(inventoryVBox, cartVBox);
-        productSelectionHBox.getChildren().addAll(btnDrink, btnChip, btnCandy, btnGum);
+        productSelectionHBox.getChildren().addAll(btnManager.getBtnDrink(), btnManager.getBtnChip(), btnManager.getBtnCandy(), btnManager.getBtnGum());
         inventoryVBox.getChildren().addAll(inventoryLabel, productSelectionHBox,  serviceManager.getInventoryGrid());
-        cartVBox.getChildren().addAll(cartLabel, cartScroll, serviceManager.getTotalPrice(), btnPurchase);
+        cartVBox.getChildren().addAll(cartLabel, cartScroll, serviceManager.getTotalPrice(), btnManager.getBtnPurchase());
         cartScroll.setContent(serviceManager.getCartGrid());
 
         // Return customerHBox Node

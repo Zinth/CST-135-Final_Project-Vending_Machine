@@ -51,4 +51,15 @@ public class InventoryManagement extends Dispenser {
     }
 
 
+    /**
+     * Prints the inventory product and quantity to string.
+     */
+    @Override
+    public String toString(){
+        String temp = "INVENTORY STOCK:\n";
+        for(int i = 0; i < getProducts().size(); i++){
+            temp+= getProducts().get(i).getProductName() + " - " + getProducts().get(i).getQuantity() +"\n";
+        }
+        return temp;
+    }
 }

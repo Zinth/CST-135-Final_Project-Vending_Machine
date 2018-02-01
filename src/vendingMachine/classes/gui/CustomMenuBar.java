@@ -59,10 +59,13 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         
         simulateCustomers.setOnAction((event) -> {
             //Turn customer simulation on and off
-            if(!serviceManager.isCustomerQueMode())
+            if(!serviceManager.isCustomerQueMode()){
                 serviceManager.setCustomerQueMode(true);
+                serviceManager.getCustomerQueue().simulateCustomerQue();
+            }
             else
                 serviceManager.setCustomerQueMode(false);
+                serviceManager.getCustomerQueue().stopSimulation();
         });
 
         exit.setOnAction(e -> {

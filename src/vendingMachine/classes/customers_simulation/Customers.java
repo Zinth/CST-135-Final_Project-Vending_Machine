@@ -9,7 +9,7 @@
  *
  * @about Class for making customers
  */
-package vendingMachine.classes.customers;
+package vendingMachine.classes.customers_simulation;
 
 import vendingMachine.classes.gui.animations.IdleAnimation;
 

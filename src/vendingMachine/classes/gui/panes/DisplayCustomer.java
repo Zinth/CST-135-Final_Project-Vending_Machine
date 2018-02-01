@@ -10,6 +10,7 @@
 package vendingMachine.classes.gui.panes;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
@@ -21,34 +22,52 @@ import vendingMachine.interfaces.UpdatableGUINode;
  *
  * @author Chris
  */
-public class CustomerLinePane extends VBox implements UpdatableGUINode{
+public class DisplayCustomer extends VBox implements UpdatableGUINode{
     
     private ServiceManager serviceManager;
+    private VBox serving = new VBox();
+    private VBox line = new VBox();
     
-    public CustomerLinePane(ServiceManager serviceManager){
+    public DisplayCustomer(ServiceManager serviceManager){
         //Set Service Manager
         this.serviceManager = serviceManager;
         
         //Set simple style no need for custom class in CSS style sheet.
         this.setStyle("-fx-background-color: #54428E");
-        this.setSpacing(2);
+        this.setSpacing(35);
         this.setPadding(new Insets(5,0,5,0));
+        this.setAlignment(Pos.BOTTOM_CENTER);
+        //this.setMaxHeight();
+
+        serving.setSpacing(10);
+        
+        this.getChildren().addAll(line, serving);
         
         updateVisible();
         updateNode();
+        
     }
-    
+ 
     /**
      * Populates the VBox with Customers
-     * @param numberOfCustomers 
+     *
+     * @param numberOfCustomers
      */
-    public void populateLine(){
-            //Create the Line
-            for (int i = serviceManager.getCustomerQueue().getCustomerQue().getSize() -1; i > 0; i--) {
-                this.getChildren().add(serviceManager.getCustomerQueue().getCustomerQue().getList().get(i).getAnimation());  
+    public void populateLine() {
+        // Clear serving VBox
+        serving.getChildren().clear();
+        line.getChildren().clear();
+        //Create the Line
+        for (int i = serviceManager.getCustomerQueue().getCustomerQue().getSize() - 1; i > 0; i--) {
+            if (i == 1) {
+                //Set the first customer being serived
+                serving.getChildren().addAll(new Label("Serving"), new Separator(), serviceManager.getCustomerQueue().getCustomerQue().getFirst().getAnimation());
+            } else {
+                line.getChildren().add(serviceManager.getCustomerQueue().getCustomerQue().getList().get(i).getAnimation());
             }
-             //Set the first customer being serived
-            this.getChildren().addAll( new Label("Serving"), new Separator(), serviceManager.getCustomerQueue().getCustomerQue().getFirst().getAnimation()); 
+        }
+        
+
     }
     
     public void updateVisible(){
@@ -63,7 +82,6 @@ public class CustomerLinePane extends VBox implements UpdatableGUINode{
      * Called when in the Customer finished part of the CustomerQue Loop
      */
     public void updateNode(){
-       this.getChildren().clear();
        populateLine();
        
     }  

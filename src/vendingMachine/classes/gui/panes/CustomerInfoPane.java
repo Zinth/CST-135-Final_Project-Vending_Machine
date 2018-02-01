@@ -11,6 +11,7 @@
  */
 package vendingMachine.classes.gui.panes;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -20,7 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import vendingMachine.classes.ServiceManager;
-import vendingMachine.classes.customers.Customers;
+import vendingMachine.classes.customers_simulation.Customers;
 import vendingMachine.interfaces.UpdatableGUINode;
 
 /**
@@ -34,14 +35,13 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
     private Label nameLabel = new Label();
     private Label productWantedLabel = new Label();
     private Label productPurchasedLabel = new Label();
-    private Label pricePaidLabel = new Label();
-    private TextArea alertLog = new TextArea();
+    private Label priceLabel = new Label();
+    private TextArea alertLog;
     
     public CustomerInfoPane(ServiceManager serviceManager){
         this.serviceManager = serviceManager;
         
-        //TEMP
-        customer = new Customers("DEFAULT", "DEFAULT", "DEFUALT");
+        alertLog = serviceManager.getEventLog();
         
         //Set general Style
         this.setStyle("-fx-background-color: #54428E");
@@ -61,7 +61,7 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
                 infoLine("Customer Name", nameLabel),
                 infoLine("Looking for", productWantedLabel),
                 infoLine("Purchased Item", productPurchasedLabel),
-                infoLine("Purchase Cost", pricePaidLabel));
+                infoLine("Purchase Price", priceLabel));
 
         //Set up the alerLog
         VBox logVBox = new VBox();
@@ -72,6 +72,13 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
         
         logVBox.getChildren().addAll(logHeader, new Separator(), alertLog);
         
+        //Set up  simControl VBox
+        VBox simControl = new VBox();
+        simControl.setPadding(new Insets(10));
+        simControl.setAlignment(Pos.TOP_LEFT);
+        simControl.getChildren().addAll(serviceManager.getBtnManager().getBtnSimPlay(), serviceManager.getBtnManager().getBtnSimStop());
+        simControl.setSpacing(20);
+        
         //Property Settings of alertBox
         alertLog.setEditable(false);
         alertLog.setMaxSize(USE_PREF_SIZE, 125);
@@ -79,7 +86,7 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
         Separator separator = new Separator(Orientation.VERTICAL);
         
         //Add Nodes to this HBox
-        this.getChildren().addAll(infoVBox, separator, logVBox);
+        this.getChildren().addAll(simControl ,infoVBox, separator, logVBox);
         
         updateVisible();
         
@@ -93,20 +100,14 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
         info.getChildren().addAll(lineHeader, label);
         return info;
     }
-    
-    public void newAlert(String alertMSG){
-        alertLog.setText(alertMSG + "/n");
-    }
-    
+ 
     /**
      * update the text of the customer info Labels
      */
     public void updateCustomerInfo(){
         nameLabel.setText(customer.getName());
         productWantedLabel.setText(customer.getWantedItem());
-        //TODO: FIND A WAY TO RETURN WHAT THE CUSTOMER BAUGHT AND DISPLAY HERE.
-        productPurchasedLabel.setText("NOT IMPLAMENTED YET");
-        pricePaidLabel.setText(serviceManager.getTotalPrice().getText());
+        serviceManager.getTotalPrice().updateNode();
     }
     /**
      * Only show this if customerQueMode is true
@@ -124,5 +125,15 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
         customer = serviceManager.getCustomerQueue().getCustomerQue().getFirst();
         updateCustomerInfo();
     }
+
+    public Label getProductPurchasedLabel() {
+        return productPurchasedLabel;
+    }
+
+    public Label getPriceLabel() {
+        return priceLabel;
+    }
+    
+    
     
 }
