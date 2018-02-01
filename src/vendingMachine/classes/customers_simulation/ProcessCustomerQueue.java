@@ -64,7 +64,7 @@ public class ProcessCustomerQueue{
     }
 
     public void test(){
-        actions.selectItem(customerQue.getFirst());
+        actions.playSimulation(customerQue.getFirst());
     }
     
     /**
