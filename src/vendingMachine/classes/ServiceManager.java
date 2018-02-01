@@ -24,8 +24,8 @@ import vendingMachine.classes.gui.grids.CartGrid;
 import vendingMachine.classes.gui.grids.InventoryGrid;
 import vendingMachine.classes.gui.grids.ManagerGrid;
 import vendingMachine.classes.gui.panes.CustomerInfoPane;
-import vendingMachine.classes.gui.panes.CustomerLinePane;
-import vendingMachine.classes.gui.panes.EventLog;
+import vendingMachine.classes.gui.panes.DisplayCustomer;
+import vendingMachine.classes.customers_simulation.EventLog;
 import vendingMachine.interfaces.UpdatableGUINode;
 
 public final class ServiceManager {
@@ -47,10 +47,10 @@ public final class ServiceManager {
     
     
     //CustomerQue
-    private final CustomerLinePane customerLine;
+    private final DisplayCustomer customerLine;
     private final CustomerInfoPane customerInfo;
     private final EventLog eventLog = new EventLog();
-    private final ProcessCustomerQueue customerQueue = new ProcessCustomerQueue(this);;
+    private final ProcessCustomerQueue customerQueue = new ProcessCustomerQueue(this,"testQue.csv");;
     
     //none constants
     private boolean managerMode = false;
@@ -63,7 +63,7 @@ public final class ServiceManager {
         managerGrid = new ManagerGrid(this, 6);
         restock = new Restock(this);
         menuBar = new CustomMenuBar(this);
-        customerLine = new CustomerLinePane(this);
+        customerLine = new DisplayCustomer(this);
         customerInfo = new CustomerInfoPane(this);
         vmManager = new VendingMachineManager(this);
         vmManager.addVendingMachine("Default");
@@ -216,7 +216,7 @@ public final class ServiceManager {
         return gIManager;
     }
 
-    public CustomerLinePane getCustomerLine() {
+    public DisplayCustomer getCustomerLine() {
         return customerLine;
     }
     

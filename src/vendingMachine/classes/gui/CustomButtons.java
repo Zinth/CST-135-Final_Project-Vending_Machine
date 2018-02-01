@@ -63,14 +63,14 @@ public class CustomButtons extends Button implements UpdatableGUINode {
     }
 
     //Custom Button with image
-    public CustomButtons(ServiceManager serviceManager, boolean manager, String imagePath, String btnName){
+    public CustomButtons(ServiceManager serviceManager, boolean manager, String imagePath, String btnName, int width, int height){
 
         this.serviceManager = serviceManager;
         this.manager = manager;
         //Image that will be displayed on the button
         ImageView imageView = new ImageView(new Image(imagePath));
-        imageView.setFitWidth(100);
-        imageView.setFitHeight(100);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
 
         //set graphic ImageView of button
         this.setGraphic(imageView);

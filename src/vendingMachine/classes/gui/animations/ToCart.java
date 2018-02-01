@@ -7,7 +7,7 @@
  * @teacher Dr. Lively
  * @date 01/17/18
  */
-package vendingMachine.classes.gui;
+package vendingMachine.classes.gui.animations;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
@@ -17,7 +17,7 @@ import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import vendingMachine.classes.gui.panes.InventoryPane;
 
-public class AnimationPane extends Pane {
+public class ToCart extends Pane {
 
     private int transSpeed;
     private int fadeSpeed;
@@ -31,7 +31,7 @@ public class AnimationPane extends Pane {
      * @param endX
      * @param endY
      */
-    public AnimationPane(double startX, double startY, double endX, double endY, ImageView imageView) {
+    public ToCart(double startX, double startY, double endX, double endY, ImageView imageView) {
         this.transSpeed = 1000;
         this.fadeSpeed = 300;
 

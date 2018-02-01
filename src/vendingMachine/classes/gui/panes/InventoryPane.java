@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import vendingMachine.classes.ServiceManager;
-import vendingMachine.classes.gui.AnimationPane;
+import vendingMachine.classes.gui.animations.ToCart;
 import vendingMachine.classes.products.Product;
 
 public class InventoryPane extends ProductPane {
@@ -23,7 +23,7 @@ public class InventoryPane extends ProductPane {
     private double X = 50;
     private double Y = 200;
     private ImageView animateImage;
-    private AnimationPane animation;
+    private ToCart animation;
 
     public InventoryPane(ServiceManager serviceManager, Product product) {
         super(serviceManager, product);
@@ -44,7 +44,7 @@ public class InventoryPane extends ProductPane {
                 serviceManager.getIManager().decreaseQuantity(product);
                 updateStockLabel(product);
                 //Create animationPane
-                animation = new AnimationPane(50, 75, X, Y, animateImage);
+                animation = new ToCart(50, 75, X, Y, animateImage);
                 //Run Animation
                 this.toFront();
                 this.getChildren().add(animation);

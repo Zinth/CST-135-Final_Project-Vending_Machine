@@ -65,6 +65,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
             }
             else
                 serviceManager.setCustomerQueMode(false);
+                serviceManager.getCustomerQueue().stopSimulation();
         });
 
         exit.setOnAction(e -> {

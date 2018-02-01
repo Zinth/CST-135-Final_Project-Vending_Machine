@@ -26,16 +26,18 @@ public class SimulatedActions {
     private ServiceManager serviceManager;
     private Random rand = new Random();
     private String itemName; 
+    private Timeline actionTimeline;
     
     public SimulatedActions(ServiceManager serviceManager){
         this.serviceManager = serviceManager;
         itemName = "";
+        actionTimeline = new Timeline();
+        actionTimeline.setCycleCount(1);
     }
     
     public void playSimulation(Customers customer){
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(1);
-        timeline.getKeyFrames().addAll(
+        actionTimeline.getKeyFrames().clear();
+        actionTimeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(0), e -> {
                     catagoryChange(customer);
                 }), new KeyFrame(Duration.millis(1000), e -> {
@@ -44,7 +46,11 @@ public class SimulatedActions {
                     purchase(customer);
                 })
         );
-        timeline.play();
+        actionTimeline.play();
+    }
+    
+    public void stopSimulation(){
+        actionTimeline.stop();
     }
     
     public void catagoryChange(Customers customer){

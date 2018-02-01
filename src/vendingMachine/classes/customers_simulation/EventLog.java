@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vendingMachine.classes.gui.panes;
+package vendingMachine.classes.customers_simulation;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -15,12 +15,11 @@ import vendingMachine.classes.customers_simulation.Customers;
  * @author Chris
  */
 public class EventLog extends TextArea {
-
-    private int eventNumber = 0;
     private int customerNumber = 1;
+    private int eventNumber = 0;
 
     public EventLog() {
-        this.setText(this.getText() + "-------- Customer: " + customerNumber + " --------\n");
+        
         this.textProperty().addListener(new ChangeListener<Object>() {
             @Override
             public void changed(ObservableValue<?> observable, Object oldValue,
@@ -37,6 +36,9 @@ public class EventLog extends TextArea {
      * @param customer
      */
     public void event(Customers customer, String event) {
+        if(eventNumber == 0){
+            this.setText(this.getText() + "-------- Customer: " + customerNumber + " --------\n");
+        }
         eventNumber++;
         this.appendText(eventNumber + ": " + customer + event + "\n");
     }
@@ -44,6 +46,13 @@ public class EventLog extends TextArea {
     public void newCustomer() {
         customerNumber++;
         this.appendText("-------- Customer: " + customerNumber + " --------\n");
+        
+    }
+    
+    public void reset(){
+        this.clear();
+        this.eventNumber = 0;
+        this.customerNumber = 1;
         
     }
 }

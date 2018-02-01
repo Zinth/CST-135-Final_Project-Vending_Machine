@@ -103,7 +103,7 @@ public class Main extends Application {
         ComboBox switchMachines = new MachineComboBox(serviceManager); // change the arguement to reflect number of machines
 
         // --- Create Buttons ---
-        CustomButtons resetButton = new CustomButtons(serviceManager, true, "res/images/refresh.png", "Reset Items");
+        CustomButtons resetButton = new CustomButtons(serviceManager, true, "res/images/refresh.png", "Reset Items", 75, 75);
         resetButton.setShape(new Circle(3));
         resetButton.setOnAction(e -> {
             serviceManager.getIManager().resetProducts();
@@ -111,7 +111,7 @@ public class Main extends Application {
         });
         
         //Button to display Manager Grid
-        Button btnManager = new CustomButtons(serviceManager, false, "res/images/manager.png", "Manager Mode");
+        Button btnManager = new CustomButtons(serviceManager, false, "res/images/manager.png", "Manager Mode", 75,75);
         btnManager.setShape(new Circle(3));
         //btnManager action event for changing if manager grid is displayed or not
         btnManager.setOnAction(event -> {
@@ -150,11 +150,13 @@ public class Main extends Application {
         //Add Menu bar to root top
         root.setTop(menu);
         
+        //Add Customer Info Pane to root
+        root.setBottom(serviceManager.getCustomerInfo());
+        
         //Add Customer Animation Que Line to root
         root.setLeft(serviceManager.getCustomerLine());
         
-        //Add Customer Info Pane to root
-        root.setBottom(serviceManager.getCustomerInfo());
+        
         
         // --- Standard JavaFX ---
         //Set up default Scene
@@ -165,6 +167,7 @@ public class Main extends Application {
         primaryStage.setTitle("Vending Machine");
         primaryStage.setScene(scene);
         primaryStage.setResizable(true); // Prevent user resizing
+        primaryStage.sizeToScene();
         primaryStage.show();
     }
 

@@ -11,6 +11,7 @@
  */
 package vendingMachine.classes.gui.panes;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -71,6 +72,13 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
         
         logVBox.getChildren().addAll(logHeader, new Separator(), alertLog);
         
+        //Set up  simControl VBox
+        VBox simControl = new VBox();
+        simControl.setPadding(new Insets(10));
+        simControl.setAlignment(Pos.TOP_LEFT);
+        simControl.getChildren().addAll(serviceManager.getBtnManager().getBtnSimPlay(), serviceManager.getBtnManager().getBtnSimStop());
+        simControl.setSpacing(20);
+        
         //Property Settings of alertBox
         alertLog.setEditable(false);
         alertLog.setMaxSize(USE_PREF_SIZE, 125);
@@ -78,7 +86,7 @@ public class CustomerInfoPane extends HBox implements UpdatableGUINode{
         Separator separator = new Separator(Orientation.VERTICAL);
         
         //Add Nodes to this HBox
-        this.getChildren().addAll(infoVBox, separator, logVBox);
+        this.getChildren().addAll(simControl ,infoVBox, separator, logVBox);
         
         updateVisible();
         

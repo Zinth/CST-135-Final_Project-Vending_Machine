@@ -11,7 +11,8 @@
  */
 package vendingMachine.classes.gui;
 
-import javafx.scene.control.Button;
+import javafx.animation.Animation;
+import javafx.animation.Timeline;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -30,6 +31,8 @@ public class ButtonManager {
     private CustomButtons btnCandy;
     private CustomButtons btnGum;
     private CustomButtons btnPurchase;
+    private CustomButtons btnSimPlay;
+    private CustomButtons btnSimStop;
     
     
     public ButtonManager(ServiceManager serviceManager){
@@ -37,28 +40,28 @@ public class ButtonManager {
         
          // --- Selection Buttons ---
         //Button for selecting Drink with picture
-        btnDrink = new CustomButtons(serviceManager, false, "res/images/drinks.png", "Drinks");
+        btnDrink = new CustomButtons(serviceManager, false, "res/images/drinks.png", "Drinks", 100, 100);
         btnDrink.setOnAction(event -> {
             //Sort the inventory grid to show only drinks
             serviceManager.getInventoryGrid().setProductType("drink");
         });
 
         //Button for selecting Chips with picture
-        btnChip = new CustomButtons(serviceManager, false, "res/images/chips.png", "Chips");
+        btnChip = new CustomButtons(serviceManager, false, "res/images/chips.png", "Chips", 100, 100);
         btnChip.setOnAction(event -> {
             //Sort the inventory grid to show only chips
             serviceManager.getInventoryGrid().setProductType("chips");
         });
 
         //Button for selecting Snack with picture
-        btnCandy = new CustomButtons(serviceManager, false, "res/images/candy.png", "Candy");
+        btnCandy = new CustomButtons(serviceManager, false, "res/images/candy.png", "Candy", 100 ,100);
         btnCandy.setOnAction(event -> {
             //Sort the inventory grid to show only candy
             serviceManager.getInventoryGrid().setProductType("candy");
         });
 
         //Button for selecting Gum with picture
-        btnGum = new CustomButtons(serviceManager, false, "res/images/gum.png", "Gums");
+        btnGum = new CustomButtons(serviceManager, false, "res/images/gum.png", "Gums", 100, 100);
         btnGum.setOnAction(event -> {
             //Sort the inventory grid to show only gum
             serviceManager.getInventoryGrid().setProductType("gum");
@@ -76,7 +79,21 @@ public class ButtonManager {
         //Set btnPurchase properties
         btnPurchase.setGraphic(serviceManager.getTotalPrice());
         btnPurchase.setContentDisplay(ContentDisplay.TOP);
+        
+        // --- Simulation Buttons ---
+        btnSimPlay = new CustomButtons(serviceManager, false, "res/images/play.png", "Play & Pause", 50, 50);
+        btnSimPlay.setShape(new Circle(3));
+        btnSimPlay.setOnAction((event) -> {
+            serviceManager.getCustomerQueue().playSimulation();
+        });
+        
+        btnSimStop = new CustomButtons(serviceManager, false, "res/images/stop.png", "Stop", 50 ,50);
+        btnSimStop.setShape(new Circle(3));
+        btnSimStop.setOnAction((event) -> {
+          serviceManager.getCustomerQueue().stopSimulation();
+        });
     }
+    
     
     // --- GETTERS & SETTERS ---
 
@@ -99,5 +116,14 @@ public class ButtonManager {
     public CustomButtons getBtnPurchase() {
         return btnPurchase;
     }
+
+    public CustomButtons getBtnSimStop() {
+        return btnSimStop;
+    }
+
+    public CustomButtons getBtnSimPlay() {
+        return btnSimPlay;
+    }
+    
     
 }

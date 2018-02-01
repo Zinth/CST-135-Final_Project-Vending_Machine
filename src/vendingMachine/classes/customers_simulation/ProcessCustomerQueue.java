@@ -13,6 +13,7 @@ package vendingMachine.classes.customers_simulation;
 
 import vendingMachine.classes.GenericQueue;
 import java.util.List;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.paint.Color;
@@ -25,23 +26,26 @@ public class ProcessCustomerQueue{
     private ServiceManager serviceManager;
     private GenericQueue<Customers> customerQue = new GenericQueue<>();
     private SimulatedActions actions;
+    private Timeline simTimeline = new Timeline();;
+    private String path;
     
     /**
      * CONSTRUCTOR
      * @param serviceManager 
      */
-    public ProcessCustomerQueue(ServiceManager serviceManager){
+    public ProcessCustomerQueue(ServiceManager serviceManager, String path){
         this.serviceManager = serviceManager;
+        this.path = path;
         actions  = new SimulatedActions(serviceManager);
 
-        populateCustomerQue("testQue.csv");
+        populateCustomerQue();
     }
     
     /**
      * Reads from a CSV file and add customers from the List of String arrays generated.
      * @param path to .CSV File
      */
-    public void populateCustomerQue(String path){
+    public void populateCustomerQue(){
          //get a new CSVUtil
         CsvUtil customer = new CsvUtil(path);
         
@@ -53,6 +57,7 @@ public class ProcessCustomerQueue{
         for (int i = 1; i < customerList.size(); i++) {
             customerQue.addTo(createCustomers(customerList.get(i)));
         }
+        
     }
     
     /**
@@ -76,26 +81,45 @@ public class ProcessCustomerQueue{
     }
 
     public void simulateCustomerQue() {
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(customerQue.getSize());
-        timeline.getKeyFrames().addAll(
+        simTimeline.getKeyFrames().clear();
+        simTimeline.setCycleCount(customerQue.getSize());
+        simTimeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(1), (event) -> {
                     actions.playSimulation(customerQue.getFirst());
                 }), new KeyFrame(Duration.millis(5000), (event) -> {
-                    if(customerQue.getSize() > 0){
+                    if(customerQue.getSize() > 1){
                     nextCustomer();
                     }else{
                     customerQue.getList().clear();
-                    serviceManager.getALERT().showAlert("CUSTOMER SIMULATION:\n Customer simulation complete!", 14, Color.BLACK);
+                    serviceManager.getALERT().showAlert("CUSTOMER SIMULATION:\n Customer simulation complete!\n", 24, Color.BLACK, serviceManager.getIManager().toString());
                     //serviceManager.setCustomerQueMode(false);
                     }
                 }));
-        
-        timeline.play();
     }
     
-    public void test(){
-        actions.playSimulation(customerQue.getFirst());
+    public void playSimulation(){
+        if(simTimeline.getStatus() == Animation.Status.STOPPED ){
+                //Set up the simTimeline keyframs
+                simulateCustomerQue();
+                //update the customer line
+                serviceManager.getCustomerLine().updateNode();
+                // play the simTimeline
+                simTimeline.play();
+            }else if(simTimeline.getStatus() == Animation.Status.PAUSED){
+                simTimeline.play();
+            }else{
+                simTimeline.pause();
+            }
+    }
+    
+    public void stopSimulation() {
+        if (simTimeline.getStatus() == Animation.Status.PAUSED || simTimeline.getStatus() == Animation.Status.RUNNING) {
+            actions.stopSimulation();
+            customerQue.getList().clear();
+            serviceManager.getEventLog().reset();
+            populateCustomerQue();
+            simTimeline.stop();
+        }
     }
     
     /**
@@ -112,5 +136,11 @@ public class ProcessCustomerQueue{
     public GenericQueue<Customers> getCustomerQue() {
         return customerQue;
     }
+
+    public Timeline getSimTimeline() {
+        return simTimeline;
+    }
+    
+    
 
 }
