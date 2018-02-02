@@ -47,6 +47,16 @@ public class Cart {
                 alert.showAlert("Error C02: Product is not longer in the cart", 16, Color.RED);
             }
     }
+    
+    public void removeFromCart(){
+        cartList.entrySet().stream().forEach((pair) -> {
+            Product product = (Product) pair.getKey();
+            Integer quantity = pair.getValue();
+            for(int i=1; i <= quantity; i++){
+                removeFromCart(product);
+            }
+        });
+    }
 
     /**
      * Add a product or quanity to the cartList and remove one from productList
