@@ -5,18 +5,17 @@
  */
 package login.views;
 
-import java.util.Iterator;
-import java.util.Map;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import login.controller.LoginController;
 import utilities.ServiceManager;
@@ -44,7 +43,8 @@ public class LoginView extends Application {
     public void load() {
         if(!loginController.isLoggedIn()){
             Stage primaryStage = new Stage();
-            Text header = new Text("Login To Access Manager Mode");
+            Label header = new Label("Login To Access Manager Mode");
+            header.getStyleClass().add("labelBlack");
             Button loginBtn = new Button("Login");
             TextField usernameField = new TextField();
             usernameField.setPromptText("Username");
@@ -63,11 +63,15 @@ public class LoginView extends Application {
                 }
             });
             VBox vbox = new VBox(header, usernameField, passwordField, loginBtn);
+            vbox.setAlignment(Pos.CENTER);
+            vbox.setSpacing(5);
             StackPane root = new StackPane();
+            root.getStyleClass().add("main");
             root.getChildren().add(vbox);
 
             Scene scene = new Scene(root, 300, 250);
-
+            scene.getStylesheets().add("vendingMachine.css");
+            
             primaryStage.setTitle("Login to Manager Mode!");
             primaryStage.setScene(scene);
             primaryStage.show();
