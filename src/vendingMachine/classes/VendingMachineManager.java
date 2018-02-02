@@ -11,10 +11,11 @@
  */
 package vendingMachine.classes;
 
+import utilities.ServiceManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-import vendingMachine.classes.products.Product;
+import vendingMachine.products.Product;
 
 
 public class VendingMachineManager {

@@ -27,11 +27,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import vendingMachine.classes.ServiceManager;
-import vendingMachine.classes.gui.AlertWindow;
-import vendingMachine.classes.gui.ButtonManager;
-import vendingMachine.classes.gui.CustomButtons;
-import vendingMachine.classes.gui.MachineComboBox;
+import utilities.ServiceManager;
+import vendingMachine.views.AlertWindow;
+import vendingMachine.views.ButtonManager;
+import vendingMachine.views.CustomButtons;
+import vendingMachine.views.MachineComboBox;
 
 public class Main extends Application {
 
@@ -62,13 +62,15 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        root = new BorderPane();
         //Create Service Manager
-        serviceManager = new ServiceManager();
+        serviceManager = new ServiceManager(root);
         btnManager = serviceManager.getBtnManager();
+        btnManager.setCustomerGroup(CUSTOMER_UI_GROUP);
+        btnManager.setManager_ui_group(MANAGER_UI_GROUP);
         
         //-- Create Panes --
         //Create the root pane and format it.
-        root = new BorderPane();
         root.setPrefSize(1020, 800);
         root.getStyleClass().add("main");
 
@@ -103,31 +105,10 @@ public class Main extends Application {
         ComboBox switchMachines = new MachineComboBox(serviceManager); // change the arguement to reflect number of machines
 
         // --- Create Buttons ---
-        CustomButtons resetButton = new CustomButtons(serviceManager, true, "res/images/refresh.png", "Reset Items", 75, 75);
-        resetButton.setShape(new Circle(3));
-        resetButton.setOnAction(e -> {
-            serviceManager.getIManager().resetProducts();
-            serviceManager.UpdateGui();
-        });
+        CustomButtons resetButton = btnManager.getBtnReset();
         
         //Button to display Manager Grid
-        Button btnManager = new CustomButtons(serviceManager, false, "res/images/manager.png", "Manager Mode", 75,75);
-        btnManager.setShape(new Circle(3));
-        //btnManager action event for changing if manager grid is displayed or not
-        btnManager.setOnAction(event -> {
-            if (serviceManager.isManagerMode()) {
-                root.setCenter(CUSTOMER_UI_GROUP);
-                serviceManager.setManagerMode(false);
-                resetButton.updateNode();
-                serviceManager.UpdateGui();
-            } else {
-                // Else have scene contain managerVBox
-                root.setCenter(MANAGER_UI_GROUP);
-                serviceManager.setManagerMode(true);
-                resetButton.updateNode();
-                serviceManager.UpdateGui();
-            }
-        });
+        Button btnManagerMode = btnManager.getBtnManagerMode();
         // --- Nodes to Groups ---
         //Add the createCustomerUI to customerUI group
         CUSTOMER_UI_GROUP.getChildren().addAll(customerVBox);
@@ -140,7 +121,7 @@ public class Main extends Application {
         managerVBox.getChildren().addAll(managerLabel,switchMachines, managerScroll);
 
         //Add btnManager to bottomHBox
-        rightVBox.getChildren().addAll(btnManager, resetButton);
+        rightVBox.getChildren().addAll(btnManagerMode, resetButton);
         //Set default UI Group for root Pane
         root.setCenter(CUSTOMER_UI_GROUP);
         root.setAlignment(CUSTOMER_UI_GROUP, Pos.TOP_CENTER);

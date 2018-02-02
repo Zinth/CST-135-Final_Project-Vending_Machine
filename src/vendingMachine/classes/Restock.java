@@ -11,10 +11,12 @@
  */
 package vendingMachine.classes;
 
+import utilities.CsvUtil;
+import utilities.ServiceManager;
 import java.util.ArrayList;
 import java.util.Set;
 import javafx.scene.paint.Color;
-import vendingMachine.classes.products.Product;
+import vendingMachine.products.Product;
 
 public class Restock {
     private final ServiceManager serviceManager;

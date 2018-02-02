@@ -10,11 +10,11 @@
  */
 package vendingMachine.classes;
 
-import vendingMachine.classes.products.Chips;
-import vendingMachine.classes.products.Candy;
-import vendingMachine.classes.products.Drink;
-import vendingMachine.classes.products.Gum;
-import vendingMachine.classes.products.Product;
+import vendingMachine.products.Chips;
+import vendingMachine.products.Candy;
+import vendingMachine.products.Drink;
+import vendingMachine.products.Gum;
+import vendingMachine.products.Product;
 
 import java.util.ArrayList;
 

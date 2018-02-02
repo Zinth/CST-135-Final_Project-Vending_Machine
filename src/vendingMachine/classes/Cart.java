@@ -12,8 +12,8 @@
 
 package vendingMachine.classes;
 
-import vendingMachine.classes.gui.AlertWindow;
-import vendingMachine.classes.products.Product;
+import vendingMachine.views.AlertWindow;
+import vendingMachine.products.Product;
 
 import java.util.HashMap;
 import java.util.Map;

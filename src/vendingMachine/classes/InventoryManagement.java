@@ -12,7 +12,7 @@
 
 package vendingMachine.classes;
 
-import vendingMachine.classes.products.Product;
+import vendingMachine.products.Product;
 
 public class InventoryManagement extends Dispenser {
 

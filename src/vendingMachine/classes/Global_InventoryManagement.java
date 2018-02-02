@@ -1,5 +1,7 @@
 package vendingMachine.classes;
 
+import utilities.CsvUtil;
+import utilities.ServiceManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -10,11 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javafx.scene.paint.Color;
-import vendingMachine.classes.products.Product;
-import vendingMachine.classes.products.Candy;
-import vendingMachine.classes.products.Chips;
-import vendingMachine.classes.products.Drink;
-import vendingMachine.classes.products.Gum;
+import vendingMachine.products.Product;
+import vendingMachine.products.Candy;
+import vendingMachine.products.Chips;
+import vendingMachine.products.Drink;
+import vendingMachine.products.Gum;
 
 public class Global_InventoryManagement extends Product {
 
