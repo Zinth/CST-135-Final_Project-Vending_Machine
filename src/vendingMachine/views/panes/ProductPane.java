@@ -134,6 +134,10 @@ public class ProductPane extends StackPane {
     public Image getImage() {
         return productImage.getImage();
     }
+
+    public Product getProduct() {
+        return product;
+    }
     
      @Override
     public String toString(){

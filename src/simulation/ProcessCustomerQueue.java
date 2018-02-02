@@ -92,7 +92,6 @@ public class ProcessCustomerQueue{
                     }else{
                     customerQue.getList().clear();
                     serviceManager.getALERT().showAlert("CUSTOMER SIMULATION:\n Customer simulation complete!\n", 24, Color.BLACK, serviceManager.getIManager().toString());
-                    //serviceManager.setCustomerQueMode(false);
                     }
                 }));
     }

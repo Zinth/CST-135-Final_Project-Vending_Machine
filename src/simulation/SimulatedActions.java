@@ -6,7 +6,6 @@
 package simulation;
 
 import java.util.Random;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.Event;
@@ -17,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import utilities.ServiceManager;
+import vendingMachine.views.panes.InventoryPane;
 
 /**
  *
@@ -81,7 +81,6 @@ public class SimulatedActions {
          for(int i = 0; i < serviceManager.getInventoryGrid().getChildren().size(); i++){
              String temp = serviceManager.getInventoryGrid().getChildren().get(i).toString();
              
-             System.out.println("TEST: productName = |" + temp + "|  wantedProduct = |" + wantedProduct + "|");
              if(wantedProduct.equals(temp)){
                 result = i;
              }
@@ -97,19 +96,27 @@ public class SimulatedActions {
         if (index >= 0) {
             node = serviceManager.getInventoryGrid().getChildren().get(index);
             itemName = node.toString();
+            if (((InventoryPane) serviceManager.getInventoryGrid().getChildren().get(index)).getProduct().getQuantity() > 0){
             serviceManager.getEventLog().event(customer, " found " + itemName + ".");
             buttonPress(node);
             serviceManager.getEventLog().event(customer, " added " + itemName + " to the cart.");
+            }else{
+             serviceManager.getEventLog().event(customer, " wanted out of stock" + itemName + "."); 
+                itemNotFound(node, customer);
+            }
         } else {
-            int randomIndex = rand.nextInt(serviceManager.getInventoryGrid().getChildren().size());
+            itemNotFound(node, customer);
+        }
+        serviceManager.getCustomerInfo().getProductPurchasedLabel().setText(itemName);
+    }
+    
+    public void itemNotFound(Node node, Customers customer){
+        int randomIndex = rand.nextInt(serviceManager.getInventoryGrid().getChildren().size());
             node = serviceManager.getInventoryGrid().getChildren().get(randomIndex);
             itemName = node.toString();
             serviceManager.getEventLog().event(customer, " couldn't find " + customer.getWantedItem() + ", but found " + itemName + ".");
             buttonPress(node);
             serviceManager.getEventLog().event(customer, " added " + itemName + " to the cart.");
-            System.out.println("PRODUCT NOT FOUND");
-        }
-        serviceManager.getCustomerInfo().getProductPurchasedLabel().setText(itemName);
     }
     
     public void purchase(Customers customer){
