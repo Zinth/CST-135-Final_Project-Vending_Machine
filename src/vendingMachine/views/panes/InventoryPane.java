@@ -36,7 +36,7 @@ public class InventoryPane extends ProductPane {
         animateImage = new ImageView(getImage());
         animateImage.setFitWidth(75);
         animateImage.setFitHeight(75);
-
+        this.setDisable(serviceManager.isCustomerQueMode());
         this.setOnMouseClicked(event -> {
             if (product.getQuantity() > 0) {
                 //Add item to cart
@@ -53,6 +53,8 @@ public class InventoryPane extends ProductPane {
                 }
             }
         });
+        
+     
         
         //Set the default style of the panel
         this.setStyle(BTN_NORMAL);

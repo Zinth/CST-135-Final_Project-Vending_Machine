@@ -18,15 +18,14 @@ import vendingMachine.interfaces.UpdatableGUINode;
  *
  * @author Chris
  */
-public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
-    
+public class CustomMenuBar extends MenuBar implements UpdatableGUINode {
+
     private ServiceManager serviceManager;
     private MenuItem purchaseOrder;
     private MenuItem export;
     private MenuItem productSearch;
     private MenuItem simulateCustomers;
-    
-    
+
     public CustomMenuBar(ServiceManager serviceManager) {
         this.serviceManager = serviceManager;
 
@@ -37,7 +36,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         purchaseOrder = new MenuItem("_Purchase Order...");
         export = new MenuItem("_Export Invenotry...");
         productSearch = new MenuItem("Product _Search");
-        simulateCustomers= new MenuItem("_Simulate Customers");
+        simulateCustomers = new MenuItem("_Simulate Customers");
         MenuItem exit = new MenuItem("E_xit");
 
         //Set action Events to fileMenu items.
@@ -50,22 +49,24 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
             ExportInventory exportInventoryGui = new ExportInventory();
             exportInventoryGui.load(serviceManager);
         });
-        
+
         productSearch.setOnAction((event) -> {
             //Launch Search Window
             SearchWindow search = new SearchWindow();
             search.showWinow(serviceManager);
         });
-        
+
         simulateCustomers.setOnAction((event) -> {
             //Turn customer simulation on and off
-            if(!serviceManager.isCustomerQueMode()){
+            if (!serviceManager.isCustomerQueMode()) {
                 serviceManager.setCustomerQueMode(true);
                 serviceManager.getCustomerQueue().simulateCustomerQue();
-            }
-            else
+            } else {
                 serviceManager.setCustomerQueMode(false);
                 serviceManager.getCustomerQueue().stopSimulation();
+            }
+            serviceManager.UpdateInventoryGui();
+            serviceManager.getBtnManager().btnSimMode();
         });
 
         exit.setOnAction(e -> {
@@ -93,7 +94,7 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
                         + "Purchase Items:\n Click the Check-Out button to finalize your purchase.\n\n"
                         + "Manager Mode:\n Click the Keyhole button to go to manager mode.", 16, Color.BLACK);
             } else {
-                 serviceManager.getALERT().showAlert("Machine Buttons:\n Changes the vending machine you want to manage .\n\n"
+                serviceManager.getALERT().showAlert("Machine Buttons:\n Changes the vending machine you want to manage .\n\n"
                         + "Increase Stock:\n Click on the + button to increase stock of that product.\n\n"
                         + "Decreace Stock:\n Click on the - button to decrease stock of that product\n\n"
                         + "Reset Stock:\n Click the refresh button to reset all stock to default levels.\n\n"
@@ -128,28 +129,24 @@ public class CustomMenuBar extends MenuBar  implements UpdatableGUINode{
         updateNode();
 
     }
-    
-  
-    
+
     /**
-     * Update manager mode. 
+     * Update manager mode.
      */
     @Override
     public void updateNode() {
         //Determin if fileMenu items are enables or not
-        if(serviceManager.isManagerMode()){
+        if (serviceManager.isManagerMode()) {
             purchaseOrder.setDisable(false);
             export.setDisable(false);
             productSearch.setDisable(false);
             simulateCustomers.setDisable(true);
-        }else{
+        } else {
             purchaseOrder.setDisable(true);
             export.setDisable(true);
             productSearch.setDisable(true);
             simulateCustomers.setDisable(false);
         }
     }
-    
-    
-    
+
 }

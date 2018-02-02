@@ -117,8 +117,11 @@ public class ProcessCustomerQueue{
             actions.stopSimulation();
             customerQue.getList().clear();
             serviceManager.getEventLog().reset();
+            serviceManager.getCart().removeFromCart();
+            serviceManager.getCartGrid().getChildren().clear();
             populateCustomerQue();
             simTimeline.stop();
+            
         }
     }
     

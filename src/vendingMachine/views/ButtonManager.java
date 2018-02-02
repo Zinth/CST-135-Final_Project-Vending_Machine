@@ -119,6 +119,24 @@ public class ButtonManager {
         });
     }
 
+    public void btnSimMode() {
+        if (serviceManager.isCustomerQueMode()) {
+            btnDrink.setDisable(true);
+            btnChip.setDisable(true);
+            btnCandy.setDisable(true);
+            btnGum.setDisable(true);
+            btnPurchase.setDisable(true);
+            btnManagerMode.setDisable(true);
+        } else {
+            btnDrink.setDisable(false);
+            btnChip.setDisable(false);
+            btnCandy.setDisable(false);
+            btnGum.setDisable(false);
+            btnPurchase.setDisable(false);
+            btnManagerMode.setDisable(false);
+        }
+    }
+
     public void finalizeManagerMode() {
         serviceManager.getRoot().setCenter(manager_ui_group);
         serviceManager.setManagerMode(true);
