@@ -9,13 +9,13 @@
  *
  * @about This class manages adding products to and from the cart
  */
-
 package vendingMachine.classes;
 
 import vendingMachine.views.AlertWindow;
 import vendingMachine.products.Product;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import javafx.scene.paint.Color;
 
@@ -25,67 +25,71 @@ public class Cart {
     private AlertWindow alert = new AlertWindow();
     private final HashMap<Product, Integer> cartList;
 
-    public Cart(){
+    public Cart() {
         this.cartList = new HashMap<>();
     }
 
-
     /**
      * Reduce the product quantity in cart or remove it
+     *
      * @param product
      */
-    public void removeFromCart(Product product){
-            //check if item does exist in the cart
-            if(cartList.containsKey(product)){
-                int prevQuantity = cartList.get(product);
-                int newQuantity = prevQuantity-1;
-                cartList.replace(product, newQuantity);
-                if(newQuantity == 0){
-                    cartList.remove(product);
-                }
-            }else{
-                alert.showAlert("Error C02: Product is not longer in the cart", 16, Color.RED);
+    public void removeFromCart(Product product) {
+        //check if item does exist in the cart
+        if (cartList.containsKey(product)) {
+            int prevQuantity = cartList.get(product);
+            int newQuantity = prevQuantity - 1;
+            cartList.replace(product, newQuantity);
+            if (newQuantity == 0) {
+                cartList.remove(product);
             }
+        } else {
+            alert.showAlert("Error C02: Product is not longer in the cart", 16, Color.RED);
+        }
     }
-    
-    public void removeFromCart(){
-        cartList.entrySet().stream().forEach((pair) -> {
+
+    public void removeFromCart() {
+        Iterator it = cartList.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
             Product product = (Product) pair.getKey();
-            Integer quantity = pair.getValue();
-            for(int i=1; i <= quantity; i++){
+            Integer quantity = (Integer) pair.getValue();
+            for (int i = 1; i <= quantity; i++) {
                 removeFromCart(product);
             }
-        });
+        }
     }
 
     /**
      * Add a product or quanity to the cartList and remove one from productList
+     *
      * @param product
      */
-    public void addToCart(Product product){
+    public void addToCart(Product product) {
         //Check if cartlist does not contain product
-        if(!cartList.containsKey(product)){
+        if (!cartList.containsKey(product)) {
             // add product
             cartList.put(product, 1);
-        }else{
+        } else {
             int prevQuantity = cartList.get(product);
-            int newQuantity = prevQuantity+1;
+            int newQuantity = prevQuantity + 1;
             cartList.replace(product, newQuantity);
         }
     }
-    
+
     /**
      * Purchase product Simulator
      */
-    public void checkOut(){
+    public void checkOut() {
         cartList.clear();
     }
-    
+
     /**
      * Get the total cost of all items in cart.
+     *
      * @return totalCost
      */
-    public double getTotalCost(){
+    public double getTotalCost() {
         // double to hold total cost
         double totalCost = 0;
 
@@ -93,7 +97,7 @@ public class Cart {
         for (Map.Entry<Product, Integer> entry : cartList.entrySet()) {
             Product product = entry.getKey();
             Integer quantity = entry.getValue();
-            totalCost += product.getPrice()*quantity;
+            totalCost += product.getPrice() * quantity;
         }
         //return totalCost
         return totalCost;
