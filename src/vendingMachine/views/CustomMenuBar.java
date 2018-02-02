@@ -92,7 +92,7 @@ public class CustomMenuBar extends MenuBar implements UpdatableGUINode {
                         + "More Info:\n Hover over a item in the vending machine to get more information.\n\n"
                         + "Remove Items:\n Remove Items from the cart by clicking on them.\n\n"
                         + "Purchase Items:\n Click the Check-Out button to finalize your purchase.\n\n"
-                        + "Manager Mode:\n Click the Keyhole button to go to manager mode.", 16, Color.BLACK);
+                        + "Manager Mode:\n Click the Keyhole button to go to manager mode. Login is username: admin password: password", 16, Color.BLACK);
             } else {
                 serviceManager.getALERT().showAlert("Machine Buttons:\n Changes the vending machine you want to manage .\n\n"
                         + "Increase Stock:\n Click on the + button to increase stock of that product.\n\n"
